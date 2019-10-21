@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => {
       position: 'fixed',
       bottom: 10,
       margin: 'auto',
-      zIndex: 99999
+			zIndex: theme.zIndex.mobileStepper + 1,
     }
   }
 });

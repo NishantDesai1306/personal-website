@@ -42,14 +42,8 @@ const useStyles = makeStyles((theme) => {
       position: 'fixed',
       bottom: 10,
       left: 20,
-      zIndex: 99999
+      zIndex: theme.zIndex.mobileStepper + 1
     },
-    fab: {
-      position: 'fixed',
-      bottom: 10,
-      margin: 'auto',
-      zIndex: 99999
-    }
   }
 });
 

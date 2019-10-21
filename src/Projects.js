@@ -20,6 +20,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Slide from '@material-ui/core/Slide';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import smartCopyLogo from './assets/smart-copy.png';
 import chatzzLogo from './assets/chatzz.jpg';
@@ -106,14 +107,37 @@ const TabPanel = (props) => {
 export default function Projects(props) {
 	const classes = useClasses();
 	const theme = useTheme();
-	const [selectedTab, setSelectedTab] = React.useState(0);
-	const [smartCopyDemoModal, setSmartCopyDemoModal] = React.useState(false);
+	const [state, setState] = React.useState({
+		selectedTab: 0,
+		smartCopyDemoModal: false,
+		isSmartCopyDemoIframeLoaded: false,
+	});
+
 	const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
 	const isXs = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const handleChange = (event, newValue) => {
-		setSelectedTab(newValue);
+		console.log(newValue);
+		setState({
+			...state,
+			selectedTab: newValue,
+		});
 	};
+
+	const setSmartCopyDemoModal = (isOpen) => {
+		setState({
+			...state,
+			smartCopyDemoModal: isOpen,
+			isSmartCopyDemoIframeLoaded: !isOpen,
+		});
+	}
+
+	const iframeLoaded = () => {
+		setState({
+			...state,
+			isSmartCopyDemoIframeLoaded: true,
+		});
+	}
 	
 	return (
 		<Container className='mt-5 pt-5 px-0'>
@@ -145,7 +169,7 @@ export default function Projects(props) {
 								variant={isDesktop ? "fullWidth" : "scrollable"}
 								indicatorColor="primary"
 								textColor="primary"
-								value={selectedTab}
+								value={state.selectedTab}
 								onChange={handleChange}
 							>
 								<Tab
@@ -171,7 +195,7 @@ export default function Projects(props) {
 							</Tabs>
 
 							<Box>
-								<TabPanel value={selectedTab} index={0}>
+								<TabPanel value={state.selectedTab} index={0}>
 									<Typography className={classes.paragraphSpacing}>
 										Smart Copy is a basic project which helps users in taking notes, I have built it using various frameworks as a starter project
 									</Typography>
@@ -179,10 +203,10 @@ export default function Projects(props) {
 									<Box className='mb-4 border p-4 rounded'>
 										<Typography variant='h6' className={classes.paragraphSpacing}>
 											Android (Native)
-											</Typography>
+										</Typography>
 										<Typography className={classes.paragraphSpacing}>
 											Smart Copy started from this project, in native android platform I leveraged the Android's floating window so that whenever a user double clicks on any input field in any app a dismissible floating bubble pops up which will show the list of all copied items in a floating list.
-											</Typography>
+										</Typography>
 
 										<Box>
 											{
@@ -229,7 +253,7 @@ export default function Projects(props) {
 										</Box>
 
 										{
-											smartCopyDemoModal && (
+											state.smartCopyDemoModal && (
 												<Dialog
 													open
 													TransitionComponent={Transition}
@@ -239,25 +263,40 @@ export default function Projects(props) {
 													onClose={() => setSmartCopyDemoModal(false)}
 												>
 													<DialogContent className='d-flex flex-column pb-4'>
-														<Box className='d-flex align-items-center justify-content-between mb-3'>
+														<Box className='d-flex align-items-start justify-content-between mb-3'>
 															<Typography variant="h6">
 																Smart Copy Demo
 															</Typography>
 
-															<IconButton onClick={() => setSmartCopyDemoModal(false)}>
+															<IconButton
+																className='p-0'
+																onClick={() => setSmartCopyDemoModal(false)}
+															>
 																<Icon>close</Icon>
 															</IconButton>
 														</Box>
 
-														<Box className='flex-grow-1'>
-															<iframe
-																title='smart-copy-demo'
-																className={`w-100 h-100 ${classes.smartCopyDemoIframe}`}
-																src="https://www.youtube.com/embed/BB-6VMgOwFc"
-																frameBorder="0"
-																allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-																allowFullScreen
-															/>
+														<Box className='flex-grow-1 d-flex justify-content-center align-items-center w-100'>
+															{
+																!state.isSmartCopyDemoIframeLoaded && (
+																	<CircularProgress
+																		className='position-absolute'
+																		thickness={4}
+																	/>
+																)
+															}
+
+															{
+																<iframe
+																	title='smart-copy-demo'
+																	className={`w-100 h-100 ${classes.smartCopyDemoIframe}`}
+																	src="https://www.youtube.com/embed/BB-6VMgOwFc"
+																	frameBorder="0"
+																	allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+																	allowFullScreen
+																	onLoad={iframeLoaded}
+																/>
+															}
 														</Box>
 													</DialogContent>
 												</Dialog>
@@ -419,7 +458,7 @@ export default function Projects(props) {
 									</Box>
 								</TabPanel>
 
-								<TabPanel value={selectedTab} index={1}>
+								<TabPanel value={state.selectedTab} index={1}>
 									<Typography className={classes.paragraphSpacing}>
 										Socket.io based chat framework that provides basic set of functions to create a chat application.
 									</Typography>
@@ -458,7 +497,7 @@ export default function Projects(props) {
 									</Box>
 								</TabPanel>
 
-								<TabPanel value={selectedTab} index={2}>
+								<TabPanel value={state.selectedTab} index={2}>
 									<Typography className={classes.paragraphSpacing}>
 										MEAN stack based web app which provides a platform to post missing items found near you, there's also a chat application which helps in communication between person who found the item and that item's owner.
 										</Typography>
@@ -509,7 +548,7 @@ export default function Projects(props) {
 									</Box>
 								</TabPanel>
 
-								<TabPanel value={selectedTab} index={3}>
+								<TabPanel value={state.selectedTab} index={3}>
 									<Typography className={classes.paragraphSpacing}>
 										During end of 2018 and start of 2019 a heated battle was going on between two Youtube channels PewDiePie and T-Series to get the throne of highest subscribed channel on the platform, so instead of going on youtube to get the latest subscriber score I built this mobile app which will fetch the subscriber count for those channels in real time.
 									</Typography>

@@ -17,7 +17,25 @@ if (workbox) {
 	console.log(`Boo! Workbox didn't load 😬`);
 }
 
-const staticCacheName = 'pages-cache-v1';
+const cachesToRemove = [
+	/pages-cache/,
+	// /workbox-precache/, // enable when I want to remove old image from cache
+]
+const staticCacheName = 'pages-cache-v2';
+
+self.addEventListener('activate', function (event) {
+	event.waitUntil(
+		caches.keys().then(function (cacheNames) {
+			return Promise.all(
+				cacheNames.filter(function (cacheName) {
+					return cachesToRemove.some((cacheNameRegex) => cacheNameRegex.test(cacheName))
+				}).map(function (cacheName) {
+					return caches.delete(cacheName);
+				})
+			);
+		})
+	);
+});
 
 self.addEventListener('install', (event) => {
 	const urls = [

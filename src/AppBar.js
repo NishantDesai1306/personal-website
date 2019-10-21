@@ -18,7 +18,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
-import ownerImage from './assets/owner.jpg';
+import ownerImage from './assets/owner.png';
 import constants from './constant';
 
 const useStyles = makeStyles((theme) => {

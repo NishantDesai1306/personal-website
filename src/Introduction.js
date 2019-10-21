@@ -5,7 +5,7 @@ import Avatar	 from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-import ownerImage from './assets/owner.jpg';
+import ownerImage from './assets/owner.png';
 
 const useStyles = makeStyles((theme) => {
 	return {

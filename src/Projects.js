@@ -22,6 +22,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Slide from '@material-ui/core/Slide';
 
 import smartCopyLogo from './assets/smart-copy.png';
+import chatzzLogo from './assets/chatzz.jpg';
+import lostBoxLogo from './assets/lost_box.png';
 import pdpVsTsLogo from './assets/pdp_vs_ts.png';
 
 const getAlphaChannelFromDecimal = (opacityInDecimal) => {
@@ -73,7 +75,10 @@ const useClasses = makeStyles((theme) => {
 		},
 		projectButtonLabel: {
 			textTransform: 'none',
-		}
+		},
+		smartCopyDemoIframe: {
+			minHeight: 400,
+		},
 	};
 });
 
@@ -149,10 +154,12 @@ export default function Projects(props) {
 									{...a11yProps(0)}
 								/>
 								<Tab
+									icon={<Avatar src={chatzzLogo} />}
 									label="Chatzz"
 									{...a11yProps(1)}
 								/>
 								<Tab
+									icon={<Avatar src={lostBoxLogo} />}
 									label="Lost Box"
 									{...a11yProps(2)}
 								/>
@@ -245,8 +252,7 @@ export default function Projects(props) {
 														<Box className='flex-grow-1'>
 															<iframe
 																title='smart-copy-demo'
-																style={{ minHeight: 400, minWidth: 500 }}
-																className='w-100 h-100'
+																className={`w-100 h-100 ${classes.smartCopyDemoIframe}`}
 																src="https://www.youtube.com/embed/BB-6VMgOwFc"
 																frameBorder="0"
 																allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -262,10 +268,10 @@ export default function Projects(props) {
 									<Box className='mb-4 border p-4 rounded'>
 										<Typography variant='h6' className={classes.paragraphSpacing}>
 											Angular App
-											</Typography>
+										</Typography>
 										<Typography className={classes.paragraphSpacing}>
 											This is mobile responsive web companion of mobile app built using Angular v6, and it also connects to same database which means that all your items that you copy on android mobile app are now accessible in the web. I also wrote the NodeJS backend server which basically serves the data to the app.
-											</Typography>
+										</Typography>
 
 										<Box>
 											{
@@ -301,7 +307,7 @@ export default function Projects(props) {
 											>
 												<Icon className={classes.icon}>launch</Icon>
 												Open
-												</Button>
+											</Button>
 
 											<Button
 												variant="contained"
@@ -312,7 +318,7 @@ export default function Projects(props) {
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
-												</Button>
+											</Button>
 										</Box>
 									</Box>
 
@@ -367,17 +373,17 @@ export default function Projects(props) {
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
-												</Button>
+											</Button>
 										</Box>
 									</Box>
 
 									<Box className='mb-4 border p-4 rounded'>
 										<Typography variant='h6' className={classes.paragraphSpacing}>
 											React Native
-											</Typography>
+										</Typography>
 										<Typography className={classes.paragraphSpacing}>
 											A simple mobile app built using React Native, it supports the user accounts and shows list of items which you can edit/delete in the app. I started this project to learn more about hybrid mobile app frameworks which allows me to create same app for Android and iOS.
-											</Typography>
+										</Typography>
 
 										<Box>
 											{
@@ -485,7 +491,7 @@ export default function Projects(props) {
 											color="primary"
 											fullWidth={isXs}
 											className={classes.buttons}
-											onClick={() => window.open("https://lost-box.herokuapp.com", "__blank")}
+											onClick={() => window.open("https://lost-box.herokuapp.com/login", "__blank")}
 										>
 											<Icon className={classes.icon}>launch</Icon>
 											Open

@@ -67,9 +67,9 @@ export default function ContactMe(props) {
 
 							<Box className='d-flex justify-content-center my-4'>
 								<Button
-									variant="contained"
-									color="primary"
-									size="large"
+									variant='contained'
+									color='primary'
+									size='large'
 									onClick={() => window.open(`mailto:${constants.USER_PROFILE.EMAIL}`, '_blank')}
 									fullWidth={isMobile}
 								>
@@ -88,11 +88,11 @@ export default function ContactMe(props) {
 									constants.USER_PROFILE.LINKS.GITHUB && (
 										<Box>
 											<IconButton
-												color="primary"
+												color='primary'
 												onClick={() => window.open(constants.USER_PROFILE.LINKS.GITHUB)}
 												className={classes.contactMeButton}
 											>
-												<img alt="github_profile" src={githubIcon} />
+												<img alt='github_profile' src={githubIcon} />
 											</IconButton>
 										</Box>
 									)
@@ -104,7 +104,7 @@ export default function ContactMe(props) {
 												onClick={() => window.open(constants.USER_PROFILE.LINKS.UPWORK)}
 												className={classes.contactMeButton}
 											>
-												<img src={upworkIcon} alt="upwork_profile" className='upwork-icon' />
+												<img src={upworkIcon} alt='upwork_profile' className='upwork-icon' />
 											</IconButton>
 										</Box>
 									)
@@ -116,7 +116,7 @@ export default function ContactMe(props) {
 												onClick={() => window.open(constants.USER_PROFILE.LINKS.LINKEDIN)}
 												className={classes.contactMeButton}
 											>
-												<img src={linkedinIcon} alt="linkedin_profile" />
+												<img src={linkedinIcon} alt='linkedin_profile' />
 											</IconButton>
 										</Box>
 									)
@@ -128,7 +128,7 @@ export default function ContactMe(props) {
 												onClick={() => window.open(constants.USER_PROFILE.LINKS.FACEBOOK)}
 												className={classes.contactMeButton}
 											>
-												<img src={facebookIcon} alt="linkedin_profile" />
+												<img src={facebookIcon} alt='linkedin_profile' />
 											</IconButton>
 										</Box>
 									)

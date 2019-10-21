@@ -7,7 +7,8 @@ const constants = {
 			LINKEDIN: 'https://www.linkedin.com/in/nishant-desai-706018105/',
 			UPWORK: 'https://www.upwork.com/o/profiles/users/_~0138e4c1eefd3394a6/',
 			FACEBOOK: 'https://www.facebook.com/nishant.desai.1306',
-		}
+		},
+		RESUME: '/Nishant_Desai_Resume.pdf',
 	},
 	ABOUT: {
 		description: [

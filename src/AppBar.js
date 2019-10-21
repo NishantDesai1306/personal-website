@@ -83,14 +83,14 @@ export default function MyAppBar(props) {
 
 	return (
 		<ElevationScroll {...props}>
-			<AppBar position="fixed" elevation={0}>
+			<AppBar position='fixed' elevation={0}>
 				<Toolbar>
 					<Hidden xlUp>
 						<IconButton
-							edge="start"
+							edge='start'
 							className={classes.menuButton}
-							color="inherit"
-							aria-label="menu"
+							color='inherit'
+							aria-label='menu'
 							onClick={onOpenSideDrawer}
 						>
 							<Icon>menu</Icon>
@@ -103,33 +103,33 @@ export default function MyAppBar(props) {
 						</Fade>
 					</AvatarScroll>
 					
-					<Typography variant="h6" className={classes.title}>
+					<Typography variant='h6' className={classes.title}>
 						{constants.USER_PROFILE.NAME}
 					</Typography>
 
 					<Hidden mdDown>
 						<Box>
 							<AnchorLink offset='25' href='#about-me' className={classes.buttonLink}>
-								<Button color="inherit" className="mx-3">About Me</Button>
+								<Button color='inherit' className='mx-3'>About Me</Button>
 							</AnchorLink>
 						</Box>
 						<Box>
 							<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
-								<Button color="inherit" className="mx-3">Experience</Button>
+								<Button color='inherit' className='mx-3'>Experience</Button>
 							</AnchorLink>
 						</Box>
 						<Box>
 							<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
-								<Button color="inherit" className="mx-3">Projects</Button>
+								<Button color='inherit' className='mx-3'>Projects</Button>
 							</AnchorLink>
 						</Box>
 						<Box>
 							<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
-								<Button color="inherit" className="mx-3">Contact Me</Button>
+								<Button color='inherit' className='mx-3'>Contact Me</Button>
 							</AnchorLink>
 						</Box>
 						<Box>
-							<Button color="inherit" className="mx-3" href="/Nishant_Desai_Resume.pdf" target="_blank">Resume</Button>
+							<Button color='inherit' className='mx-3' href='/Nishant_Desai_Resume.pdf' target='_blank'>Resume</Button>
 						</Box>
 					</Hidden>
 				</Toolbar>

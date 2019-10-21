@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
+import constants from './constant';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -19,11 +20,11 @@ const FabButton = () => {
 	const classes = useStyles();
 
 	return (
-		<Tooltip title="Resume">
+		<Tooltip title='Resume'>
 			<Fab
-				color="primary" 
+				color='primary' 
 				className={classes.fab}
-				onClick={() => window.open("/Nishant_Desai_Resume.pdf", "_blank")}
+				onClick={() => window.open(constants.USER_PROFILE.RESUME, '_blank')}
 			>
 				<Icon>description</Icon>
 			</Fab>      

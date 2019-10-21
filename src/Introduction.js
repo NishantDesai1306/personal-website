@@ -28,14 +28,14 @@ export default function Introduction(props) {
 			</Box>
 
 			<Box className='col-12 col-md-5'>
-				<Typography variant="h6">Hello I'm</Typography>
-				<Typography variant="h4" gutterBottom>Nishant Desai</Typography>
+				<Typography variant='h6'>Hello I'm</Typography>
+				<Typography variant='h4' gutterBottom>Nishant Desai</Typography>
 
-				<Typography variant="h4" color='textSecondary' gutterBottom>
+				<Typography variant='h4' color='textSecondary' gutterBottom>
 					I build web and mobile based applications
 				</Typography>
 
-				<Typography variant="h6" color='textSecondary'>
+				<Typography variant='h6' color='textSecondary'>
 					I'm a software engineer based in Surat, IN with expertise in building high-quality websites and applications.
 				</Typography>
 			</Box>

@@ -66,10 +66,10 @@ export default function App() {
 
   return (
     <div className='d-flex flex-column align-items-center bootstrap-wrapper'>
-      <Tooltip title="Update">
+      <Tooltip title='Update'>
         <Fab
           id='app-update'
-          color="secondary"
+          color='secondary'
           className={`${classes.updateButton} d-none`}
         >
           <Icon>get_app</Icon>

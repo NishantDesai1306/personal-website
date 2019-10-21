@@ -9,7 +9,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 
-import AnchorLink from 'react-anchor-link-smooth-scroll'
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+
+import constants from './constant';
 
 const useStyles = makeStyles((theme) => {
 	return {
@@ -34,53 +36,56 @@ export default function SideDrawer(props) {
 		<Drawer open={isDrawerOpen} onClose={onClose}>
 			<div
 				className={classes.list}
-				role="presentation"
+				role='presentation'
 				onClick={onClose}
 				onKeyDown={onClose}
 			>
-				<List component="nav" aria-label="main mailbox folders">
+				<List component='nav' aria-label='main mailbox folders'>
 					<AnchorLink offset='50' href='#about-me' className={classes.buttonLink}>
 						<ListItem button>
 							<ListItemIcon>
-								<Icon color="primary">notes</Icon>
+								<Icon color='primary'>notes</Icon>
 							</ListItemIcon>
-							<ListItemText primary="About Me" />
+							<ListItemText primary='About Me' />
 						</ListItem>
 					</AnchorLink>
 					
 					<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
 						<ListItem button>
 							<ListItemIcon>
-								<Icon color="primary">code</Icon>
+								<Icon color='primary'>code</Icon>
 							</ListItemIcon>
-							<ListItemText primary="Experience" />
+							<ListItemText primary='Experience' />
 						</ListItem>
 					</AnchorLink>
 					
 					<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
 						<ListItem button>
 							<ListItemIcon>
-								<Icon color="primary">work</Icon>
+								<Icon color='primary'>work</Icon>
 							</ListItemIcon>
-							<ListItemText primary="Projects" />							
+							<ListItemText primary='Projects' />							
 						</ListItem>
 					</AnchorLink>
 
 					<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
 						<ListItem button>
 							<ListItemIcon>
-								<Icon color="primary">email</Icon>
+								<Icon color='primary'>email</Icon>
 							</ListItemIcon>
-							<ListItemText primary="Contact Me" />
+							<ListItemText primary='Contact Me' />
 						</ListItem>
 					</AnchorLink>
 
-					<ListItem button>
+					<ListItem
+						button
+						onClick={() => window.open(constants.USER_PROFILE.RESUME, '_blank')}
+					>
 						<ListItemIcon>
-							<Icon color="primary">description</Icon>
+							<Icon color='primary'>description</Icon>
 						</ListItemIcon>
 						<ListItemText>
-							<Typography color="primary">
+							<Typography color='primary'>
 								Resume
 							</Typography>
 						</ListItemText>

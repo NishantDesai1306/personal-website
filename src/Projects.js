@@ -36,7 +36,7 @@ const getAlphaChannelFromDecimal = (opacityInDecimal) => {
 }
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-	return <Slide direction="up" ref={ref} {...props} />;
+	return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const useClasses = makeStyles((theme) => {
@@ -64,7 +64,7 @@ const useClasses = makeStyles((theme) => {
 			margin: theme.spacing(2),
 		},
 		projectButton: {
-			"&:hover": {
+			'&:hover': {
 				color: theme.palette.primary.main,
 				borderColor: theme.palette.primary.main,
 				background: theme.palette.primary.main + getAlphaChannelFromDecimal(theme.palette.action.hoverOpacity)
@@ -166,30 +166,30 @@ export default function Projects(props) {
 						<Paper className='w-100'>
 							<Tabs
 								className='border-bottom'
-								variant={isDesktop ? "fullWidth" : "scrollable"}
-								indicatorColor="primary"
-								textColor="primary"
+								variant={isDesktop ? 'fullWidth' : 'scrollable'}
+								indicatorColor='primary'
+								textColor='primary'
 								value={state.selectedTab}
 								onChange={handleChange}
 							>
 								<Tab
 									icon={<Avatar src={smartCopyLogo} />}
-									label="Smart Copy"
+									label='Smart Copy'
 									{...a11yProps(0)}
 								/>
 								<Tab
 									icon={<Avatar src={chatzzLogo} />}
-									label="Chatzz"
+									label='Chatzz'
 									{...a11yProps(1)}
 								/>
 								<Tab
 									icon={<Avatar src={lostBoxLogo} />}
-									label="Lost Box"
+									label='Lost Box'
 									{...a11yProps(2)}
 								/>
 								<Tab
 									icon={<Avatar src={pdpVsTsLogo} />}
-									label="PewDiePie vs T-Series"
+									label='PewDiePie vs T-Series'
 									{...a11yProps(3)}
 								/>
 							</Tabs>
@@ -230,19 +230,19 @@ export default function Projects(props) {
 
 										<Box>
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												fullWidth={isXs}
 												className={classes.buttons}
-												href="https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk"
+												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
 												<Icon className={classes.icon}>get_app</Icon>
 												Download
 											</Button>
 
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												fullWidth={isXs}
 												className={classes.buttons}
 												onClick={() => setSmartCopyDemoModal(true)}
@@ -259,12 +259,12 @@ export default function Projects(props) {
 													TransitionComponent={Transition}
 													keepMounted
 													fullScreen={isXs}
-													maxWidth="xl"
+													maxWidth='xl'
 													onClose={() => setSmartCopyDemoModal(false)}
 												>
 													<DialogContent className='d-flex flex-column pb-4'>
 														<Box className='d-flex align-items-start justify-content-between mb-3'>
-															<Typography variant="h6">
+															<Typography variant='h6'>
 																Smart Copy Demo
 															</Typography>
 
@@ -290,9 +290,9 @@ export default function Projects(props) {
 																<iframe
 																	title='smart-copy-demo'
 																	className={`w-100 h-100 ${classes.smartCopyDemoIframe}`}
-																	src="https://www.youtube.com/embed/BB-6VMgOwFc"
-																	frameBorder="0"
-																	allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+																	src='https://www.youtube.com/embed/BB-6VMgOwFc'
+																	frameBorder='0'
+																	allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
 																	allowFullScreen
 																	onLoad={iframeLoaded}
 																/>
@@ -338,22 +338,22 @@ export default function Projects(props) {
 
 										<Box>
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												fullWidth={isXs}
 												className={classes.buttons}
-												onClick={() => window.open("https://smartcopy.herokuapp.com", "__blank")}
+												onClick={() => window.open('https://smartcopy.herokuapp.com', '__blank')}
 											>
 												<Icon className={classes.icon}>launch</Icon>
 												Open
 											</Button>
 
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												fullWidth={isXs}
 												className={classes.buttons}
-												onClick={() => window.open("https://github.com/NishantDesai1306/smart-copy-web-app-angular", "__blank")}
+												onClick={() => window.open('https://github.com/NishantDesai1306/smart-copy-web-app-angular', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
@@ -393,22 +393,22 @@ export default function Projects(props) {
 
 										<Box>
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												className={classes.buttons}
 												fullWidth={isXs}
-												onClick={() => window.open("https://smartcopy-195fd.web.app/login", "__blank")}
+												onClick={() => window.open('https://smartcopy-195fd.web.app/login', '__blank')}
 											>
 												<Icon className={classes.icon}>launch</Icon>
 												Open
 											</Button>
 
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												fullWidth={isXs}
 												className={classes.buttons}
-												onClick={() => window.open("https://github.com/NishantDesai1306/smart-copy-web-firebase", "__blank")}
+												onClick={() => window.open('https://github.com/NishantDesai1306/smart-copy-web-firebase', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
@@ -445,11 +445,11 @@ export default function Projects(props) {
 
 										<Box>
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												fullWidth={isXs}
 												className={classes.buttons}
-												onClick={() => window.open("https://github.com/NishantDesai1306/react-native-smart-copy", "__blank")}
+												onClick={() => window.open('https://github.com/NishantDesai1306/react-native-smart-copy', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
@@ -485,11 +485,11 @@ export default function Projects(props) {
 
 									<Box>
 										<Button
-											variant="contained"
-											color="primary"
+											variant='contained'
+											color='primary'
 											className={classes.buttons}
 											fullWidth={isXs}
-											onClick={() => window.open("https://github.com/NishantDesai1306/chatzz", "__blank")}
+											onClick={() => window.open('https://github.com/NishantDesai1306/chatzz', '__blank')}
 										>
 											<Icon className={classes.icon}>code</Icon>
 											Code
@@ -526,21 +526,21 @@ export default function Projects(props) {
 
 									<Box>
 										<Button
-											variant="contained"
-											color="primary"
+											variant='contained'
+											color='primary'
 											fullWidth={isXs}
 											className={classes.buttons}
-											onClick={() => window.open("https://lost-box.herokuapp.com/login", "__blank")}
+											onClick={() => window.open('https://lost-box.herokuapp.com/login', '__blank')}
 										>
 											<Icon className={classes.icon}>launch</Icon>
 											Open
 										</Button>
 										<Button
-											variant="contained"
-											color="primary"
+											variant='contained'
+											color='primary'
 											fullWidth={isXs}
 											className={classes.buttons}
-											onClick={() => window.open("https://github.com/NishantDesai1306/lost-and-found", "__blank")}
+											onClick={() => window.open('https://github.com/NishantDesai1306/lost-and-found', '__blank')}
 										>
 											<Icon className={classes.icon}>code</Icon>
 											Code
@@ -582,23 +582,23 @@ export default function Projects(props) {
 
 										<Box>
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												disabled
 												className={classes.buttons}
 												fullWidth={isXs}
-												href="https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk"
+												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
 												<Icon className={classes.icon}>get_app</Icon>
 												Download
 											</Button>
 
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												className={classes.buttons}
 												fullWidth={isXs}
-												onClick={() => window.open("https://github.com/NishantDesai1306/pdp_vs_ts", "__blank")}
+												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
@@ -611,7 +611,7 @@ export default function Projects(props) {
 											Lite Version (Source code less than 5kb)
 										</Typography>
 										<Typography className={classes.paragraphSpacing}>
-											I created this lite version as it was the app that I submitted in <a href="https://flutter.dev/create" target="__blank">Flutter Create</a> competition, the rules were simple I had to create a flutter app written with less than 5kb of dart code. It just shows the live subscriber count of PewDiePie and T-Series youtube channels.
+											I created this lite version as it was the app that I submitted in <a href='https://flutter.dev/create' target='__blank'>Flutter Create</a> competition, the rules were simple I had to create a flutter app written with less than 5kb of dart code. It just shows the live subscriber count of PewDiePie and T-Series youtube channels.
 										</Typography>
 
 										<Box>
@@ -635,23 +635,23 @@ export default function Projects(props) {
 
 										<Box>
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												disabled
 												fullWidth={isXs}
 												className={classes.buttons}
-												href="https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk"
+												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
 												<Icon className={classes.icon}>get_app</Icon>
 												Download
 											</Button>
 
 											<Button
-												variant="contained"
-												color="primary"
+												variant='contained'
+												color='primary'
 												className={classes.buttons}
 												fullWidth={isXs}
-												onClick={() => window.open("https://github.com/NishantDesai1306/pdp_vs_ts_lite", "__blank")}
+												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts_lite', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
@@ -704,7 +704,7 @@ export default function Projects(props) {
 															label: classes.projectButtonLabel
 														}}
 														onClick={() => window.open(link, '__blank')}
-														variant="outlined"
+														variant='outlined'
 														startIcon={<Icon>work</Icon>}
 													>
 														{text}

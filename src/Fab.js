@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => {
     fab: {
       position: 'fixed',
       bottom: 10,
-      margin: 'auto',
+      right: 20,
 			zIndex: theme.zIndex.mobileStepper + 1,
     }
   }

@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import Hidden from '@material-ui/core/Hidden';
 
@@ -15,7 +16,7 @@ import AboutMe from './AboutMe';
 import Experience from './Experience';
 import Projects from './Projects';
 import ContactMe from './ContactMe';
-import Fab from './Fab';
+import ResumeFab from './Fab';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => {
       alignItems: 'center',
       minHeight: '100vh',
     },
-    appUpdateButton: {
+    updateButton: {
       position: 'fixed',
       bottom: 10,
       left: 20,
@@ -65,18 +66,16 @@ export default function App() {
 
   return (
     <div className='d-flex flex-column align-items-center bootstrap-wrapper'>
-      <Button
-        className='d-none position-fixed'
-        classes={{
-          root: classes.appUpdateButton
-        }}
-        startIcon={<Icon>sync</Icon>}
-        variant="contained"
-        color="secondary"
-        id='app-update'
-      >
-        Update SW
-      </Button>
+      <Tooltip title="Update">
+        <Fab
+          id='app-update'
+          color="secondary"
+          className={`${classes.updateButton} d-none`}
+        >
+          <Icon>get_app</Icon>
+        </Fab>
+      </Tooltip>
+
       <div className='flex-grow-0 w-100'>
         <AppBar
           onOpenSideDrawer={() => toggleDrawer(true)}
@@ -110,7 +109,7 @@ export default function App() {
       </div>
 
       <Hidden xlUp>
-        <Fab />
+        <ResumeFab />
       </Hidden>      
     </div>
   );

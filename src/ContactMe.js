@@ -12,6 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import constants from './constant';
 
@@ -79,58 +80,66 @@ export default function ContactMe(props) {
 
 							<Divider className='my-3' />
 
-							<Typography>
-								or contact me on
+							<Typography variant='subtitle2'>
+								or you can also contact me on these platforms
 							</Typography>
 
 							<Box className='py-2 row m-0 justify-content-center'>
 								{
 									constants.USER_PROFILE.LINKS.GITHUB && (
-										<Box>
-											<IconButton
-												color='primary'
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.GITHUB)}
-												className={classes.contactMeButton}
-											>
-												<img alt='github_profile' src={githubIcon} />
-											</IconButton>
-										</Box>
+										<Tooltip title='Github'>
+											<Box className='mx-2'>
+												<IconButton
+													color='primary'
+													onClick={() => window.open(constants.USER_PROFILE.LINKS.GITHUB)}
+													className={classes.contactMeButton}
+												>
+													<img alt='github_profile' src={githubIcon} />
+												</IconButton>
+											</Box>
+										</Tooltip>
 									)
 								}
 								{
 									constants.USER_PROFILE.LINKS.UPWORK && (
-										<Box>
-											<IconButton
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.UPWORK)}
-												className={classes.contactMeButton}
-											>
-												<img src={upworkIcon} alt='upwork_profile' className='upwork-icon' />
-											</IconButton>
-										</Box>
+										<Tooltip title='Upwork'>
+											<Box className='mx-2'>
+												<IconButton
+													onClick={() => window.open(constants.USER_PROFILE.LINKS.UPWORK)}
+													className={classes.contactMeButton}
+												>
+													<img src={upworkIcon} alt='upwork_profile' className='upwork-icon' />
+												</IconButton>
+											</Box>
+										</Tooltip>
 									)
 								}
 								{
 									constants.USER_PROFILE.LINKS.LINKEDIN && (
-										<Box>
-											<IconButton
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.LINKEDIN)}
-												className={classes.contactMeButton}
-											>
-												<img src={linkedinIcon} alt='linkedin_profile' />
-											</IconButton>
-										</Box>
+										<Tooltip title='LinkedIn'>
+											<Box className='mx-2'>
+												<IconButton
+													onClick={() => window.open(constants.USER_PROFILE.LINKS.LINKEDIN)}
+													className={classes.contactMeButton}
+												>
+													<img src={linkedinIcon} alt='linkedin_profile' />
+												</IconButton>
+											</Box>
+										</Tooltip>
 									)
 								}
 								{
 									constants.USER_PROFILE.LINKS.FACEBOOK && (
-										<Box>
-											<IconButton
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.FACEBOOK)}
-												className={classes.contactMeButton}
-											>
-												<img src={facebookIcon} alt='linkedin_profile' />
-											</IconButton>
-										</Box>
+										<Tooltip title='Facebook'>
+											<Box className='mx-2'>
+												<IconButton
+													onClick={() => window.open(constants.USER_PROFILE.LINKS.FACEBOOK)}
+													className={classes.contactMeButton}
+												>
+													<img src={facebookIcon} alt='linkedin_profile' />
+												</IconButton>
+											</Box>
+										</Tooltip>
 									)
 								}
 							</Box>

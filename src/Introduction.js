@@ -20,7 +20,7 @@ export default function Introduction(props) {
 	const classes = useStyles();
 
 	return (
-		<Box className={`row align-items-center ${classes.main} h-100 p-lg-0 px-5 pb-5 m-0`}>
+		<Box className={`row align-items-center ${classes.main} h-100 p-lg-0 px-5 pb-5 m-0 flex-grow-1`}>
 			<Box className='col-12 col-md-5 offset-md-1'>
 				<Box className='row justify-content-center align-items-center'>
 					<Avatar src={ownerImage} className={classes.profilePicture} />

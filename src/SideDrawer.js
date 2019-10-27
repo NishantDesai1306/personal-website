@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => {
 		buttonLink: {
 			color: theme.palette.primary.main,
 			textDecoration: 'none',
+			display: 'flex',
+			alignItems: 'center',
 		}
 	}
 });
@@ -41,41 +43,41 @@ export default function SideDrawer(props) {
 				onKeyDown={onClose}
 			>
 				<List component='nav' aria-label='main mailbox folders'>
-					<AnchorLink offset='50' href='#about-me' className={classes.buttonLink}>
-						<ListItem button>
+					<ListItem button>
+						<AnchorLink offset='50' href='#about-me' className={classes.buttonLink}>
 							<ListItemIcon>
 								<Icon color='primary'>notes</Icon>
 							</ListItemIcon>
 							<ListItemText primary='About Me' />
-						</ListItem>
-					</AnchorLink>
+						</AnchorLink>
+					</ListItem>
 					
-					<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
-						<ListItem button>
+					<ListItem button>
+						<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
 							<ListItemIcon>
 								<Icon color='primary'>code</Icon>
 							</ListItemIcon>
 							<ListItemText primary='Experience' />
-						</ListItem>
-					</AnchorLink>
+						</AnchorLink>
+					</ListItem>
 					
-					<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
-						<ListItem button>
+					<ListItem button>
+						<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
 							<ListItemIcon>
 								<Icon color='primary'>work</Icon>
 							</ListItemIcon>
 							<ListItemText primary='Projects' />							
-						</ListItem>
-					</AnchorLink>
+						</AnchorLink>
+					</ListItem>
 
-					<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
-						<ListItem button>
+					<ListItem button>
+						<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
 							<ListItemIcon>
 								<Icon color='primary'>email</Icon>
 							</ListItemIcon>
 							<ListItemText primary='Contact Me' />
-						</ListItem>
-					</AnchorLink>
+						</AnchorLink>
+					</ListItem>
 
 					<ListItem
 						button

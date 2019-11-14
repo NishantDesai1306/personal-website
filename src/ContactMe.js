@@ -71,6 +71,7 @@ export default function ContactMe(props) {
 									variant='contained'
 									color='primary'
 									size='large'
+									className='uses-internet'
 									onClick={() => window.open(`mailto:${constants.USER_PROFILE.EMAIL}`, '_blank')}
 									fullWidth={isMobile}
 								>
@@ -92,7 +93,7 @@ export default function ContactMe(props) {
 												<IconButton
 													color='primary'
 													onClick={() => window.open(constants.USER_PROFILE.LINKS.GITHUB)}
-													className={classes.contactMeButton}
+													className={`${classes.contactMeButton} uses-internet`}
 												>
 													<img alt='github_profile' src={githubIcon} />
 												</IconButton>

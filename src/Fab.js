@@ -23,7 +23,7 @@ const FabButton = () => {
 		<Tooltip title='Resume'>
 			<Fab
 				color='primary' 
-				className={classes.fab}
+				className={`${classes.fab} uses-internet`}
 				onClick={() => window.open(constants.USER_PROFILE.RESUME, '_blank')}
 			>
 				<Icon>description</Icon>

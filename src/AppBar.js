@@ -71,7 +71,7 @@ function AvatarScroll(props) {
 
 	return React.cloneElement(children, {
 		in: !!trigger,
-		className: trigger ? 'mr-2' : ''
+		className: 'd-flex align-items-center'
 	});
 }
 
@@ -99,13 +99,14 @@ export default function MyAppBar(props) {
 
 					<AvatarScroll>
 						<Fade>
-							<Avatar src={ownerImage} />
+							<div>
+								<Avatar className='mr-2' src={ownerImage} />
+								<Typography variant='h6' className={classes.title}>
+									{constants.USER_PROFILE.NAME}
+								</Typography>
+							</div>
 						</Fade>
 					</AvatarScroll>
-					
-					<Typography variant='h6' className={classes.title}>
-						{constants.USER_PROFILE.NAME}
-					</Typography>
 
 					<Hidden mdDown>
 						<Box>
@@ -129,7 +130,23 @@ export default function MyAppBar(props) {
 							</AnchorLink>
 						</Box>
 						<Box>
-							<Button color='inherit' className='mx-3' href='/Nishant_Desai_Resume.pdf' target='_blank'>Resume</Button>
+							<Button
+								color='inherit'
+								className='mx-3'
+								href='/Nishant_Desai_Resume.pdf'
+								target='_blank'
+							>
+								Resume
+							</Button>
+						</Box>
+						<Box>
+							<Button
+								onClick={() => window.showInstallPrompt()}
+								color='inherit'
+								className='install-handle mx-3 d-none'
+							>
+								Install PWA
+							</Button>
 						</Box>
 					</Hidden>
 				</Toolbar>

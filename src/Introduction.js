@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import ownerImage from './assets/owner.png';
+import constants from './constant';
 
 const useStyles = makeStyles((theme) => {
 	return {
@@ -29,7 +30,7 @@ export default function Introduction(props) {
 
 			<Box className='col-12 col-md-5'>
 				<Typography variant='h6'>Hello I'm</Typography>
-				<Typography variant='h4' gutterBottom>Nishant Desai</Typography>
+				<Typography variant='h4' gutterBottom>{constants.USER_PROFILE.NAME}</Typography>
 
 				<Typography variant='h4' color='textSecondary' gutterBottom>
 					I build web and mobile based applications

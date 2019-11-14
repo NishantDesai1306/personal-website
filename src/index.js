@@ -6,6 +6,7 @@ import { Workbox } from 'workbox-window';
 
 import App from './App';
 import theme from './theme';
+import './event-listeners';
 
 import 'bootstrap-utilities/bootstrap-utilities.css';
 import 'bootstrap-grid-only-css/dist/css/bootstrap-grid.min.css';
@@ -30,7 +31,6 @@ if ('serviceWorker' in navigator) {
     
     wb.register();
   });
-
 }
 
 ReactDOM.render(

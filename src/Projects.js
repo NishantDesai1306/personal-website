@@ -217,7 +217,7 @@ export default function Projects(props) {
 													<Chip
 														key={index}
 														color='primary'
-														className={classes.chip}
+														className={`${classes.chip} uses-internet`}
 														label={technology.text}
 														clickable={!!technology.link}
 														onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -233,7 +233,7 @@ export default function Projects(props) {
 												variant='contained'
 												color='primary'
 												fullWidth={isXs}
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
 												<Icon className={classes.icon}>get_app</Icon>
@@ -244,7 +244,7 @@ export default function Projects(props) {
 												variant='contained'
 												color='primary'
 												fullWidth={isXs}
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												onClick={() => setSmartCopyDemoModal(true)}
 											>
 												<Icon className={classes.icon}>play_circle_filled</Icon>
@@ -325,7 +325,7 @@ export default function Projects(props) {
 													<Chip
 														key={index}
 														color='primary'
-														className={classes.chip}
+														className={`${classes.chip} uses-internet`}
 														label={technology.text}
 														clickable={!!technology.link}
 														onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -341,7 +341,7 @@ export default function Projects(props) {
 												variant='contained'
 												color='primary'
 												fullWidth={isXs}
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://smartcopy.herokuapp.com', '__blank')}
 											>
 												<Icon className={classes.icon}>launch</Icon>
@@ -352,7 +352,7 @@ export default function Projects(props) {
 												variant='contained'
 												color='primary'
 												fullWidth={isXs}
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://github.com/NishantDesai1306/smart-copy-web-app-angular', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
@@ -380,7 +380,7 @@ export default function Projects(props) {
 													<Chip
 														key={index}
 														color='primary'
-														className={classes.chip}
+														className={`${classes.chip} uses-internet`}
 														label={technology.text}
 														clickable={!!technology.link}
 														onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -395,7 +395,7 @@ export default function Projects(props) {
 											<Button
 												variant='contained'
 												color='primary'
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												fullWidth={isXs}
 												onClick={() => window.open('https://smartcopy-195fd.web.app/login', '__blank')}
 											>
@@ -407,7 +407,7 @@ export default function Projects(props) {
 												variant='contained'
 												color='primary'
 												fullWidth={isXs}
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://github.com/NishantDesai1306/smart-copy-web-firebase', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
@@ -432,7 +432,7 @@ export default function Projects(props) {
 													<Chip
 														key={index}
 														color='primary'
-														className={classes.chip}
+														className={`${classes.chip} uses-internet`}
 														label={technology.text}
 														clickable={!!technology.link}
 														onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -448,7 +448,7 @@ export default function Projects(props) {
 												variant='contained'
 												color='primary'
 												fullWidth={isXs}
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://github.com/NishantDesai1306/react-native-smart-copy', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
@@ -472,7 +472,7 @@ export default function Projects(props) {
 												<Chip
 													key={index}
 													color='primary'
-													className={classes.chip}
+													className={`${classes.chip} uses-internet`}
 													label={technology.text}
 													clickable={!!technology.link}
 													onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -487,7 +487,7 @@ export default function Projects(props) {
 										<Button
 											variant='contained'
 											color='primary'
-											className={classes.buttons}
+											className={`${classes.buttons} uses-internet`}
 											fullWidth={isXs}
 											onClick={() => window.open('https://github.com/NishantDesai1306/chatzz', '__blank')}
 										>
@@ -513,7 +513,7 @@ export default function Projects(props) {
 												<Chip
 													key={index}
 													color='primary'
-													className={classes.chip}
+													className={`${classes.chip} uses-internet`}
 													label={technology.text}
 													clickable={!!technology.link}
 													onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -529,7 +529,7 @@ export default function Projects(props) {
 											variant='contained'
 											color='primary'
 											fullWidth={isXs}
-											className={classes.buttons}
+											className={`${classes.buttons} uses-internet`}
 											onClick={() => window.open('https://lost-box.herokuapp.com/login', '__blank')}
 										>
 											<Icon className={classes.icon}>launch</Icon>
@@ -539,7 +539,7 @@ export default function Projects(props) {
 											variant='contained'
 											color='primary'
 											fullWidth={isXs}
-											className={classes.buttons}
+											className={`${classes.buttons} uses-internet`}
 											onClick={() => window.open('https://github.com/NishantDesai1306/lost-and-found', '__blank')}
 										>
 											<Icon className={classes.icon}>code</Icon>
@@ -569,7 +569,7 @@ export default function Projects(props) {
 													<Chip
 														key={index}
 														color='primary'
-														className={classes.chip}
+														className={`${classes.chip} uses-internet`}
 														label={technology.text}
 														clickable={!!technology.link}
 														onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -585,7 +585,7 @@ export default function Projects(props) {
 												variant='contained'
 												color='primary'
 												disabled
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												fullWidth={isXs}
 												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
@@ -596,7 +596,7 @@ export default function Projects(props) {
 											<Button
 												variant='contained'
 												color='primary'
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												fullWidth={isXs}
 												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts', '__blank')}
 											>
@@ -622,7 +622,7 @@ export default function Projects(props) {
 													<Chip
 														key={index}
 														color='primary'
-														className={classes.chip}
+														className={`${classes.chip} uses-internet`}
 														label={technology.text}
 														clickable={!!technology.link}
 														onClick={() => technology.link && window.open(technology.link, '__blank')}
@@ -639,7 +639,7 @@ export default function Projects(props) {
 												color='primary'
 												disabled
 												fullWidth={isXs}
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
 												<Icon className={classes.icon}>get_app</Icon>
@@ -649,7 +649,7 @@ export default function Projects(props) {
 											<Button
 												variant='contained'
 												color='primary'
-												className={classes.buttons}
+												className={`${classes.buttons} uses-internet`}
 												fullWidth={isXs}
 												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts_lite', '__blank')}
 											>
@@ -700,7 +700,7 @@ export default function Projects(props) {
 												<Tooltip title={description}>
 													<Button
 														classes={{
-															root: classes.projectButton,
+															root: `${classes.projectButton} uses-internet`,
 															label: classes.projectButtonLabel
 														}}
 														onClick={() => window.open(link, '__blank')}

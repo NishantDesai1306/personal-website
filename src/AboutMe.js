@@ -115,7 +115,7 @@ export default function AboutMe(props) {
 									<Chip
 										key={index}
 										color='primary'
-										className={classes.chip}
+										className={`${classes.chip} ${technology.link ? 'uses-internet' : ''}`}
 										label={technology.text}
 										clickable={!!technology.link}
 										onClick={() => technology.link && window.open(technology.link, '__blank')}

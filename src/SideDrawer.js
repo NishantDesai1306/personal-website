@@ -8,21 +8,44 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
 
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 import constants from './constant';
 
+import ownerImage from './assets/owner.png';
+
 const useStyles = makeStyles((theme) => {
 	return {
 		list: {
-			width: 250,
+			width: 300,
 		},
 		buttonLink: {
 			color: theme.palette.primary.main,
 			textDecoration: 'none',
 			display: 'flex',
 			alignItems: 'center',
+		},
+		drawerHeader: {
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: 'center',
+			padding: theme.spacing(2),
+			background: theme.palette.primary.main,
+			height: '250px',
+		},
+		ownerImage: {
+			width: '150px',
+			height: '150px',
+		},
+		ownerDetails: {
+			flexGrow: 1,
+			display: 'flex',
+			justifyContent: 'center',
+			color: 'white',
+			flexDirection: 'column',
 		}
 	}
 });
@@ -36,6 +59,17 @@ export default function SideDrawer(props) {
 
 	return (
 		<Drawer open={isDrawerOpen} onClose={onClose}>
+			<div className={classes.drawerHeader}>
+				<Avatar src={ownerImage} className={classes.ownerImage} />
+				<Box className={classes.ownerDetails}>
+					<Typography variant='h6'>
+						{constants.USER_PROFILE.NAME}
+					</Typography>
+					<Typography>
+						{constants.USER_PROFILE.EMAIL}
+					</Typography>
+				</Box>
+			</div>
 			<div
 				className={classes.list}
 				role='presentation'
@@ -89,6 +123,21 @@ export default function SideDrawer(props) {
 						<ListItemText>
 							<Typography color='primary'>
 								Resume
+							</Typography>
+						</ListItemText>
+					</ListItem>
+
+					<ListItem
+						className='install-handle d-none'
+						button
+						onClick={() => window.showInstallPrompt()}
+					>
+						<ListItemIcon>
+							<Icon color='primary'>get_app</Icon>
+						</ListItemIcon>
+						<ListItemText>
+							<Typography color='primary'>
+								Install
 							</Typography>
 						</ListItemText>
 					</ListItem>

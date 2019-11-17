@@ -60,6 +60,5 @@ window.addEventListener('offline', handleConnection);
 window.addEventListener('beforeinstallprompt', (e) => {
 	e.preventDefault();
 	window.deferredPrompt = e;
-	alert('prevented');
 	toggleClasses('install-handle', 'd-none', false);
 });

@@ -76,7 +76,7 @@ export default function SideDrawer(props) {
 				onClick={onClose}
 				onKeyDown={onClose}
 			>
-				<List component='nav' aria-label='main mailbox folders'>
+				<List component='nav' aria-label='main mailbox folders' className='p-0'>
 					<ListItem button>
 						<AnchorLink offset='50' href='#about-me' className={classes.buttonLink}>
 							<ListItemIcon>

@@ -126,21 +126,6 @@ export default function SideDrawer(props) {
 							</Typography>
 						</ListItemText>
 					</ListItem>
-
-					<ListItem
-						className='install-handle d-none'
-						button
-						onClick={() => window.showInstallPrompt()}
-					>
-						<ListItemIcon>
-							<Icon color='primary'>get_app</Icon>
-						</ListItemIcon>
-						<ListItemText>
-							<Typography color='primary'>
-								Install
-							</Typography>
-						</ListItemText>
-					</ListItem>
 				</List>
 			</div>
 		</Drawer>

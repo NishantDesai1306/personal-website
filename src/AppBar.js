@@ -71,7 +71,7 @@ function AvatarScroll(props) {
 
 	return React.cloneElement(children, {
 		in: !!trigger,
-		className: 'd-flex align-items-center'
+		className: 'd-flex flex-grow-1 align-items-center'
 	});
 }
 
@@ -139,16 +139,18 @@ export default function MyAppBar(props) {
 								Resume
 							</Button>
 						</Box>
-						<Box>
-							<Button
-								onClick={() => window.showInstallPrompt()}
-								color='inherit'
-								className='install-handle mx-3 d-none'
-							>
-								Install PWA
-							</Button>
-						</Box>
 					</Hidden>
+
+					<Box>
+						<Button
+							onClick={() => window.showInstallPrompt()}
+							color='inherit'
+							className='install-handle d-none'
+							startIcon={<Icon>get_app</Icon>}
+						>
+							Install
+						</Button>
+					</Box>
 				</Toolbar>
 			</AppBar>
 		</ElevationScroll>

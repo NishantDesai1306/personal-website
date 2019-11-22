@@ -77,41 +77,41 @@ export default function SideDrawer(props) {
 				onKeyDown={onClose}
 			>
 				<List component='nav' aria-label='main mailbox folders' className='p-0'>
-					<ListItem button>
-						<AnchorLink offset='50' href='#about-me' className={classes.buttonLink}>
-							<ListItemIcon>
-								<Icon color='primary'>notes</Icon>
-							</ListItemIcon>
-							<ListItemText primary='About Me' />
-						</AnchorLink>
-					</ListItem>
+					<AnchorLink offset='50' href='#about-me' className={classes.buttonLink}>
+						<ListItem button>
+								<ListItemIcon>
+									<Icon color='primary'>notes</Icon>
+								</ListItemIcon>
+								<ListItemText primary='About Me' />
+						</ListItem>
+					</AnchorLink>
 					
-					<ListItem button>
-						<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
-							<ListItemIcon>
-								<Icon color='primary'>code</Icon>
-							</ListItemIcon>
-							<ListItemText primary='Experience' />
-						</AnchorLink>
-					</ListItem>
+					<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
+						<ListItem button>
+								<ListItemIcon>
+									<Icon color='primary'>code</Icon>
+								</ListItemIcon>
+								<ListItemText primary='Experience' />
+						</ListItem>
+					</AnchorLink>
 					
-					<ListItem button>
-						<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
-							<ListItemIcon>
-								<Icon color='primary'>work</Icon>
-							</ListItemIcon>
-							<ListItemText primary='Projects' />							
-						</AnchorLink>
-					</ListItem>
+					<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
+						<ListItem button>
+								<ListItemIcon>
+									<Icon color='primary'>work</Icon>
+								</ListItemIcon>
+								<ListItemText primary='Projects' />							
+						</ListItem>
+					</AnchorLink>
 
-					<ListItem button>
-						<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
-							<ListItemIcon>
-								<Icon color='primary'>email</Icon>
-							</ListItemIcon>
-							<ListItemText primary='Contact Me' />
-						</AnchorLink>
-					</ListItem>
+					<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
+						<ListItem button>
+								<ListItemIcon>
+									<Icon color='primary'>email</Icon>
+								</ListItemIcon>
+								<ListItemText primary='Contact Me' />
+						</ListItem>
+					</AnchorLink>
 
 					<ListItem
 						button

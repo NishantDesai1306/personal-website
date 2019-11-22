@@ -145,7 +145,7 @@ export default function MyAppBar(props) {
 						<Button
 							onClick={() => window.showInstallPrompt()}
 							color='inherit'
-							className='install-handle d-none'
+							className='install-handle d-none mx-3'
 							startIcon={<Icon>get_app</Icon>}
 						>
 							Install

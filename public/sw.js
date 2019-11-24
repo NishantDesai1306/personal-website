@@ -1,7 +1,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js');
 
 if (workbox) {
-	console.log(`Yay! Workbox is loaded`)
+	console.log(`Yay! Workbox is loaded`);
 
 	workbox.precaching.precacheAndRoute([
   {
@@ -42,7 +42,7 @@ if (workbox) {
   },
   {
     "url": "index.css",
-    "revision": "6f1be41ef96091aedad750a604dd4559"
+    "revision": "776feda6f336f8bfe13f18d3d5db2ea8"
   },
   {
     "url": "index.html",

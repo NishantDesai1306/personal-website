@@ -77,7 +77,7 @@ export default function SideDrawer(props) {
 				onKeyDown={onClose}
 			>
 				<List component='nav' aria-label='main mailbox folders' className='p-0'>
-					<AnchorLink offset='50' href='#about-me' className={classes.buttonLink}>
+					<AnchorLink offset='50' href='#about-me' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
 									<Icon color='primary'>notes</Icon>
@@ -86,7 +86,7 @@ export default function SideDrawer(props) {
 						</ListItem>
 					</AnchorLink>
 					
-					<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
+					<AnchorLink offset='50' href='#experience' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
 									<Icon color='primary'>code</Icon>
@@ -95,7 +95,7 @@ export default function SideDrawer(props) {
 						</ListItem>
 					</AnchorLink>
 					
-					<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
+					<AnchorLink offset='75' href='#projects' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
 									<Icon color='primary'>work</Icon>
@@ -104,7 +104,7 @@ export default function SideDrawer(props) {
 						</ListItem>
 					</AnchorLink>
 
-					<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
+					<AnchorLink offset='0' href='#contact-me' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
 									<Icon color='primary'>email</Icon>

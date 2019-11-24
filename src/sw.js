@@ -14,7 +14,7 @@ if (workbox) {
 		}
 	});
 } else {
-	console.log(`Boo! Workbox didn't load`)
+	console.log(`Boo! Workbox didn't load`);
 }
 
 const cachesToRemove = [

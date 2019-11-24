@@ -1,7 +1,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js');
 
 if (workbox) {
-	console.log(`Yay! Workbox is loaded`);
+	console.log(`Yay! Workbox is loaded`)
 
 	workbox.precaching.precacheAndRoute([]);
 
@@ -14,14 +14,14 @@ if (workbox) {
 		}
 	});
 } else {
-	console.log(`Boo! Workbox didn't load`);
+	console.log(`Boo! Workbox didn't load`)
 }
 
 const cachesToRemove = [
 	/pages-cache/,
 	// /workbox-precache/, // enable when I want to remove old image from cache
 ]
-const staticCacheName = 'pages-cache-v3';
+const staticCacheName = 'pages-cache-v4';
 
 self.addEventListener('activate', function (event) {
 	event.waitUntil(

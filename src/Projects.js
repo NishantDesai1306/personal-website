@@ -581,7 +581,7 @@ export default function Projects(props) {
 										<Divider className={classes.divider} />
 
 										<Box>
-											<Button
+											{/* <Button
 												variant='contained'
 												color='primary'
 												disabled
@@ -591,7 +591,7 @@ export default function Projects(props) {
 											>
 												<Icon className={classes.icon}>get_app</Icon>
 												Download
-											</Button>
+											</Button> */}
 
 											<Button
 												variant='contained'
@@ -634,7 +634,7 @@ export default function Projects(props) {
 										<Divider className={classes.divider} />
 
 										<Box>
-											<Button
+											{/* <Button
 												variant='contained'
 												color='primary'
 												disabled
@@ -644,7 +644,7 @@ export default function Projects(props) {
 											>
 												<Icon className={classes.icon}>get_app</Icon>
 												Download
-											</Button>
+											</Button> */}
 
 											<Button
 												variant='contained'

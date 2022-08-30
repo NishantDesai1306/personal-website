@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => {
       width: '80%',
       display: 'flex',
       alignItems: 'center',
-      minHeight: '100vh',
+      minHeight: '80vh',
     },
     updateButton: {
       position: 'fixed',

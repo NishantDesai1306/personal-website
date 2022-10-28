@@ -26,7 +26,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import smartCopyLogo from './assets/smart-copy.png';
 import chatzzLogo from './assets/chatzz.jpg';
 import lostBoxLogo from './assets/lost_box.png';
-import pdpVsTsLogo from './assets/pdp_vs_ts.png';
+import flutterLogo from './assets/flutter.png';
 
 const getAlphaChannelFromDecimal = (opacityInDecimal) => {
 	const totalDivisionInAlphaChannel = 255 // FF in hex = 0 - 256 in decimal;
@@ -130,6 +130,10 @@ const useClasses = makeStyles((theme) => {
 		smartCopyDemoIframe: {
 			minHeight: 400,
 		},
+		youtubeChannelWarDemoIframe: {
+			minHeight: 800,
+			minWidth: 500,
+		},
 	};
 });
 
@@ -161,6 +165,8 @@ export default function Projects(props) {
 		selectedTab: 0,
 		smartCopyDemoModal: false,
 		isSmartCopyDemoIframeLoaded: false,
+		youtubeChannelWarDemoModal: false,
+		isYoutubeChannelWarDemoIframeLoaded: false,
 	});
 	const technologiesUsed = useRef({
 		smartCopy: {
@@ -249,10 +255,24 @@ export default function Projects(props) {
 		});
 	}
 
-	const iframeLoaded = () => {
+	const setYoutubeChannelWarDemoModal = (isOpen) => {
+		setState({
+			...state,
+			youtubeChannelWarDemoModal: isOpen,
+			isYoutubeChannelWarDemoIframeLoaded: !isOpen,
+		});
+	}
+
+	const onSmartCopyDemoIframeLoaded = () => {
 		setState({
 			...state,
 			isSmartCopyDemoIframeLoaded: true,
+		});
+	}
+	const onYoutubeChannelWarDemoIframeLoaded = () => {
+		setState({
+			...state,
+			isYoutubeChannelWarDemoIframeLoaded: true,
 		});
 	}
 	
@@ -305,8 +325,8 @@ export default function Projects(props) {
 									{...a11yProps(2)}
 								/>
 								<Tab
-									icon={<Avatar src={pdpVsTsLogo} />}
-									label='PewDiePie vs T-Series'
+									icon={<Avatar src={flutterLogo} />}
+									label='YT channel war'
 									{...a11yProps(3)}
 								/>
 							</Tabs>
@@ -405,7 +425,7 @@ export default function Projects(props) {
 																	frameBorder='0'
 																	allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
 																	allowFullScreen
-																	onLoad={iframeLoaded}
+																	onLoad={onSmartCopyDemoIframeLoaded}
 																/>
 															}
 														</Box>
@@ -623,7 +643,7 @@ export default function Projects(props) {
 
 								<TabPanel value={state.selectedTab} index={3}>
 									<Typography className={classes.paragraphSpacing}>
-										During end of 2018 and start of 2019 a heated battle was going on between two Youtube channels PewDiePie and T-Series to get the throne of highest subscribed channel on the platform, so instead of going on youtube to get the latest subscriber score I built this mobile app which will fetch the subscriber count for those channels in real time.
+										During end of 2018 and start of 2019 a heated battle was going on between two Youtube channels PewDiePie and T-Series to get the throne of highest subscribed channel on the platform, so instead of going on youtube to get the latest subscriber score I built this mobile app which will fetch the subscriber count for those channels in real time. The app was later modified so that user can pick any two youtube channels for comparison.
 									</Typography>
 
 									<Box className='mb-4 border p-4 rounded'>
@@ -664,14 +684,74 @@ export default function Projects(props) {
 											<Button
 												variant='contained'
 												color='primary'
+												fullWidth={isXs}
+												className={`${classes.buttons} uses-internet`}
+												onClick={() => setYoutubeChannelWarDemoModal(true)}
+											>
+												<Icon className={classes.icon}>play_circle_filled</Icon>
+												Demo
+											</Button>
+
+											<Button
+												variant='contained'
+												color='primary'
 												className={`${classes.buttons} uses-internet`}
 												fullWidth={isXs}
-												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts', '__blank')}
+												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts_v3', '__blank')}
 											>
 												<Icon className={classes.icon}>code</Icon>
 												Code
 											</Button>
 										</Box>
+
+										{
+											state.youtubeChannelWarDemoModal && (
+												<Dialog
+													open
+													TransitionComponent={Transition}
+													keepMounted
+													fullScreen={isXs}
+													maxWidth='xl'
+													onClose={() => setYoutubeChannelWarDemoModal(false)}
+												>
+													<DialogContent className='d-flex flex-column pb-4'>
+														<Box className='d-flex align-items-start justify-content-between mb-3'>
+															<Typography variant='h6'>
+																Youtube Channel War Demo
+															</Typography>
+
+															<IconButton
+																className='p-0'
+																onClick={() => setYoutubeChannelWarDemoModal(false)}
+															>
+																<Icon>close</Icon>
+															</IconButton>
+														</Box>
+
+														<Box className='flex-grow-1 d-flex justify-content-center align-items-center w-100'>
+															{
+																!state.isYoutubeChannelWarDemoIframeLoaded && (
+																	<CircularProgress
+																		className='position-absolute'
+																		thickness={4}
+																	/>
+																)
+															}
+
+															<iframe
+																title='youtube-channel-war-demo'
+																className={`w-100 h-100 ${classes.youtubeChannelWarDemoIframe}`}
+																src='https://www.youtube.com/embed/RwFfTf3dJww'
+																frameBorder='0'
+																allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+																allowFullScreen
+																onLoad={onYoutubeChannelWarDemoIframeLoaded}
+															/>
+														</Box>
+													</DialogContent>
+												</Dialog>
+											)
+										}
 									</Box>
 
 									<Box className='mb-4 border p-4 rounded'>

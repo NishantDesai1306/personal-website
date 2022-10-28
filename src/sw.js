@@ -3,7 +3,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox
 if (workbox) {
 	console.log(`Yay! Workbox is loaded`);
 
-	workbox.precaching.precacheAndRoute([]);
+	workbox.precaching.precacheAndRoute([self.__WB_MANIFEST]);
 
 	workbox.routing.setCatchHandler(({ event }) => {
 
@@ -19,7 +19,7 @@ if (workbox) {
 
 const cachesToRemove = [
 	/pages-cache/,
-	// /workbox-precache/, // enable when I want to remove old image from cache
+	/workbox-precache/, // enable when I want to remove old image from cache
 ]
 const staticCacheName = 'pages-cache-v4';
 

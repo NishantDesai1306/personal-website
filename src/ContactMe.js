@@ -17,10 +17,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import constants from './constant';
 
-import githubIcon from '!file-loader!./assets/github.svg';
-import linkedinIcon from '!file-loader!./assets/linkedin.svg';
-import upworkIcon from '!file-loader!./assets/upwork.svg';
-import facebookIcon from '!file-loader!./assets/facebook.svg';
+import githubIcon from './assets/github.svg';
+import linkedinIcon from './assets/linkedin.svg';
+import upworkIcon from './assets/upwork.svg';
+import facebookIcon from './assets/facebook.svg';
 
 const useClasses = makeStyles((theme) => {
 	return {

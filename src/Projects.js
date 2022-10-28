@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -39,30 +40,30 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const useClasses = makeStyles((theme) => {
+const useTechnologyChipClasses = makeStyles((theme) => {
 	return {
-		sectionIcon: {
-			transform: 'scale(10)',
-		},
-		paragraphSpacing: {
-			marginBottom: theme.spacing(2),
-		},
-		buttons: {
-			[theme.breakpoints.down('sm')]: {
-				marginBottom: theme.spacing(2),
-			},
-			marginRight: theme.spacing(2),
-		},
 		chip: {
 			marginBottom: theme.spacing(1),
 			marginRight: theme.spacing(1),
 		},
-		icon: {
-			marginRight: theme.spacing(1),
-		},
-		divider: {
-			margin: theme.spacing(2),
-		},
+	}
+});
+const TechnologyChip = ({ text, link }) => {
+	const classes = useTechnologyChipClasses();
+
+	return (
+		<Chip
+			color='primary'
+			className={`${classes.chip} uses-internet`}
+			label={text}
+			clickable={!!link}
+			onClick={() => link && window.open(link, '__blank')}
+		/>
+	)
+}
+
+const useOtherProjectButtonClasses = makeStyles((theme) => {
+	return {
 		projectButton: {
 			'&:hover': {
 				color: theme.palette.primary.main,
@@ -76,6 +77,55 @@ const useClasses = makeStyles((theme) => {
 		},
 		projectButtonLabel: {
 			textTransform: 'none',
+		},
+	}
+});
+const OtherProjectButton = ({ text, link, description }) => {
+	const classes = useOtherProjectButtonClasses();
+
+	return (
+		<Box className='col-12 col-sm-6 pb-4 px-3'>
+			<Tooltip title={description}>
+				<Button
+					classes={{
+						root: `${classes.projectButton} uses-internet`,
+						label: classes.projectButtonLabel
+					}}
+					onClick={() => window.open(link, '__blank')}
+					variant='outlined'
+					startIcon={<Icon>work</Icon>}
+				>
+					{text}
+				</Button>
+			</Tooltip>
+		</Box>
+	)
+};
+
+const useClasses = makeStyles((theme) => {
+	return {
+		sectionIcon: {
+			transform: 'scale(10)',
+			position: 'sticky',
+    		top: '170px',
+		},
+		iconContainer: {
+			padding: '90px 0',
+		},
+		paragraphSpacing: {
+			marginBottom: theme.spacing(2),
+		},
+		buttons: {
+			[theme.breakpoints.down('sm')]: {
+				marginBottom: theme.spacing(2),
+			},
+			marginRight: theme.spacing(2),
+		},
+		icon: {
+			marginRight: theme.spacing(1),
+		},
+		divider: {
+			margin: theme.spacing(2),
 		},
 		smartCopyDemoIframe: {
 			minHeight: 400,
@@ -112,6 +162,73 @@ export default function Projects(props) {
 		smartCopyDemoModal: false,
 		isSmartCopyDemoIframeLoaded: false,
 	});
+	const technologiesUsed = useRef({
+		smartCopy: {
+			nativeAndroid: [
+				{ text: 'Android', link: 'https://www.android.com' },
+				{ text: 'Java', link: 'https://www.java.com/en/' }
+			],
+			angularApp: [
+				{ text: 'Angular', link: 'https://angular.io' },
+				{ text: 'Angular Material', link: 'https://material.angular.io' },
+				{ text: 'NodeJS', link: 'https://nodejs.org/en/' },
+				{ text: 'ExpressJS', link: 'http://expressjs.com' },
+				{ text: 'MongoDB', link: 'https://www.mongodb.com' },
+				{ text: 'Mongoose', link: 'https://mongoosejs.com/docs/validation.html' },
+			],
+			reactApp: [
+				{ text: 'ReactJS', link: 'https://reactjs.org' },
+				{ text: 'Material UI', link: 'https://material-ui.com' },
+				{ text: 'Firebase', link: 'https://firebase.google.com' },
+				{ text: 'Work Box', link: 'https://developers.google.com/web/tools/workbox' },
+			],
+			reactNative: [
+				{ text: 'React Native', link: 'https://facebook.github.io/react-native/' },
+			]
+		},
+		chatzz: {
+			app: [
+				{ text: 'Socket.io', link: 'https://socket.io' },
+				{ text: 'NodeJS', link: 'https://nodejs.org' }
+			],
+		},
+		lostBox: {
+			app: [
+				{ text: 'MongoDB', link: 'https://mongodb.com' },
+				{ text: 'ExpressJS', link: 'https://expressjs.com' },
+				{ text: 'Angular', link: 'https://angular.io' },
+				{ text: 'NodeJS', link: 'https://nodejs.org' },
+				{ text: 'Chatzz', link: 'https://github.com/NishantDesai1306/chatzz' },
+			],
+		},
+		pdpVsTs: {
+			app: [
+				{ text: 'Flutter', link: 'https://flutter.dev' },
+			],
+		},
+	});
+	const otherProjects = useRef([
+		{
+			text: 'React Native Starter',
+			link: 'https://github.com/NishantDesai1306/react-native-starter',
+			description: 'Boiler plate project for React Native app',
+		},
+		{
+			text: 'React Redux Node Starter',
+			link: 'https://github.com/NishantDesai1306/react-redux-node-starter',
+			description: 'Boiler plate project for MERN app with Redux store',
+		},
+		{
+			text: 'Memory Game',
+			link: 'https://memory-game-angular.herokuapp.com/game',
+			description: 'Basic game in which user has to pick card of same color',
+		},
+		{
+			text: 'MEAN5 Starter',
+			link: 'https://github.com/NishantDesai1306/MEAN5-Angular-Material-Starter',
+			description: 'Boiler plate project for MEAN stack with Angular 5',
+		},
+	]);
 
 	const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
 	const isXs = useMediaQuery(theme.breakpoints.down('sm'));
@@ -140,10 +257,10 @@ export default function Projects(props) {
 	}
 	
 	return (
-		<Container className='mt-5 pt-5 px-0'>
+		<Container className='mt-4 px-0'>
 			<Box className='d-flex'>
 				<Hidden mdDown>
-					<Box className='d-xl-flex d-none align-items-center justify-content-center col-xl-3'>
+					<Box className={clsx('d-xl-flex d-none justify-content-center col-xl-3', classes.iconContainer)}>
 						<Icon className={classes.sectionIcon} color='disabled'>
 							work
 						</Icon>
@@ -152,18 +269,18 @@ export default function Projects(props) {
 
 				<Box className='px-0 col-12 col-xl-9'>
 					<Box className='mb-4'>
-						<Box className='d-flex align-items-center justify-content-center mb-2'>
-							<Hidden mdUp>
-								<Icon color='disabled' className='mr-2'>
-									work
-								</Icon>
-							</Hidden>
-							<Typography className='text-center' variant='h5'>
-								Projects
-							</Typography>
-						</Box>
-
 						<Paper className='w-100'>
+							<Box className='d-flex align-items-center justify-content-start px-4 mb-2 pt-4'>
+								<Hidden mdUp>
+									<Icon color='disabled' className='mr-2'>
+										work
+									</Icon>
+								</Hidden>
+								<Typography className='text-center' variant='h5'>
+									Projects
+								</Typography>
+							</Box>
+							
 							<Tabs
 								className='border-bottom'
 								variant={isDesktop ? 'fullWidth' : 'scrollable'}
@@ -210,17 +327,11 @@ export default function Projects(props) {
 
 										<Box>
 											{
-												[
-													{ text: 'Android', link: 'https://www.android.com' },
-													{ text: 'Java', link: 'https://www.java.com/en/' }
-												].map((technology, index) => (
-													<Chip
+												technologiesUsed.current.smartCopy.nativeAndroid.map(({ text, link, }, index) => (
+													<TechnologyChip
 														key={index}
-														color='primary'
-														className={`${classes.chip} uses-internet`}
-														label={technology.text}
-														clickable={!!technology.link}
-														onClick={() => technology.link && window.open(technology.link, '__blank')}
+														text={text}
+														link={link}
 													/>
 												))
 											}
@@ -314,21 +425,11 @@ export default function Projects(props) {
 
 										<Box>
 											{
-												[
-													{ text: 'Angular', link: 'https://angular.io' },
-													{ text: 'Angular Material', link: 'https://material.angular.io' },
-													{ text: 'NodeJS', link: 'https://nodejs.org/en/' },
-													{ text: 'ExpressJS', link: 'http://expressjs.com' },
-													{ text: 'MongoDB', link: 'https://www.mongodb.com' },
-													{ text: 'Mongoose', link: 'https://mongoosejs.com/docs/validation.html' },
-												].map((technology, index) => (
-													<Chip
+												technologiesUsed.current.smartCopy.angularApp.map(({ text, link, }, index) => (
+													<TechnologyChip
 														key={index}
-														color='primary'
-														className={`${classes.chip} uses-internet`}
-														label={technology.text}
-														clickable={!!technology.link}
-														onClick={() => technology.link && window.open(technology.link, '__blank')}
+														text={text}
+														link={link}
 													/>
 												))
 											}
@@ -371,19 +472,11 @@ export default function Projects(props) {
 
 										<Box>
 											{
-												[
-													{ text: 'ReactJS', link: 'https://reactjs.org' },
-													{ text: 'Material UI', link: 'https://material-ui.com' },
-													{ text: 'Firebase', link: 'https://firebase.google.com' },
-													{ text: 'Work Box', link: 'https://developers.google.com/web/tools/workbox' },
-												].map((technology, index) => (
-													<Chip
+												technologiesUsed.current.smartCopy.reactApp.map(({ text, link, }, index) => (
+													<TechnologyChip
 														key={index}
-														color='primary'
-														className={`${classes.chip} uses-internet`}
-														label={technology.text}
-														clickable={!!technology.link}
-														onClick={() => technology.link && window.open(technology.link, '__blank')}
+														text={text}
+														link={link}
 													/>
 												))
 											}
@@ -426,16 +519,11 @@ export default function Projects(props) {
 
 										<Box>
 											{
-												[
-													{ text: 'React Native', link: 'https://facebook.github.io/react-native/' },
-												].map((technology, index) => (
-													<Chip
+												technologiesUsed.current.smartCopy.reactNative.map(({ text, link, }, index) => (
+													<TechnologyChip
 														key={index}
-														color='primary'
-														className={`${classes.chip} uses-internet`}
-														label={technology.text}
-														clickable={!!technology.link}
-														onClick={() => technology.link && window.open(technology.link, '__blank')}
+														text={text}
+														link={link}
 													/>
 												))
 											}
@@ -465,17 +553,11 @@ export default function Projects(props) {
 
 									<Box>
 										{
-											[
-												{ text: 'Socket.io', link: 'https://socket.io' },
-												{ text: 'NodeJS', link: 'https://nodejs.org' }
-											].map((technology, index) => (
-												<Chip
+											technologiesUsed.current.chatzz.app.map(({ text, link, }, index) => (
+												<TechnologyChip
 													key={index}
-													color='primary'
-													className={`${classes.chip} uses-internet`}
-													label={technology.text}
-													clickable={!!technology.link}
-													onClick={() => technology.link && window.open(technology.link, '__blank')}
+													text={text}
+													link={link}
 												/>
 											))
 										}
@@ -500,23 +582,14 @@ export default function Projects(props) {
 								<TabPanel value={state.selectedTab} index={2}>
 									<Typography className={classes.paragraphSpacing}>
 										MEAN stack based web app which provides a platform to post missing items found near you, there's also a chat application which helps in communication between person who found the item and that item's owner.
-										</Typography>
+									</Typography>
 									<Box>
 										{
-											[
-												{ text: 'MongoDB', link: 'https://mongodb.com' },
-												{ text: 'ExpressJS', link: 'https://expressjs.com' },
-												{ text: 'Angular', link: 'https://angular.io' },
-												{ text: 'NodeJS', link: 'https://nodejs.org' },
-												{ text: 'Chatzz', link: 'https://github.com/NishantDesai1306/chatzz' },
-											].map((technology, index) => (
-												<Chip
+											technologiesUsed.current.lostBox.app.map(({ text, link, }, index) => (
+												<TechnologyChip
 													key={index}
-													color='primary'
-													className={`${classes.chip} uses-internet`}
-													label={technology.text}
-													clickable={!!technology.link}
-													onClick={() => technology.link && window.open(technology.link, '__blank')}
+													text={text}
+													link={link}
 												/>
 											))
 										}
@@ -563,16 +636,11 @@ export default function Projects(props) {
 
 										<Box>
 											{
-												[
-													{ text: 'Flutter', link: 'https://flutter.dev' },
-												].map((technology, index) => (
-													<Chip
+												technologiesUsed.current.pdpVsTs.app.map(({ text, link, }, index) => (
+													<TechnologyChip
 														key={index}
-														color='primary'
-														className={`${classes.chip} uses-internet`}
-														label={technology.text}
-														clickable={!!technology.link}
-														onClick={() => technology.link && window.open(technology.link, '__blank')}
+														text={text}
+														link={link}
 													/>
 												))
 											}
@@ -616,16 +684,11 @@ export default function Projects(props) {
 
 										<Box>
 											{
-												[
-													{ text: 'Flutter', link: 'https://flutter.dev' },
-												].map((technology, index) => (
-													<Chip
+												technologiesUsed.current.pdpVsTs.app.map(({ text, link, }, index) => (
+													<TechnologyChip
 														key={index}
-														color='primary'
-														className={`${classes.chip} uses-internet`}
-														label={technology.text}
-														clickable={!!technology.link}
-														onClick={() => technology.link && window.open(technology.link, '__blank')}
+														text={text}
+														link={link}
 													/>
 												))
 											}
@@ -673,46 +736,14 @@ export default function Projects(props) {
 
 							<Box className='row'>
 								{
-									[
-										{
-											text: 'React Native Starter',
-											link: 'https://github.com/NishantDesai1306/react-native-starter',
-											description: 'Boiler plate project for React Native app',
-										},
-										{
-											text: 'React Redux Node Starter',
-											link: 'https://github.com/NishantDesai1306/react-redux-node-starter',
-											description: 'Boiler plate project for MERN app with Redux store',
-										},
-										{
-											text: 'Memory Game',
-											link: 'https://memory-game-angular.herokuapp.com/game',
-											description: 'Basic game in which user has to pick card of same color',
-										},
-										{
-											text: 'MEAN5 Starter',
-											link: 'https://github.com/NishantDesai1306/MEAN5-Angular-Material-Starter',
-											description: 'Boiler plate project for MEAN stack with Angular 5',
-										},
-									].map(({ text, description, link }, index) => {
-										return (
-											<Box className='col-12 col-sm-6 pb-4 px-3' key={index}>
-												<Tooltip title={description}>
-													<Button
-														classes={{
-															root: `${classes.projectButton} uses-internet`,
-															label: classes.projectButtonLabel
-														}}
-														onClick={() => window.open(link, '__blank')}
-														variant='outlined'
-														startIcon={<Icon>work</Icon>}
-													>
-														{text}
-													</Button>
-												</Tooltip>
-											</Box>
-										);
-									})
+									otherProjects.current.map(({ text, link, description, }, index) => (
+										<OtherProjectButton
+											key={index}
+											text={text}
+											link={link}
+											description={description}
+										/>
+									))
 								}
 							</Box>
 						</Paper>

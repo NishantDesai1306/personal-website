@@ -1,5 +1,6 @@
 import React from 'react';
 
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -23,8 +24,13 @@ import facebookIcon from './assets/facebook.svg';
 
 const useClasses = makeStyles((theme) => {
 	return {
+		iconContainer: {
+			padding: '70px 0',
+		},
 		sectionIcon: {
 			transform: 'scale(10)',
+			position: 'sticky',
+    		top: '150px',
 		},
 		tabs: {
 			borderRight: `1px solid ${theme.palette.divider}`,
@@ -47,7 +53,7 @@ export default function ContactMe(props) {
 	
 	return (
 		<Container className='my-4 px-0'>
-			<Box className='d-flex align-items-center'>
+			<Box className='d-flex'>
 				<Box className='col-12 col-xl-9 px-0'>
 					<Paper className='p-4'>
 						<Box className='d-flex align-items-center mb-2'>
@@ -149,7 +155,7 @@ export default function ContactMe(props) {
 				</Box>
 
 				<Hidden mdDown>
-					<Box className='d-xl-flex d-none justify-content-center col-xl-3'>
+					<Box className={clsx('d-xl-flex d-none justify-content-center col-xl-3', classes.iconContainer)}>
 						<Icon className={classes.sectionIcon} color='disabled'>
 							email
 						</Icon>

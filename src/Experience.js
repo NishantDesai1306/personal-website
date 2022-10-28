@@ -19,6 +19,8 @@ const useClasses = makeStyles((theme) => {
 	return {
 		sectionIcon: {
 			transform: 'scale(10)',
+			position: 'sticky',
+    		top: '135px',
 		},
 		tabs: {
 			borderRight: `1px solid ${theme.palette.divider}`,
@@ -58,31 +60,47 @@ export default function Experience(props) {
 	const experience = [
 		{
 			tabTitle: 'AppGambit',
+			url: 'https://appgambit.com/',
 			title: 'AppGambit (Formerly known as JumpByte)',
 			duration: 'May 2016 - Dec 2017',
 			experience: [
-				`Developed and maintained notification server built on top of Meteor`,
-				`Developed and Managed multiple projects on both frontend and backend`,
-				`Manually tested web apps in various browsers to ensure cross-browser compatibility`,
-				`Worked on native android app which was used for communication internally`,
+				`Developed and maintained notification server built on top of Meteor.`,
+				`Developed and Managed multiple projects on both frontend and backend.`,
+				`Manually tested web apps in various browsers to ensure cross-browser compatibility.`,
+				`Worked on native android app which was used for communication internally.`,
 			],
 		},
 		{
-			tabTitle: 'Freelancing',
-			title: 'Freelance Application Developer',
-			duration: 'January 2018 - Present',
+			tabTitle: 'modd.io',
+			url: 'https://www.modd.io/',
+			title: 'Application Developer',
+			duration: 'January 2018 - September 2020',
 			experience: [
-				`Worked with multiple clients and delivered projects with high quality software that meets client's expectations`,
-				`Designed and Developed complex intra-server communication, scheduling and auto-scaling system for Modd.io`,
-				`Developed software on both client side as well as server side`,
+				`Worked on a React based web application which lets users build their own multiplayer game.`,
+				`Reduced S3 costs by 50% through a two-tier caching system.`,
+				`Designed and built a provisioning and communication system among servers which is horizontally scalable.`,
+				`Hosting games and Auto-scaling games on game servers to provide smooth UX.`,
+				`Deploying private servers for users to create a new game session where only people with invite links can join in.`,
 				`Designed and developers hybrid apps for clients using React Native`,
 			]
 		},
+		{
+			tabTitle: 'FoodX',
+			url: 'https://www.foodxtech.com/',
+			title: 'Fullstack Developer (on Contract)',
+			duration: 'September 2020 - September 2022',
+			experience: [
+				`Worked on a React based web application which lets users manage orders and products online.`,
+				`Designed UI/UX solutions based on what's more feasible for a given task.`,
+				`Took lead in designing multiple company wide features and their implementation.`,
+			]
+		},
+		
 	];
 
 	return (
 		<Container className='my-4 px-0'>
-			<Box className='d-flex align-items-center'>
+			<Box className='d-flex'>
 				<Box className='d-flex col-12 col-xl-9 px-0'>
 					<Paper className='p-3 w-100'>
 						<Box className='d-flex align-items-center mb-2'>
@@ -122,6 +140,13 @@ export default function Experience(props) {
 												<Typography variant='h5' className='mb-1' color='textPrimary'>
 													{experienceDetails.title}
 												</Typography>
+												
+												<div className='mb-1'>
+													<a href={experienceDetails.url} target="__blank">
+														{experienceDetails.url}
+													</a>
+												</div>
+												
 												<Typography className='mb-1' color='textSecondary'>
 													Duration: {experienceDetails.duration}
 												</Typography>
@@ -145,7 +170,7 @@ export default function Experience(props) {
 				</Box>
 				
 				<Hidden mdDown>
-					<Box className='d-none d-xl-flex justify-content-center col-xl-3'>
+					<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
 						<Icon className={classes.sectionIcon} color='disabled'>
 							code
 						</Icon>

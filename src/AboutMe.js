@@ -22,6 +22,8 @@ const useClasses = makeStyles((theme) => {
 		},
 		sectionIcon: {
 			transform: 'scale(10)',
+			position: 'sticky',
+    		top: '135px',
 		}
 	};
 });
@@ -77,8 +79,8 @@ export default function AboutMe(props) {
 
 	return (
 		<Container className='my-4 py-5 px-0'>
-			<Box className='row m-0 align-items-center'>
-				<Box className='d-none d-xl-flex justify-content-center col-xl-3'>
+			<Box className='row m-0'>
+				<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
 					<Icon className={classes.sectionIcon} color='disabled'>
 						notes
 					</Icon>

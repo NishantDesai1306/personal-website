@@ -37,7 +37,7 @@ export default function Introduction(props) {
 				</Typography>
 
 				<Typography variant='h6' color='textSecondary'>
-					I'm a software engineer based in Surat, IN with expertise in building high-quality websites and applications.
+					I'm a software engineer working in Canada with expertise in building high-quality web applications.
 				</Typography>
 			</Box>
 		</Box>

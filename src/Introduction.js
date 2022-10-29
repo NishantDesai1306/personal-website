@@ -29,7 +29,7 @@ export default function Introduction(props) {
 			</Box>
 
 			<Box className='col-12 col-md-5'>
-				<Typography variant='h6'>Hello I'm</Typography>
+				<Typography variant='h6'>Hello I'm </Typography>
 				<Typography variant='h4' gutterBottom>{constants.USER_PROFILE.NAME}</Typography>
 
 				<Typography variant='h4' color='textSecondary' gutterBottom>

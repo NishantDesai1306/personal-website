@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
 import Hidden from '@material-ui/core/Hidden';
+import CloseIcon from '@material-ui/icons/Close';
 
 import SideDrawer from './SideDrawer';
 import AppBar from './AppBar';
@@ -48,42 +49,54 @@ const useStyles = makeStyles((theme) => {
   }
 });
 
-const initialState = {
-  isDrawerOpen: false,
-};
-
 export default function App() {
   const classes = useStyles();
-  const [state, setState] = React.useState(initialState);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [hideUpdateNotification, setHideUpdateNotification] = useState(false);
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
 
-  const toggleDrawer = (isDrawerOpen) => {
-    setState({
-      isDrawerOpen
-    });
-  }
+  const downloadUpdate = useCallback(() => {
+    const registrationWaiting = window.deferredUpdate && window.deferredUpdate.waiting;
+    if (registrationWaiting) {
+      registrationWaiting.postMessage({ type: 'SKIP_WAITING' });
+      registrationWaiting.addEventListener('statechange', e => {
+        if (e.target.state === 'activated') {
+          window.location.reload();
+        }
+      });
+    }
+  }, []);
 
   return (
     <div className='d-flex flex-column align-items-center bootstrap-wrapper'>
-      <Tooltip title='Update'>
-        <Fab
-          id='app-update'
-          color='secondary'
-          className={`${classes.updateButton} d-none`}
-        >
-          <Icon>get_app</Icon>
-        </Fab>
-      </Tooltip>
+      <Snackbar
+        id='app-update'
+        className='d-none'
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={!hideUpdateNotification}
+        onClose={() => setHideUpdateNotification(true)}
+        message="Update available"
+        action={
+          <React.Fragment>
+            <Button color="secondary" size="small" onClick={() => downloadUpdate()}>
+              Download
+            </Button>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={() => setHideUpdateNotification(true)}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
 
       <div className='flex-grow-0 w-100'>
         <AppBar
-          onOpenSideDrawer={() => toggleDrawer(true)}
+          onOpenSideDrawer={() => setIsDrawerOpen(true)}
         />
 
         <SideDrawer
-          isDrawerOpen={state.isDrawerOpen}
-          onClose={() => toggleDrawer(false)}
+          isDrawerOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
         />
       </div>
 

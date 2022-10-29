@@ -6,10 +6,14 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
+import NotesIcon from '@material-ui/icons/Notes';
+import CodeIcon from '@material-ui/icons/Code';
+import WorkIcon from '@material-ui/icons/Work';
+import EmailIcon from '@material-ui/icons/Email';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 
@@ -80,7 +84,7 @@ export default function SideDrawer(props) {
 					<AnchorLink offset='50' href='#about-me' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
-									<Icon color='primary'>notes</Icon>
+									<NotesIcon color='primary' />
 								</ListItemIcon>
 								<ListItemText primary='About Me' />
 						</ListItem>
@@ -89,7 +93,7 @@ export default function SideDrawer(props) {
 					<AnchorLink offset='50' href='#experience' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
-									<Icon color='primary'>code</Icon>
+									<CodeIcon color='primary' />
 								</ListItemIcon>
 								<ListItemText primary='Experience' />
 						</ListItem>
@@ -98,7 +102,7 @@ export default function SideDrawer(props) {
 					<AnchorLink offset='75' href='#projects' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
-									<Icon color='primary'>work</Icon>
+									<WorkIcon color='primary' />
 								</ListItemIcon>
 								<ListItemText primary='Projects' />							
 						</ListItem>
@@ -107,7 +111,7 @@ export default function SideDrawer(props) {
 					<AnchorLink offset='0' href='#contact-me' className={`${classes.buttonLink} no-select`}>
 						<ListItem button>
 								<ListItemIcon>
-									<Icon color='primary'>email</Icon>
+									<EmailIcon color='primary' />
 								</ListItemIcon>
 								<ListItemText primary='Contact Me' />
 						</ListItem>
@@ -118,7 +122,7 @@ export default function SideDrawer(props) {
 						onClick={() => window.open(constants.USER_PROFILE.RESUME, '_blank')}
 					>
 						<ListItemIcon>
-							<Icon color='primary'>description</Icon>
+							<DescriptionIcon color='primary' />
 						</ListItemIcon>
 						<ListItemText>
 							<Typography color='primary'>

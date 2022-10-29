@@ -1,3 +1,4 @@
+/* eslint-disable import/no-webpack-loader-syntax */
 import React from 'react';
 
 import clsx from 'clsx';
@@ -9,18 +10,18 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
+import EmailIcon from '@material-ui/icons/Email';
 
 import constants from './constant';
 
-import githubIcon from './assets/github.svg';
-import linkedinIcon from './assets/linkedin.svg';
-import upworkIcon from './assets/upwork.svg';
-import facebookIcon from './assets/facebook.svg';
+import githubIcon from '!file-loader!./assets/github.svg';
+import linkedinIcon from '!file-loader!./assets/linkedin.svg';
+import upworkIcon from '!file-loader!./assets/upwork.svg';
+import facebookIcon from '!file-loader!./assets/facebook.svg';
 
 const useClasses = makeStyles((theme) => {
 	return {
@@ -58,9 +59,7 @@ export default function ContactMe(props) {
 					<Paper className='p-4'>
 						<Box className='d-flex align-items-center mb-2'>
 							<Hidden mdUp>
-								<Icon color='disabled' className='mr-2'>
-									email
-								</Icon>
+								<EmailIcon color='disabled' className='mr-2' />
 							</Hidden>
 							<Typography variant='h5'>
 								Contact Me
@@ -156,9 +155,7 @@ export default function ContactMe(props) {
 
 				<Hidden mdDown>
 					<Box className={clsx('d-xl-flex d-none justify-content-center col-xl-3', classes.iconContainer)}>
-						<Icon className={classes.sectionIcon} color='disabled'>
-							email
-						</Icon>
+						<EmailIcon className={classes.sectionIcon} color='disabled' />
 					</Box>
 				</Hidden>
 			</Box>

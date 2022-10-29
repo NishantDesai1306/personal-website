@@ -5,9 +5,9 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
-import Icon from '@material-ui/core/Icon'
 import Hidden from '@material-ui/core/Hidden'
 import Box from '@material-ui/core/Box'
+import NotesIcon from '@material-ui/icons/Notes';
 
 import constants from './constant';
 
@@ -81,18 +81,14 @@ export default function AboutMe(props) {
 		<Container className='my-4 py-5 px-0'>
 			<Box className='row m-0'>
 				<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
-					<Icon className={classes.sectionIcon} color='disabled'>
-						notes
-					</Icon>
+					<NotesIcon className={classes.sectionIcon} color='disabled' />
 				</Box>
 
 				<Box className='col-12 col-xl-9 px-0'>
 					<Paper className='p-4'>
 						<Box className='d-flex align-items-center mb-2'>
 							<Hidden xlUp>
-								<Icon color='disabled' className='mr-2'>
-									notes
-								</Icon>
+								<NotesIcon color='disabled' className='mr-2' />
 							</Hidden>
 							<Typography variant='h5'>
 								About Me

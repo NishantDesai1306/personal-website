@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
@@ -22,6 +21,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Slide from '@material-ui/core/Slide';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import WorkIcon from '@material-ui/icons/Work';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import CloseIcon from '@material-ui/icons/Close';
+import CodeIcon from '@material-ui/icons/Code';
+import LaunchIcon from '@material-ui/icons/Launch';
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
 import smartCopyLogo from './assets/smart-copy.png';
 import chatzzLogo from './assets/chatzz.jpg';
@@ -93,7 +98,7 @@ const OtherProjectButton = ({ text, link, description }) => {
 					}}
 					onClick={() => window.open(link, '__blank')}
 					variant='outlined'
-					startIcon={<Icon>work</Icon>}
+					startIcon={<WorkIcon />}
 				>
 					{text}
 				</Button>
@@ -281,9 +286,7 @@ export default function Projects(props) {
 			<Box className='d-flex'>
 				<Hidden mdDown>
 					<Box className={clsx('d-xl-flex d-none justify-content-center col-xl-3', classes.iconContainer)}>
-						<Icon className={classes.sectionIcon} color='disabled'>
-							work
-						</Icon>
+						<WorkIcon className={classes.sectionIcon} color='disabled' />
 					</Box>
 				</Hidden>
 
@@ -292,9 +295,7 @@ export default function Projects(props) {
 						<Paper className='w-100'>
 							<Box className='d-flex align-items-center justify-content-start px-4 mb-2 pt-4'>
 								<Hidden mdUp>
-									<Icon color='disabled' className='mr-2'>
-										work
-									</Icon>
+									<WorkIcon color='disabled' className='mr-2' />
 								</Hidden>
 								<Typography className='text-center' variant='h5'>
 									Projects
@@ -367,7 +368,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
-												<Icon className={classes.icon}>get_app</Icon>
+												<GetAppIcon className={classes.icon} />
 												Download
 											</Button>
 
@@ -378,7 +379,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												onClick={() => setSmartCopyDemoModal(true)}
 											>
-												<Icon className={classes.icon}>play_circle_filled</Icon>
+												<PlayCircleFilledIcon className={classes.icon} />
 												Demo
 											</Button>
 										</Box>
@@ -403,7 +404,7 @@ export default function Projects(props) {
 																className='p-0'
 																onClick={() => setSmartCopyDemoModal(false)}
 															>
-																<Icon>close</Icon>
+																<CloseIcon />
 															</IconButton>
 														</Box>
 
@@ -465,7 +466,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://smartcopy.herokuapp.com', '__blank')}
 											>
-												<Icon className={classes.icon}>launch</Icon>
+												<LaunchIcon className={classes.icon} />
 												Open
 											</Button>
 
@@ -476,7 +477,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://github.com/NishantDesai1306/smart-copy-web-app-angular', '__blank')}
 											>
-												<Icon className={classes.icon}>code</Icon>
+												<CodeIcon className={classes.icon} />
 												Code
 											</Button>
 										</Box>
@@ -512,7 +513,7 @@ export default function Projects(props) {
 												fullWidth={isXs}
 												onClick={() => window.open('https://smartcopy-195fd.web.app/login', '__blank')}
 											>
-												<Icon className={classes.icon}>launch</Icon>
+												<LaunchIcon className={classes.icon} />
 												Open
 											</Button>
 
@@ -523,7 +524,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://github.com/NishantDesai1306/smart-copy-web-firebase', '__blank')}
 											>
-												<Icon className={classes.icon}>code</Icon>
+												<CodeIcon className={classes.icon} />
 												Code
 											</Button>
 										</Box>
@@ -559,7 +560,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												onClick={() => window.open('https://github.com/NishantDesai1306/react-native-smart-copy', '__blank')}
 											>
-												<Icon className={classes.icon}>code</Icon>
+												<CodeIcon className={classes.icon} />
 												Code
 											</Button>
 										</Box>
@@ -593,7 +594,7 @@ export default function Projects(props) {
 											fullWidth={isXs}
 											onClick={() => window.open('https://github.com/NishantDesai1306/chatzz', '__blank')}
 										>
-											<Icon className={classes.icon}>code</Icon>
+											<CodeIcon className={classes.icon} />
 											Code
 										</Button>
 									</Box>
@@ -625,7 +626,7 @@ export default function Projects(props) {
 											className={`${classes.buttons} uses-internet`}
 											onClick={() => window.open('https://lost-box.herokuapp.com/login', '__blank')}
 										>
-											<Icon className={classes.icon}>launch</Icon>
+											<LaunchIcon className={classes.icon} />
 											Open
 										</Button>
 										<Button
@@ -635,7 +636,7 @@ export default function Projects(props) {
 											className={`${classes.buttons} uses-internet`}
 											onClick={() => window.open('https://github.com/NishantDesai1306/lost-and-found', '__blank')}
 										>
-											<Icon className={classes.icon}>code</Icon>
+											<CodeIcon className={classes.icon} />
 											Code
 										</Button>
 									</Box>
@@ -677,7 +678,7 @@ export default function Projects(props) {
 												fullWidth={isXs}
 												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
-												<Icon className={classes.icon}>get_app</Icon>
+												<GetAppIcon className={classes.icon} />
 												Download
 											</Button> */}
 
@@ -688,7 +689,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												onClick={() => setYoutubeChannelWarDemoModal(true)}
 											>
-												<Icon className={classes.icon}>play_circle_filled</Icon>
+												<PlayCircleFilledIcon className={classes.icon} />
 												Demo
 											</Button>
 
@@ -699,7 +700,7 @@ export default function Projects(props) {
 												fullWidth={isXs}
 												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts_v3', '__blank')}
 											>
-												<Icon className={classes.icon}>code</Icon>
+												<CodeIcon className={classes.icon} />
 												Code
 											</Button>
 										</Box>
@@ -724,7 +725,7 @@ export default function Projects(props) {
 																className='p-0'
 																onClick={() => setYoutubeChannelWarDemoModal(false)}
 															>
-																<Icon>close</Icon>
+																<CloseIcon />
 															</IconButton>
 														</Box>
 
@@ -785,7 +786,7 @@ export default function Projects(props) {
 												className={`${classes.buttons} uses-internet`}
 												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
 											>
-												<Icon className={classes.icon}>get_app</Icon>
+												<GetAppIcon className={classes.icon} />
 												Download
 											</Button> */}
 
@@ -796,7 +797,7 @@ export default function Projects(props) {
 												fullWidth={isXs}
 												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts_lite', '__blank')}
 											>
-												<Icon className={classes.icon}>code</Icon>
+												<CodeIcon className={classes.icon} />
 												Code
 											</Button>
 										</Box>

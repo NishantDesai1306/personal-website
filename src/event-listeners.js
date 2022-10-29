@@ -1,5 +1,4 @@
 const toggleClasses = (selectorClassName, classToToggle, shouldAdd) => {
-	debugger;
 	const installHandles = document.getElementsByClassName(selectorClassName);
 
 	for (let i = 0; i < installHandles.length; ++i) {

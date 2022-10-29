@@ -8,13 +8,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import Avatar from '@material-ui/core/Avatar';
 import Fade from '@material-ui/core/Fade';
 import Box from '@material-ui/core/Box';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import MenuIcon from '@material-ui/icons/Menu';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
@@ -93,7 +94,7 @@ export default function MyAppBar(props) {
 							aria-label='menu'
 							onClick={onOpenSideDrawer}
 						>
-							<Icon>menu</Icon>
+							<MenuIcon />
 						</IconButton>
 					</Hidden>
 
@@ -146,7 +147,7 @@ export default function MyAppBar(props) {
 							onClick={() => window.showInstallPrompt()}
 							color='inherit'
 							className='install-handle d-none mx-3'
-							startIcon={<Icon>get_app</Icon>}
+							startIcon={<GetAppIcon />}
 						>
 							Install
 						</Button>

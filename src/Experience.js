@@ -8,12 +8,12 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import CodeIcon from '@material-ui/icons/Code';
 
 const useClasses = makeStyles((theme) => {
 	return {
@@ -105,9 +105,7 @@ export default function Experience(props) {
 					<Paper className='p-3 w-100'>
 						<Box className='d-flex align-items-center mb-2'>
 							<Hidden xlUp>
-								<Icon color='disabled' className='mr-2'>
-									code
-								</Icon>
+								<CodeIcon color='disabled' className='mr-2' />
 							</Hidden>
 							<Typography variant='h5'>
 								Experience
@@ -171,9 +169,7 @@ export default function Experience(props) {
 				
 				<Hidden mdDown>
 					<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
-						<Icon className={classes.sectionIcon} color='disabled'>
-							code
-						</Icon>
+						<CodeIcon className={classes.sectionIcon} color='disabled' />
 					</Box>
 				</Hidden>
 			</Box>

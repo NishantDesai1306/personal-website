@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => {
       flexDirection: 'column'
     },
     introductionContainerHeightXlUp: {
-      height: '80vh',
+      height: '100vh',
     },
     introductionContainerHeightMdDown: {
       minHeight: '100vh',

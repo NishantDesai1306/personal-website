@@ -32,32 +32,24 @@ export default function AboutMe(props) {
 	const classes = useClasses();
 	const technologies = [
 		{
-			text: 'HTML',
-			link: ''
+			text: 'NextJS',
+			link: 'https://nextjs.org/'
 		},
 		{
-			text: 'CSS',
-			link: ''
+			text: 'React',
+			link: 'https://reactjs.org'
+		},
+		{
+			text: 'NodeJS',
+			link: 'https://nodejs.org/en/'
 		},
 		{
 			text: 'Angular',
 			link: 'https://angular.io'
 		},
 		{
-			text: 'ReactJS',
-			link: 'https://reactjs.org'
-		},
-		{
 			text: 'Meteor',
 			link: 'https://www.meteor.com'
-		},
-		{
-			text: 'JQuery',
-			link: 'https://jquery.com'
-		},
-		{
-			text: 'NodeJS',
-			link: 'https://nodejs.org/en/'
 		},
 		{
 			text: 'React Native',

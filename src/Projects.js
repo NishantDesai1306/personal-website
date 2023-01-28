@@ -32,6 +32,7 @@ import smartCopyLogo from './assets/smart-copy.png';
 import chatzzLogo from './assets/chatzz.jpg';
 import lostBoxLogo from './assets/lost_box.png';
 import flutterLogo from './assets/flutter.png';
+import chessLogo from './assets/chess.jpg';
 
 const getAlphaChannelFromDecimal = (opacityInDecimal) => {
 	const totalDivisionInAlphaChannel = 255 // FF in hex = 0 - 256 in decimal;
@@ -188,7 +189,7 @@ export default function Projects(props) {
 				{ text: 'Mongoose', link: 'https://mongoosejs.com/docs/validation.html' },
 			],
 			reactApp: [
-				{ text: 'ReactJS', link: 'https://reactjs.org' },
+				{ text: 'React', link: 'https://reactjs.org' },
 				{ text: 'Material UI', link: 'https://material-ui.com' },
 				{ text: 'Firebase', link: 'https://firebase.google.com' },
 				{ text: 'Work Box', link: 'https://developers.google.com/web/tools/workbox' },
@@ -212,7 +213,14 @@ export default function Projects(props) {
 				{ text: 'Chatzz', link: 'https://github.com/NishantDesai1306/chatzz' },
 			],
 		},
-		pdpVsTs: {
+		chess: {
+			app: [
+				{ text: 'NodeJS', link: 'https://nodejs.org' },
+				{ text: 'React', link: 'https://reactjs.org' },
+				{ text: 'Bootstrap', link: 'https://getbootstrap.com' },
+			],
+		},
+		youtubeSubscriberCounter: {
 			app: [
 				{ text: 'Flutter', link: 'https://flutter.dev' },
 			],
@@ -220,24 +228,14 @@ export default function Projects(props) {
 	});
 	const otherProjects = useRef([
 		{
-			text: 'React Native Starter',
-			link: 'https://github.com/NishantDesai1306/react-native-starter',
-			description: 'Boiler plate project for React Native app',
+			text: 'Yarn cost calculator',
+			link: 'https://github.com/NishantDesai1306/yarn-cost-calculator',
+			description: 'Small Progress web app used for calculating overall cost at yarn mill.',
 		},
 		{
-			text: 'React Redux Node Starter',
-			link: 'https://github.com/NishantDesai1306/react-redux-node-starter',
-			description: 'Boiler plate project for MERN app with Redux store',
-		},
-		{
-			text: 'Memory Game',
-			link: 'https://memory-game-angular.herokuapp.com/game',
-			description: 'Basic game in which user has to pick card of same color',
-		},
-		{
-			text: 'MEAN5 Starter',
-			link: 'https://github.com/NishantDesai1306/MEAN5-Angular-Material-Starter',
-			description: 'Boiler plate project for MEAN stack with Angular 5',
+			text: 'NextJS Supabase boilerplate',
+			link: 'https://github.com/NishantDesai1306/nextjs-supabase-contact-list',
+			description: 'Boiler plate project for NextJS app and Supabase',
 		},
 	]);
 
@@ -321,14 +319,19 @@ export default function Projects(props) {
 									{...a11yProps(1)}
 								/>
 								<Tab
-									icon={<Avatar src={lostBoxLogo} />}
-									label='Lost Box'
+									icon={<Avatar src={chessLogo} />}
+									label='Chess'
 									{...a11yProps(2)}
 								/>
 								<Tab
-									icon={<Avatar src={flutterLogo} />}
-									label='YT channel war'
+									icon={<Avatar src={lostBoxLogo} />}
+									label='Lost Box'
 									{...a11yProps(3)}
+								/>
+								<Tab
+									icon={<Avatar src={flutterLogo} />}
+									label='YT Sub counter'
+									{...a11yProps(4)}
 								/>
 							</Tabs>
 
@@ -602,6 +605,39 @@ export default function Projects(props) {
 
 								<TabPanel value={state.selectedTab} index={2}>
 									<Typography className={classes.paragraphSpacing}>
+										Simple chess app with clean UI with chess engine (Stockfish 15) based eval bar.
+									</Typography>
+
+									<Box>
+										{
+											technologiesUsed.current.chess.app.map(({ text, link, }, index) => (
+												<TechnologyChip
+													key={index}
+													text={text}
+													link={link}
+												/>
+											))
+										}
+									</Box>
+
+									<Divider className={classes.divider} />
+
+									<Box>
+										<Button
+											variant='contained'
+											color='primary'
+											className={`${classes.buttons} uses-internet`}
+											fullWidth={isXs}
+											onClick={() => window.open('https://github.com/NishantDesai1306/chess', '__blank')}
+										>
+											<CodeIcon className={classes.icon} />
+											Code
+										</Button>
+									</Box>
+								</TabPanel>
+
+								<TabPanel value={state.selectedTab} index={3}>
+									<Typography className={classes.paragraphSpacing}>
 										MEAN stack based web app which provides a platform to post missing items found near you, there's also a chat application which helps in communication between person who found the item and that item's owner.
 									</Typography>
 									<Box>
@@ -642,22 +678,19 @@ export default function Projects(props) {
 									</Box>
 								</TabPanel>
 
-								<TabPanel value={state.selectedTab} index={3}>
+								<TabPanel value={state.selectedTab} index={4}>
 									<Typography className={classes.paragraphSpacing}>
-										During end of 2018 and start of 2019 a heated battle was going on between two Youtube channels PewDiePie and T-Series to get the throne of highest subscribed channel on the platform, so instead of going on youtube to get the latest subscriber score I built this mobile app which will fetch the subscriber count for those channels in real time. The app was later modified so that user can pick any two youtube channels for comparison.
+										Youtube Subscriber counter	
 									</Typography>
 
 									<Box className='mb-4 border p-4 rounded'>
-										<Typography variant='h6' className={classes.paragraphSpacing}>
-											Full Version
-										</Typography>
 										<Typography className={classes.paragraphSpacing}>
-											Full version of this app has additional features like app tour, night mode, screenshot feature, channel details and top videos of those youtube channels.
+											This is a cross platform app built using Flutter, it allows user to compare two youtube channels based on their subscribers count.
 										</Typography>
 
 										<Box>
 											{
-												technologiesUsed.current.pdpVsTs.app.map(({ text, link, }, index) => (
+												technologiesUsed.current.youtubeSubscriberCounter.app.map(({ text, link, }, index) => (
 													<TechnologyChip
 														key={index}
 														text={text}
@@ -670,18 +703,6 @@ export default function Projects(props) {
 										<Divider className={classes.divider} />
 
 										<Box>
-											{/* <Button
-												variant='contained'
-												color='primary'
-												disabled
-												className={`${classes.buttons} uses-internet`}
-												fullWidth={isXs}
-												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
-											>
-												<GetAppIcon className={classes.icon} />
-												Download
-											</Button> */}
-
 											<Button
 												variant='contained'
 												color='primary'
@@ -698,7 +719,7 @@ export default function Projects(props) {
 												color='primary'
 												className={`${classes.buttons} uses-internet`}
 												fullWidth={isXs}
-												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts_v3', '__blank')}
+												onClick={() => window.open('https://github.com/NishantDesai1306/youtube_channel_sub_counter/tree/master', '__blank')}
 											>
 												<CodeIcon className={classes.icon} />
 												Code
@@ -753,55 +774,7 @@ export default function Projects(props) {
 												</Dialog>
 											)
 										}
-									</Box>
-
-									<Box className='mb-4 border p-4 rounded'>
-										<Typography variant='h6' className={classes.paragraphSpacing}>
-											Lite Version (Source code less than 5kb)
-										</Typography>
-										<Typography className={classes.paragraphSpacing}>
-											I created this lite version as it was the app that I submitted in <a href='https://flutter.dev/create' target='__blank'>Flutter Create</a> competition, the rules were simple I had to create a flutter app written with less than 5kb of dart code. It just shows the live subscriber count of PewDiePie and T-Series youtube channels.
-										</Typography>
-
-										<Box>
-											{
-												technologiesUsed.current.pdpVsTs.app.map(({ text, link, }, index) => (
-													<TechnologyChip
-														key={index}
-														text={text}
-														link={link}
-													/>
-												))
-											}
-										</Box>
-
-										<Divider className={classes.divider} />
-
-										<Box>
-											{/* <Button
-												variant='contained'
-												color='primary'
-												disabled
-												fullWidth={isXs}
-												className={`${classes.buttons} uses-internet`}
-												href='https://smartcopy.herokuapp.com/app/android/smart-copy-app.apk'
-											>
-												<GetAppIcon className={classes.icon} />
-												Download
-											</Button> */}
-
-											<Button
-												variant='contained'
-												color='primary'
-												className={`${classes.buttons} uses-internet`}
-												fullWidth={isXs}
-												onClick={() => window.open('https://github.com/NishantDesai1306/pdp_vs_ts_lite', '__blank')}
-											>
-												<CodeIcon className={classes.icon} />
-												Code
-											</Button>
-										</Box>
-									</Box>
+									</Box>	
 								</TabPanel>
 							</Box>
 						</Paper>

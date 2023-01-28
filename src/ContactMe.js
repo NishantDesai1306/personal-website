@@ -68,7 +68,7 @@ export default function ContactMe(props) {
 
 						<Box>
 							<Typography>
-								Although I'm not actively looking for new opportunities, my inbox is always open for better opportunities. If you have a good job offer, potential project or just want to discuss something related to tech drop in a message, I'll try my best to answer it!
+								If you have a good job offer, potential project or just want to discuss something related to tech drop in a message, I'll try my best to answer it!
 							</Typography>
 
 							<Box className='d-flex justify-content-center my-4'>

@@ -95,7 +95,16 @@ export default function Experience(props) {
 				`Took lead in designing multiple company wide features and their implementation.`,
 			]
 		},
-		
+		{
+			tabTitle: 'J.D. Power',
+			url: 'https://jdpower.com',
+			title: 'Senior Frontend Developer',
+			duration: 'November 2022 - Present',
+			experience: [
+				`Worked on a NextJS based web application which connects users with car dealers or other users who want to sell their cars.`,
+				`Debugged and resolved google ad issue which was plaguing the app for months.`,
+			]
+		},
 	];
 
 	return (

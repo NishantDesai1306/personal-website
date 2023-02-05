@@ -13,14 +13,16 @@ import Tab from '@material-ui/core/Tab';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import CodeIcon from '@material-ui/icons/Code';
+import WorkIcon from '@material-ui/icons/Work';
 
 const useClasses = makeStyles((theme) => {
 	return {
 		sectionIcon: {
 			transform: 'scale(10)',
 			position: 'sticky',
-    		top: '135px',
+			top: 155,
+			marginTop: 40,
+			marginBottom: 40,
 		},
 		tabs: {
 			borderRight: `1px solid ${theme.palette.divider}`,
@@ -59,16 +61,25 @@ export default function Experience(props) {
 
 	const experience = [
 		{
-			tabTitle: 'AppGambit',
-			url: 'https://appgambit.com/',
-			title: 'AppGambit (Formerly known as JumpByte)',
-			duration: 'May 2016 - Dec 2017',
+			tabTitle: 'J.D. Power',
+			url: 'https://jdpower.com',
+			title: 'Senior Frontend Developer',
+			duration: 'November 2022 - Present',
 			experience: [
-				`Developed and maintained notification server built on top of Meteor.`,
-				`Developed and Managed multiple projects on both frontend and backend.`,
-				`Manually tested web apps in various browsers to ensure cross-browser compatibility.`,
-				`Worked on native android app which was used for communication internally.`,
-			],
+				`Worked on a NextJS based web application which connects users with car dealers or other users who want to sell their cars.`,
+				`Debugged and resolved google ad issue which was plaguing the app for months.`,
+			]
+		},
+		{
+			tabTitle: 'FoodX',
+			url: 'https://www.foodxtech.com/',
+			title: 'Fullstack Developer (on Contract)',
+			duration: 'September 2020 - September 2022',
+			experience: [
+				`Worked on a React based web application which lets users manage orders and products online.`,
+				`Designed UI/UX solutions based on what's more feasible for a given task.`,
+				`Took lead in designing multiple company wide features and their implementation.`,
+			]
 		},
 		{
 			tabTitle: 'modd.io',
@@ -85,25 +96,16 @@ export default function Experience(props) {
 			]
 		},
 		{
-			tabTitle: 'FoodX',
-			url: 'https://www.foodxtech.com/',
-			title: 'Fullstack Developer (on Contract)',
-			duration: 'September 2020 - September 2022',
+			tabTitle: 'AppGambit',
+			url: 'https://appgambit.com/',
+			title: 'AppGambit (Formerly known as JumpByte)',
+			duration: 'May 2016 - Dec 2017',
 			experience: [
-				`Worked on a React based web application which lets users manage orders and products online.`,
-				`Designed UI/UX solutions based on what's more feasible for a given task.`,
-				`Took lead in designing multiple company wide features and their implementation.`,
-			]
-		},
-		{
-			tabTitle: 'J.D. Power',
-			url: 'https://jdpower.com',
-			title: 'Senior Frontend Developer',
-			duration: 'November 2022 - Present',
-			experience: [
-				`Worked on a NextJS based web application which connects users with car dealers or other users who want to sell their cars.`,
-				`Debugged and resolved google ad issue which was plaguing the app for months.`,
-			]
+				`Developed and maintained notification server built on top of Meteor.`,
+				`Developed and Managed multiple projects on both frontend and backend.`,
+				`Manually tested web apps in various browsers to ensure cross-browser compatibility.`,
+				`Worked on native android app which was used for communication internally.`,
+			],
 		},
 	];
 
@@ -114,7 +116,7 @@ export default function Experience(props) {
 					<Paper className='p-3 w-100'>
 						<Box className='d-flex align-items-center mb-2'>
 							<Hidden xlUp>
-								<CodeIcon color='disabled' className='mr-2' />
+								<WorkIcon color='disabled' className='mr-2' />
 							</Hidden>
 							<Typography variant='h5'>
 								Experience
@@ -178,7 +180,7 @@ export default function Experience(props) {
 				
 				<Hidden mdDown>
 					<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
-						<CodeIcon className={classes.sectionIcon} color='disabled' />
+						<WorkIcon className={classes.sectionIcon} color='disabled' />
 					</Box>
 				</Hidden>
 			</Box>

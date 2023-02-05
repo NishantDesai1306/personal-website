@@ -21,10 +21,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Slide from '@material-ui/core/Slide';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import WorkIcon from '@material-ui/icons/Work';
+import CodeIcon from '@material-ui/icons/Code';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import CloseIcon from '@material-ui/icons/Close';
-import CodeIcon from '@material-ui/icons/Code';
 import LaunchIcon from '@material-ui/icons/Launch';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
@@ -99,7 +98,7 @@ const OtherProjectButton = ({ text, link, description }) => {
 					}}
 					onClick={() => window.open(link, '__blank')}
 					variant='outlined'
-					startIcon={<WorkIcon />}
+					startIcon={<CodeIcon />}
 				>
 					{text}
 				</Button>
@@ -113,7 +112,9 @@ const useClasses = makeStyles((theme) => {
 		sectionIcon: {
 			transform: 'scale(10)',
 			position: 'sticky',
-    		top: '170px',
+			top: 155,
+			marginTop: -35,
+			marginBottom: -35,
 		},
 		iconContainer: {
 			padding: '90px 0',
@@ -284,7 +285,7 @@ export default function Projects(props) {
 			<Box className='d-flex'>
 				<Hidden mdDown>
 					<Box className={clsx('d-xl-flex d-none justify-content-center col-xl-3', classes.iconContainer)}>
-						<WorkIcon className={classes.sectionIcon} color='disabled' />
+						<CodeIcon className={classes.sectionIcon} color='disabled' />
 					</Box>
 				</Hidden>
 
@@ -293,7 +294,7 @@ export default function Projects(props) {
 						<Paper className='w-100'>
 							<Box className='d-flex align-items-center justify-content-start px-4 mb-2 pt-4'>
 								<Hidden mdUp>
-									<WorkIcon color='disabled' className='mr-2' />
+									<CodeIcon color='disabled' className='mr-2' />
 								</Hidden>
 								<Typography className='text-center' variant='h5'>
 									Projects

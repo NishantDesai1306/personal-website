@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => {
 
 export default function Introduction(props) {
   const classes = useStyles();
+  const theme = useTheme();
   const particlesInit = useCallback(async (engine) => {
 		await loadFull(engine);
   }, []);
@@ -42,7 +43,7 @@ export default function Introduction(props) {
         options={{
           background: {
             color: {
-              value: "#3f51b5",
+              value: theme.palette.primary.main,
             },
           },
 					fullScreen: false,
@@ -90,7 +91,7 @@ export default function Introduction(props) {
                 default: "bounce",
               },
               random: false,
-              speed: 6,
+              speed: 3,
               straight: false,
             },
             number: {

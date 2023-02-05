@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Hidden from '@material-ui/core/Hidden'
 import Box from '@material-ui/core/Box'
-import NotesIcon from '@material-ui/icons/Notes';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import constants from './constant';
 
@@ -23,7 +23,9 @@ const useClasses = makeStyles((theme) => {
 		sectionIcon: {
 			transform: 'scale(10)',
 			position: 'sticky',
-    		top: '135px',
+			marginTop: 35,
+			marginBottom: 35,
+			top: 155,
 		}
 	};
 });
@@ -73,14 +75,14 @@ export default function AboutMe(props) {
 		<Container className='my-4 py-5 px-0'>
 			<Box className='row m-0'>
 				<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
-					<NotesIcon className={classes.sectionIcon} color='disabled' />
+					<AccountCircle className={classes.sectionIcon} color='disabled' />
 				</Box>
 
 				<Box className='col-12 col-xl-9 px-0'>
 					<Paper className='p-4'>
 						<Box className='d-flex align-items-center mb-2'>
 							<Hidden xlUp>
-								<NotesIcon color='disabled' className='mr-2' />
+								<AccountCircle color='disabled' className='mr-2' />
 							</Hidden>
 							<Typography variant='h5'>
 								About Me

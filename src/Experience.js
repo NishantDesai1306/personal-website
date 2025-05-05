@@ -68,6 +68,16 @@ export default function Experience(props) {
 			experience: [
 				`Worked on a NextJS based web application which connects users with car dealers or other users who want to sell their cars.`,
 				`Debugged and resolved google ad issue which was plaguing the app for months.`,
+				`Streamlined implementation of Google Ads, eliminated cases when google would serve empty ads.`,
+				`Lead migration of Material UI from v4 to v5`,
+				`Helped in migration from pages router to app router in NextJS`,
+				{
+					main: `Improved overall performance and vitals of the application by carefully optimizing the codebase over months.`,
+					subPoints: [
+						'Mobile: Increased Increased "Good" URLs by 197% and reduced "Poor" URLs by 96% on Mobile.',
+						'Desktop: Increased "Good" URLs by 168% and reduced "Poor" URLs by 21% on Desktop.',
+					]
+				}
 			]
 		},
 		{
@@ -162,11 +172,34 @@ export default function Experience(props) {
 
 												<List component='nav' aria-label='main experience work'>
 													{
-														experienceDetails.experience.map((experienceDescription, index) => (
-															<ListItem button key={index}>
-																<ListItemText primary={experienceDescription} />
-															</ListItem>
-														))
+														experienceDetails.experience.map((experienceDescription, index) => {
+															if (experienceDescription.main) {
+																return (
+																	<ListItem button key={index}>
+																		<ListItemText
+																			primary={experienceDescription.main}
+																			secondary={(
+																				<ol>
+																					{
+																						experienceDescription.subPoints.map((subPoint, index) => (
+																							<li key={index}>{subPoint}</li>
+																						))
+																					}
+																				</ol>
+																			)}
+																		/>
+																	</ListItem>
+																)
+															}
+															
+															return (
+																<ListItem button key={index}>
+																	<ListItemText
+																		primary={experienceDescription}
+																	/>
+																</ListItem>
+															)
+														})
 													}
 												</List>
 											</TabPanel>

@@ -29,7 +29,6 @@ import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
 import smartCopyLogo from './assets/smart-copy.png';
 import chatzzLogo from './assets/chatzz.jpg';
-import lostBoxLogo from './assets/lost_box.png';
 import flutterLogo from './assets/flutter.png';
 import chessLogo from './assets/chess.jpg';
 
@@ -205,15 +204,6 @@ export default function Projects(props) {
 				{ text: 'NodeJS', link: 'https://nodejs.org' }
 			],
 		},
-		lostBox: {
-			app: [
-				{ text: 'MongoDB', link: 'https://mongodb.com' },
-				{ text: 'ExpressJS', link: 'https://expressjs.com' },
-				{ text: 'Angular', link: 'https://angular.io' },
-				{ text: 'NodeJS', link: 'https://nodejs.org' },
-				{ text: 'Chatzz', link: 'https://github.com/NishantDesai1306/chatzz' },
-			],
-		},
 		chess: {
 			app: [
 				{ text: 'NodeJS', link: 'https://nodejs.org' },
@@ -325,11 +315,6 @@ export default function Projects(props) {
 									{...a11yProps(2)}
 								/>
 								<Tab
-									icon={<Avatar src={lostBoxLogo} />}
-									label='Lost Box'
-									{...a11yProps(3)}
-								/>
-								<Tab
 									icon={<Avatar src={flutterLogo} />}
 									label='YT Sub counter'
 									{...a11yProps(4)}
@@ -365,7 +350,7 @@ export default function Projects(props) {
 										<Divider className={classes.divider} />
 
 										<Box>
-											<Button
+											{/* <Button
 												variant='contained'
 												color='primary'
 												fullWidth={isXs}
@@ -374,7 +359,7 @@ export default function Projects(props) {
 											>
 												<GetAppIcon className={classes.icon} />
 												Download
-											</Button>
+											</Button> */}
 
 											<Button
 												variant='contained'
@@ -460,7 +445,7 @@ export default function Projects(props) {
 											}
 										</Box>
 
-										<Divider className={classes.divider} />
+										{/* <Divider className={classes.divider} />
 
 										<Box>
 											<Button
@@ -484,7 +469,7 @@ export default function Projects(props) {
 												<CodeIcon className={classes.icon} />
 												Code
 											</Button>
-										</Box>
+										</Box> */}
 									</Box>
 
 									<Box className='mb-4 border p-4 rounded'>
@@ -507,7 +492,7 @@ export default function Projects(props) {
 											}
 										</Box>
 
-										<Divider className={classes.divider} />
+										{/* <Divider className={classes.divider} />
 
 										<Box>
 											<Button
@@ -531,7 +516,7 @@ export default function Projects(props) {
 												<CodeIcon className={classes.icon} />
 												Code
 											</Button>
-										</Box>
+										</Box> */}
 									</Box>
 
 									<Box className='mb-4 border p-4 rounded'>
@@ -638,48 +623,6 @@ export default function Projects(props) {
 								</TabPanel>
 
 								<TabPanel value={state.selectedTab} index={3}>
-									<Typography className={classes.paragraphSpacing}>
-										MEAN stack based web app which provides a platform to post missing items found near you, there's also a chat application which helps in communication between person who found the item and that item's owner.
-									</Typography>
-									<Box>
-										{
-											technologiesUsed.current.lostBox.app.map(({ text, link, }, index) => (
-												<TechnologyChip
-													key={index}
-													text={text}
-													link={link}
-												/>
-											))
-										}
-									</Box>
-
-									<Divider className={classes.divider} />
-
-									<Box>
-										<Button
-											variant='contained'
-											color='primary'
-											fullWidth={isXs}
-											className={`${classes.buttons} uses-internet`}
-											onClick={() => window.open('https://lost-box.herokuapp.com/login', '__blank')}
-										>
-											<LaunchIcon className={classes.icon} />
-											Open
-										</Button>
-										<Button
-											variant='contained'
-											color='primary'
-											fullWidth={isXs}
-											className={`${classes.buttons} uses-internet`}
-											onClick={() => window.open('https://github.com/NishantDesai1306/lost-and-found', '__blank')}
-										>
-											<CodeIcon className={classes.icon} />
-											Code
-										</Button>
-									</Box>
-								</TabPanel>
-
-								<TabPanel value={state.selectedTab} index={4}>
 									<Typography className={classes.paragraphSpacing}>
 										Youtube Subscriber counter	
 									</Typography>

@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => {
       color: theme.palette.secondary.contrastText,
       width: '100%',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      marginBottom: theme.spacing(10),
     },
     introductionContainerHeightXlUp: {
       height: '100vh',
@@ -38,7 +39,6 @@ const useStyles = makeStyles((theme) => {
       width: '80%',
       display: 'flex',
       alignItems: 'center',
-      minHeight: '80vh',
     },
     updateButton: {
       position: 'fixed',

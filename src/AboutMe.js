@@ -5,9 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
-import Hidden from '@material-ui/core/Hidden'
 import Box from '@material-ui/core/Box'
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Divider from '@material-ui/core/Divider';
 
 import constants from './constant';
 
@@ -18,14 +17,54 @@ const useClasses = makeStyles((theme) => {
 			width: '100%'
 		},
 		chip: {
-			margin: theme.spacing(1),
+			margin: theme.spacing(0.5),
+			fontWeight: 500,
+			'&:hover': {
+				transform: 'translateY(-1px)',
+				boxShadow: theme.shadows[4],
+				transition: 'all 0.2s ease-in-out',
+			}
 		},
-		sectionIcon: {
-			transform: 'scale(10)',
-			position: 'sticky',
-			marginTop: 35,
-			marginBottom: 35,
-			top: 155,
+		sectionTitle: {
+			fontWeight: 600,
+			marginBottom: theme.spacing(3),
+			color: theme.palette.primary.main,
+			position: 'relative',
+			'&::after': {
+				content: '""',
+				position: 'absolute',
+				bottom: -8,
+				left: 0,
+				width: 40,
+				height: 3,
+				backgroundColor: theme.palette.primary.main,
+				borderRadius: 2,
+			}
+		},
+		subtitle: {
+			fontWeight: 500,
+			marginBottom: theme.spacing(2),
+			color: theme.palette.text.secondary,
+		},
+		description: {
+			lineHeight: 1.7,
+			marginBottom: theme.spacing(2),
+			color: theme.palette.text.primary,
+		},
+		paper: {
+			padding: theme.spacing(4),
+			borderRadius: 12,
+			boxShadow: theme.shadows[2],
+			'&:hover': {
+				boxShadow: theme.shadows[4],
+				transition: 'box-shadow 0.3s ease-in-out',
+			}
+		},
+		technologiesSection: {
+			marginTop: theme.spacing(4),
+		},
+		chipsContainer: {
+			marginTop: theme.spacing(2),
 		}
 	};
 });
@@ -72,49 +111,51 @@ export default function AboutMe(props) {
 	];
 
 	return (
-		<Container className='my-4 py-5 px-0'>
+		<Container className='my-5 px-0'>
 			<Box className='row m-0'>
-				<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
-					<AccountCircle className={classes.sectionIcon} color='disabled' />
-				</Box>
+				<Box className='col-12 px-0'>
+					<Paper className={classes.paper}>
+						<Typography variant='h4' className={classes.sectionTitle}>
+							About Me
+						</Typography>
 
-				<Box className='col-12 col-xl-9 px-0'>
-					<Paper className='p-4'>
-						<Box className='d-flex align-items-center mb-2'>
-							<Hidden xlUp>
-								<AccountCircle color='disabled' className='mr-2' />
-							</Hidden>
-							<Typography variant='h5'>
-								About Me
+						{
+							constants.ABOUT.description.map((text, index) => (
+								<Typography key={index} className={classes.description}>
+									{text}
+								</Typography>
+							))
+						}
+
+						<Divider className='my-4' />
+
+						<Box className={classes.technologiesSection}>
+							<Typography variant='h5' className={classes.subtitle}>
+								Technologies
 							</Typography>
+
+							<Typography className={classes.description}>
+								Technologies that I have worked with to build awesome applications
+							</Typography>
+
+							<Box className={classes.chipsContainer}>
+								{
+									technologies.map((technology, index) => {
+										return (
+											<Chip
+												key={index}
+												color='primary'
+												variant='outlined'
+												className={`${classes.chip} ${technology.link ? 'uses-internet' : ''}`}
+												label={technology.text}
+												clickable={!!technology.link}
+												onClick={() => technology.link && window.open(technology.link, '__blank')}
+											/>
+										)
+									})
+								}
+							</Box>
 						</Box>
-
-						{
-							constants.ABOUT.description.map((text, index) => <Typography key={index} className='mb-1'>{text}</Typography>)
-						}
-
-						<Typography variant='h5' className='mt-4 mb-2'>
-							Technologies
-						</Typography>
-
-						<Typography className='mb-1'>
-							Technologies that I have worked with till now to build awesome apps
-						</Typography>
-
-						{
-							technologies.map((technology, index) => {
-								return (
-									<Chip
-										key={index}
-										color='primary'
-										className={`${classes.chip} ${technology.link ? 'uses-internet' : ''}`}
-										label={technology.text}
-										clickable={!!technology.link}
-										onClick={() => technology.link && window.open(technology.link, '__blank')}
-									/>
-								)
-							})
-						}
 					</Paper>
 				</Box>
 			</Box>

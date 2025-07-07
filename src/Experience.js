@@ -6,27 +6,130 @@ import { useTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import WorkIcon from '@material-ui/icons/Work';
+import Link from '@material-ui/core/Link';
 
 const useClasses = makeStyles((theme) => {
 	return {
-		sectionIcon: {
-			transform: 'scale(10)',
-			position: 'sticky',
-			top: 155,
-			marginTop: 40,
-			marginBottom: 40,
+		sectionTitle: {
+			fontWeight: 600,
+			marginBottom: theme.spacing(3),
+			color: theme.palette.primary.main,
+			position: 'relative',
+			'&::after': {
+				content: '""',
+				position: 'absolute',
+				bottom: -8,
+				left: 0,
+				width: 40,
+				height: 3,
+				backgroundColor: theme.palette.primary.main,
+				borderRadius: 2,
+			}
+		},
+		paper: {
+			padding: theme.spacing(4),
+			borderRadius: 12,
+			boxShadow: theme.shadows[2],
+			'&:hover': {
+				boxShadow: theme.shadows[4],
+				transition: 'box-shadow 0.3s ease-in-out',
+			}
 		},
 		tabs: {
 			borderRight: `1px solid ${theme.palette.divider}`,
+			'& .MuiTab-root': {
+				minHeight: 48,
+				fontWeight: 500,
+				textTransform: 'none',
+				fontSize: '0.95rem',
+				'&.Mui-selected': {
+					fontWeight: 600,
+					color: theme.palette.primary.main,
+				},
+				'&:hover': {
+					backgroundColor: theme.palette.action.hover,
+				}
+			},
+			'& .MuiTabs-indicator': {
+				backgroundColor: theme.palette.primary.main,
+			}
 		},
+		horizontalTabs: {
+			borderBottom: `1px solid ${theme.palette.divider}`,
+			marginBottom: theme.spacing(3),
+			'& .MuiTab-root': {
+				minHeight: 48,
+				fontWeight: 500,
+				textTransform: 'none',
+				fontSize: '0.95rem',
+				'&.Mui-selected': {
+					fontWeight: 600,
+					color: theme.palette.primary.main,
+				},
+				'&:hover': {
+					backgroundColor: theme.palette.action.hover,
+				}
+			},
+			'& .MuiTabs-indicator': {
+				backgroundColor: theme.palette.primary.main,
+			}
+		},
+		jobTitle: {
+			fontWeight: 600,
+			fontSize: '1.25rem',
+			marginBottom: theme.spacing(1),
+			color: theme.palette.text.primary,
+		},
+		companyLink: {
+			color: theme.palette.primary.main,
+			textDecoration: 'none',
+			fontWeight: 500,
+			'&:hover': {
+				textDecoration: 'underline',
+			}
+		},
+		duration: {
+			color: theme.palette.text.secondary,
+			fontSize: '0.9rem',
+			marginBottom: theme.spacing(2),
+			fontWeight: 500,
+		},
+		experienceList: {
+			'& .MuiListItem-root': {
+				paddingLeft: 0,
+				paddingRight: 0,
+				'&:hover': {
+					backgroundColor: 'transparent',
+				}
+			},
+			'& .MuiListItemText-primary': {
+				fontSize: '0.95rem',
+				lineHeight: 1.6,
+				color: theme.palette.text.primary,
+				marginBottom: theme.spacing(0.5),
+			},
+			'& .MuiListItemText-secondary': {
+				fontSize: '0.9rem',
+				lineHeight: 1.5,
+				color: theme.palette.text.secondary,
+				'& ol': {
+					margin: theme.spacing(1, 0),
+					paddingLeft: theme.spacing(3),
+					'& li': {
+						marginBottom: theme.spacing(0.5),
+					}
+				}
+			}
+		},
+		tabPanel: {
+			padding: theme.spacing(0, 3),
+		}
 	};
 });
 
@@ -38,7 +141,7 @@ function a11yProps(index) {
 }
 
 function TabPanel(props) {
-	const { children, value, index, } = props;
+	const { children, value, index, classes } = props;
 
 	return (
 		<Typography
@@ -47,8 +150,9 @@ function TabPanel(props) {
 			hidden={value !== index}
 			id={`vertical-tabpanel-${index}`}
 			aria-labelledby={`vertical-tab-${index}`}
+			className={classes.tabPanel}
 		>
-			<Box px={3}>{children}</Box>
+			{children}
 		</Typography>
 	);
 }
@@ -120,18 +224,13 @@ export default function Experience(props) {
 	];
 
 	return (
-		<Container className='my-4 px-0'>
-			<Box className='d-flex'>
-				<Box className='d-flex col-12 col-xl-9 px-0'>
-					<Paper className='p-3 w-100'>
-						<Box className='d-flex align-items-center mb-2'>
-							<Hidden xlUp>
-								<WorkIcon color='disabled' className='mr-2' />
-							</Hidden>
-							<Typography variant='h5'>
-								Experience
-							</Typography>
-						</Box>
+		<Container className='my-5 px-0'>
+			<Box className='row m-0'>
+				<Box className='col-12 px-0'>
+					<Paper className={classes.paper}>
+						<Typography variant='h4' className={classes.sectionTitle}>
+							Experience
+						</Typography>
 
 						<Box className={`row m-0 ${isDesktop ? 'flex-row' : 'flex-column'}`}>
 							<Box className='col-12 col-lg-3'>
@@ -142,40 +241,44 @@ export default function Experience(props) {
 									value={activeTabIndex}
 									onChange={(e, newTabIndex) => setActiveTabIndex(newTabIndex)}
 									aria-label='Experience'
+									className={isDesktop ? classes.tabs : classes.horizontalTabs}
 								>
 									{
 										experience.map((experienceDetails, index) => (
-											<Tab key={index} label={experienceDetails.tabTitle} {...a11yProps(0)} />
+											<Tab key={index} label={experienceDetails.tabTitle} {...a11yProps(index)} />
 										))
 									}
 								</Tabs>
 							</Box>
 
-							<Box className='col-12 col-lg-9 pt-3 px-0'>
+							<Box className='col-12 col-lg-9'>
 								{
 									experience.map((experienceDetails, index) => {
 										return (
-											<TabPanel value={activeTabIndex} index={index} key={index}>
-												<Typography variant='h5' className='mb-1' color='textPrimary'>
+											<TabPanel value={activeTabIndex} index={index} key={index} classes={classes}>
+												<Typography className={classes.jobTitle}>
 													{experienceDetails.title}
 												</Typography>
 												
-												<div className='mb-1'>
-													<a href={experienceDetails.url} target="__blank">
-														{experienceDetails.url}
-													</a>
-												</div>
+												<Link 
+													href={experienceDetails.url} 
+													target="_blank" 
+													rel="noopener noreferrer"
+													className={classes.companyLink}
+												>
+													{experienceDetails.url}
+												</Link>
 												
-												<Typography className='mb-1' color='textSecondary'>
-													Duration: {experienceDetails.duration}
+												<Typography className={classes.duration}>
+													{experienceDetails.duration}
 												</Typography>
 
-												<List component='nav' aria-label='main experience work'>
+												<List component='nav' aria-label='main experience work' className={classes.experienceList}>
 													{
 														experienceDetails.experience.map((experienceDescription, index) => {
 															if (experienceDescription.main) {
 																return (
-																	<ListItem button key={index}>
+																	<ListItem key={index}>
 																		<ListItemText
 																			primary={experienceDescription.main}
 																			secondary={(
@@ -193,7 +296,7 @@ export default function Experience(props) {
 															}
 															
 															return (
-																<ListItem button key={index}>
+																<ListItem key={index}>
 																	<ListItemText
 																		primary={experienceDescription}
 																	/>
@@ -210,12 +313,6 @@ export default function Experience(props) {
 						</Box>
 					</Paper>
 				</Box>
-				
-				<Hidden mdDown>
-					<Box className='d-none d-xl-flex justify-content-center col-xl-3 py-5'>
-						<WorkIcon className={classes.sectionIcon} color='disabled' />
-					</Box>
-				</Hidden>
 			</Box>
 		</Container>
 	)

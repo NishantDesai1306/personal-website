@@ -15,16 +15,17 @@ import WorkIcon from '@material-ui/icons/Work';
 import EmailIcon from '@material-ui/icons/Email';
 import DescriptionIcon from '@material-ui/icons/Description';
 
-import AnchorLink from 'react-anchor-link-smooth-scroll';
+
 
 import constants from './constant';
 
-import ownerImage from './assets/owner.png';
+import ownerImage from './assets/owner.webp';
 
 const useStyles = makeStyles((theme) => {
 	return {
 		list: {
-			width: 300,
+			width: 280,
+			maxWidth: 'calc(100vw - 32px)',
 		},
 		buttonLink: {
 			color: theme.palette.primary.main,
@@ -64,9 +65,9 @@ export default function SideDrawer(props) {
 	return (
 		<Drawer open={isDrawerOpen} onClose={onClose}>
 			<div className={classes.drawerHeader}>
-				<Avatar src={ownerImage} className={classes.ownerImage} />
+				<Avatar src={ownerImage} alt='' className={classes.ownerImage} />
 				<Box className={classes.ownerDetails}>
-					<Typography variant='h6'>
+					<Typography variant='h6' component='p'>
 						{constants.USER_PROFILE.NAME}
 					</Typography>
 					<Typography>
@@ -78,48 +79,27 @@ export default function SideDrawer(props) {
 				className={classes.list}
 				role='presentation'
 				onClick={onClose}
-				onKeyDown={onClose}
-			>
-				<List component='nav' aria-label='main mailbox folders' className='p-0'>
-					<AnchorLink offset='50' href='#about-me' className={`${classes.buttonLink} no-select`}>
-						<ListItem button>
-								<ListItemIcon>
-									<NotesIcon color='primary' />
-								</ListItemIcon>
-								<ListItemText primary='About Me' />
-						</ListItem>
-					</AnchorLink>
-					
-					<AnchorLink offset='50' href='#experience' className={`${classes.buttonLink} no-select`}>
-						<ListItem button>
-								<ListItemIcon>
-									<CodeIcon color='primary' />
-								</ListItemIcon>
-								<ListItemText primary='Experience' />
-						</ListItem>
-					</AnchorLink>
-					
-					<AnchorLink offset='75' href='#projects' className={`${classes.buttonLink} no-select`}>
-						<ListItem button>
-								<ListItemIcon>
-									<WorkIcon color='primary' />
-								</ListItemIcon>
-								<ListItemText primary='Projects' />							
-						</ListItem>
-					</AnchorLink>
 
-					<AnchorLink offset='0' href='#contact-me' className={`${classes.buttonLink} no-select`}>
-						<ListItem button>
-								<ListItemIcon>
-									<EmailIcon color='primary' />
-								</ListItemIcon>
-								<ListItemText primary='Contact Me' />
+			>
+				<List component='nav' aria-label='Mobile navigation' className='p-0'>
+					{[
+						['About Me', '#about-me', NotesIcon],
+						['Experience', '#experience', CodeIcon],
+						['Projects', '#projects', WorkIcon],
+						['Contact Me', '#contact-me', EmailIcon],
+					].map(([label, href, Icon]) => (
+						<ListItem key={href} button component='a' href={href} className={classes.buttonLink}>
+							<ListItemIcon><Icon color='primary' /></ListItemIcon>
+							<ListItemText primary={label} />
 						</ListItem>
-					</AnchorLink>
+					))}
 
 					<ListItem
 						button
-						onClick={() => window.open(constants.USER_PROFILE.RESUME, '_blank')}
+						component='a'
+						href={constants.USER_PROFILE.RESUME}
+						target='_blank'
+						rel='noopener noreferrer'
 					>
 						<ListItemIcon>
 							<DescriptionIcon color='primary' />

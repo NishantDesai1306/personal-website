@@ -12,13 +12,13 @@ const constants = {
 	},
 	ABOUT: {
 		description: [
-			`Hello! I'm Nishant Desai, a software engineer based in Surat, IN who love creating new exciting web based apps. I develop apps with intuitive and pixel-perfect UI with efficient backends.`,
+			`Hello! I'm Nishant Desai, a software engineer who loves creating new and exciting web-based apps. I develop apps with intuitive, pixel-perfect UIs and efficient backends.`,
 			
 			`Shortly after graduating from Uka Tarsadia University, I joined JumpByte (now AppGambit) where I worked on a wide variety of projects on a daily basis.`,
 
-			`I specialize in MEAN and MERN stacks for web apps and for Mobile Apps I have worked with React Native and Flutter.`,
+			`I specialize in the MEAN and MERN stacks for web apps, and I have built mobile apps with React Native and Flutter.`,
 
-			`I'm always interested in improving myself as a developer, and meeting interesting people.`,
+			`I'm always interested in improving myself as a developer, and in meeting interesting people.`,
 		]
 	}
 };

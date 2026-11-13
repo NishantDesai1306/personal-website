@@ -135,8 +135,8 @@ const useClasses = makeStyles((theme) => {
 
 function a11yProps(index) {
 	return {
-		id: `vertical-tab-${index}`,
-		'aria-controls': `vertical-tabpanel-${index}`,
+		id: `experience-tab-${index}`,
+		'aria-controls': `experience-tabpanel-${index}`,
 	};
 }
 
@@ -148,8 +148,8 @@ function TabPanel(props) {
 			component='div'
 			role='tabpanel'
 			hidden={value !== index}
-			id={`vertical-tabpanel-${index}`}
-			aria-labelledby={`vertical-tab-${index}`}
+			id={`experience-tabpanel-${index}`}
+			aria-labelledby={`experience-tab-${index}`}
 			className={classes.tabPanel}
 		>
 			{children}
@@ -170,16 +170,16 @@ export default function Experience(props) {
 			title: 'Senior Frontend Developer',
 			duration: 'November 2022 - Present',
 			experience: [
-				`Worked on a NextJS based web application which connects users with car dealers or other users who want to sell their cars.`,
-				`Debugged and resolved google ad issue which was plaguing the app for months.`,
-				`Streamlined implementation of Google Ads, eliminated cases when google would serve empty ads.`,
-				`Lead migration of Material UI from v4 to v5`,
-				`Helped in migration from pages router to app router in NextJS`,
+				`Worked on a NextJS-based web application that connects users with car dealers or with other users who want to sell their cars.`,
+				`Debugged and resolved a Google Ads issue that had been plaguing the app for months.`,
+				`Streamlined the Google Ads implementation, eliminating cases where Google would serve empty ads.`,
+				`Led the migration of Material UI from v4 to v5.`,
+				`Helped migrate from the Pages Router to the App Router in NextJS.`,
 				{
-					main: `Improved overall performance and vitals of the application by carefully optimizing the codebase over months.`,
+					main: `Improved the overall performance and Core Web Vitals of the application by carefully optimizing the codebase over several months.`,
 					subPoints: [
-						'Mobile: Increased Increased "Good" URLs by 197% and reduced "Poor" URLs by 96% on Mobile.',
-						'Desktop: Increased "Good" URLs by 168% and reduced "Poor" URLs by 21% on Desktop.',
+						'Mobile: increased "Good" URLs by 197% and reduced "Poor" URLs by 96%.',
+						'Desktop: increased "Good" URLs by 168% and reduced "Poor" URLs by 21%.',
 					]
 				}
 			]
@@ -190,9 +190,9 @@ export default function Experience(props) {
 			title: 'Fullstack Developer (on Contract)',
 			duration: 'September 2020 - September 2022',
 			experience: [
-				`Worked on a React based web application which lets users manage orders and products online.`,
-				`Designed UI/UX solutions based on what's more feasible for a given task.`,
-				`Took lead in designing multiple company wide features and their implementation.`,
+				`Worked on a React-based web application that lets users manage orders and products online.`,
+				`Designed UI/UX solutions based on what was most feasible for a given task.`,
+				`Took the lead in designing and implementing multiple company-wide features.`,
 			]
 		},
 		{
@@ -201,24 +201,24 @@ export default function Experience(props) {
 			title: 'Application Developer',
 			duration: 'January 2018 - September 2020',
 			experience: [
-				`Worked on a React based web application which lets users build their own multiplayer game.`,
+				`Worked on a React-based web application that lets users build their own multiplayer games.`,
 				`Reduced S3 costs by 50% through a two-tier caching system.`,
-				`Designed and built a provisioning and communication system among servers which is horizontally scalable.`,
-				`Hosting games and Auto-scaling games on game servers to provide smooth UX.`,
-				`Deploying private servers for users to create a new game session where only people with invite links can join in.`,
-				`Designed and developers hybrid apps for clients using React Native`,
+				`Designed and built a horizontally scalable provisioning and communication system among servers.`,
+				`Hosted and auto-scaled games on game servers to provide a smooth UX.`,
+				`Deployed private servers that let users create game sessions only people with invite links can join.`,
+				`Designed and developed hybrid apps for clients using React Native.`,
 			]
 		},
 		{
 			tabTitle: 'AppGambit',
 			url: 'https://appgambit.com/',
-			title: 'AppGambit (Formerly known as JumpByte)',
-			duration: 'May 2016 - Dec 2017',
+			title: 'AppGambit (formerly JumpByte)',
+			duration: 'May 2016 - December 2017',
 			experience: [
-				`Developed and maintained notification server built on top of Meteor.`,
-				`Developed and Managed multiple projects on both frontend and backend.`,
+				`Developed and maintained a notification server built on top of Meteor.`,
+				`Developed and managed multiple projects on both the frontend and the backend.`,
 				`Manually tested web apps in various browsers to ensure cross-browser compatibility.`,
-				`Worked on native android app which was used for communication internally.`,
+				`Worked on a native Android app used for internal communication.`,
 			],
 		},
 	];
@@ -228,12 +228,12 @@ export default function Experience(props) {
 			<Box className='row m-0'>
 				<Box className='col-12 px-0'>
 					<Paper className={classes.paper}>
-						<Typography variant='h4' className={classes.sectionTitle}>
+						<Typography variant='h4' component='h2' className={classes.sectionTitle}>
 							Experience
 						</Typography>
 
 						<Box className={`row m-0 ${isDesktop ? 'flex-row' : 'flex-column'}`}>
-							<Box className='col-12 col-lg-3'>
+							<Box className='col-12 col-xl-3'>
 								<Tabs
 									orientation={isDesktop ? 'vertical' : 'horizontal'}
 									variant='scrollable'
@@ -251,12 +251,12 @@ export default function Experience(props) {
 								</Tabs>
 							</Box>
 
-							<Box className='col-12 col-lg-9'>
+							<Box className='col-12 col-xl-9'>
 								{
 									experience.map((experienceDetails, index) => {
 										return (
 											<TabPanel value={activeTabIndex} index={index} key={index} classes={classes}>
-												<Typography className={classes.jobTitle}>
+												<Typography component='h3' className={classes.jobTitle}>
 													{experienceDetails.title}
 												</Typography>
 												
@@ -273,7 +273,7 @@ export default function Experience(props) {
 													{experienceDetails.duration}
 												</Typography>
 
-												<List component='nav' aria-label='main experience work' className={classes.experienceList}>
+												<List className={classes.experienceList}>
 													{
 														experienceDetails.experience.map((experienceDescription, index) => {
 															if (experienceDescription.main) {
@@ -281,6 +281,7 @@ export default function Experience(props) {
 																	<ListItem key={index}>
 																		<ListItemText
 																			primary={experienceDescription.main}
+																			secondaryTypographyProps={{ component: 'div' }}
 																			secondary={(
 																				<ol>
 																					{

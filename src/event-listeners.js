@@ -13,49 +13,22 @@ const toggleClasses = (selectorClassName, classToToggle, shouldAdd) => {
 	}
 }
 
-window.showInstallPrompt = () => {
-	window.deferredPrompt.prompt();
-
-	// Wait for the user to respond to the prompt
-	window.deferredPrompt.userChoice
-		.then((choiceResult) => {
-			if (choiceResult.outcome === 'accepted') {
-				console.log('User accepted the A2HS prompt');
-			} else {
-				console.log('User dismissed the A2HS prompt');
-			}
-
-			toggleClasses('install-handle', 'd-none', true)
-			window.deferredPrompt = null;
-		});
-}
-
-const isReachable = (url) => {
-  return fetch(url, { method: 'HEAD', mode: 'no-cors' })
-		.then((resp) => {
-			return resp && (resp.ok || resp.type === 'opaque');
-		})
-		.catch((err) => {
-			console.warn('[conn test failure]:', err);
-		});
-}
-
-const handleConnection = () => {
-	if (navigator.onLine) {
-		isReachable('/').then((online) => {
-			if (online) {
-				toggleClasses('uses-internet', 'Mui-disabled', false);
-			} else {
-				toggleClasses('uses-internet', 'Mui-disabled', true);
-			}
-		});
-	} else {
-		toggleClasses('uses-internet', 'Mui-disabled', true);
+window.showInstallPrompt = async () => {
+	const prompt = window.deferredPrompt;
+	if (!prompt) return;
+	window.deferredPrompt = null;
+	toggleClasses('install-handle', 'd-none', true);
+	try {
+		// Keep the native handoff synchronous with the user's click.
+		await prompt.prompt();
+		await prompt.userChoice;
+	} catch (error) {
+		console.warn('Installation is unavailable in this browser.', error);
 	}
-}
+};
 
-window.addEventListener('online', handleConnection);
-window.addEventListener('offline', handleConnection);
+// Links remain usable offline: the resume is cached and email can open a local
+// mail client. A cosmetic Mui-disabled class is not a connectivity policy.
 window.addEventListener('beforeinstallprompt', (e) => {
 	e.preventDefault();
 	window.deferredPrompt = e;

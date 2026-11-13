@@ -115,7 +115,7 @@ export default function AboutMe(props) {
 			<Box className='row m-0'>
 				<Box className='col-12 px-0'>
 					<Paper className={classes.paper}>
-						<Typography variant='h4' className={classes.sectionTitle}>
+						<Typography variant='h4' component='h2' className={classes.sectionTitle}>
 							About Me
 						</Typography>
 
@@ -130,7 +130,7 @@ export default function AboutMe(props) {
 						<Divider className='my-4' />
 
 						<Box className={classes.technologiesSection}>
-							<Typography variant='h5' className={classes.subtitle}>
+							<Typography variant='h5' component='h3' className={classes.subtitle}>
 								Technologies
 							</Typography>
 
@@ -143,13 +143,18 @@ export default function AboutMe(props) {
 									technologies.map((technology, index) => {
 										return (
 											<Chip
-												key={index}
+												key={technology.text}
 												color='primary'
 												variant='outlined'
-												className={`${classes.chip} ${technology.link ? 'uses-internet' : ''}`}
+												className={`${classes.chip} uses-internet`}
 												label={technology.text}
-												clickable={!!technology.link}
-												onClick={() => technology.link && window.open(technology.link, '__blank')}
+												clickable
+												component='a'
+												href={technology.link}
+												target='_blank'
+												rel='noopener noreferrer'
+												// Chip adds role="button" when clickable; keep native link semantics.
+												role={undefined}
 											/>
 										)
 									})

@@ -24,8 +24,11 @@ const FabButton = () => {
     <Tooltip title="Resume">
       <Fab
         color="primary"
-        className={`${classes.fab} uses-internet`}
-        onClick={() => window.open(constants.USER_PROFILE.RESUME, "_blank")}
+        className={classes.fab}
+        aria-label="Read résumé"
+        href={constants.USER_PROFILE.RESUME}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <DescriptionIcon />
       </Fab>

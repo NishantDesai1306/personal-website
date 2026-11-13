@@ -18,13 +18,14 @@ const theme = createTheme({
     },
   },
   breakpoints: {
-    // bootstrap grid values as per https://getbootstrap.com/docs/4.1/layout/grid/
+    // Bootstrap 4 grid breakpoints (https://getbootstrap.com/docs/4.1/layout/grid/),
+    // so MUI media queries and the `col-*` classes switch at the same widths.
     values: {
       xs: 0,
       sm: 576,
-      md: 767, 
-      lg: 991,
-      xl: 1199,
+      md: 768,
+      lg: 992,
+      xl: 1200,
     }
   }
 });

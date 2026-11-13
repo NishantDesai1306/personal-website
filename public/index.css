@@ -1,3 +1,31 @@
+html {
+	scroll-behavior: smooth;
+}
+
+.skip-link {
+	position: fixed;
+	top: 8px;
+	left: 8px;
+	padding: 12px 20px;
+	background: white;
+	color: #283593;
+	z-index: 2000;
+	transform: translateY(-200%);
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
 .lds-ring-container {
 	display: flex;
 	align-items: center;

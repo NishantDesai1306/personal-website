@@ -1,15 +1,13 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Hidden from '@material-ui/core/Hidden';
 import Avatar from '@material-ui/core/Avatar';
 import Fade from '@material-ui/core/Fade';
 import Box from '@material-ui/core/Box';
@@ -17,143 +15,145 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import MenuIcon from '@material-ui/icons/Menu';
 import GetAppIcon from '@material-ui/icons/GetApp';
 
-import AnchorLink from 'react-anchor-link-smooth-scroll'
-
-import ownerImage from './assets/owner.png';
+import ownerImage from './assets/owner.webp';
 import constants from './constant';
+
+// Scroll distance (px) after which the header gains elevation and shows the
+// compact avatar/name. Fixed so it no longer depends on `window.screen`.
+export const HEADER_SCROLL_THRESHOLD = 240;
+
+const NAV_LINKS = [
+	{ label: 'About Me', href: '#about-me' },
+	{ label: 'Experience', href: '#experience' },
+	{ label: 'Projects', href: '#projects' },
+	{ label: 'Contact Me', href: '#contact-me' },
+];
+
+/**
+ * Click handler for in-page `<a href="#id">` links: smooth-scrolls to the
+ * target while keeping it clear of the fixed header. Leaves the browser's
+ * native anchor jump in place when the target is missing.
+ */
+export function scrollToSection(event) {
+	const hash = event.currentTarget.getAttribute('href');
+	const target = hash && hash.startsWith('#') ? document.getElementById(hash.slice(1)) : null;
+	if (!target || typeof window.scrollTo !== 'function') {
+		return;
+	}
+
+	event.preventDefault();
+	const header = document.querySelector('header');
+	const headerHeight = header ? header.getBoundingClientRect().height : 0;
+	const prefersReducedMotion = typeof window.matchMedia === 'function'
+		&& window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	target.focus({ preventScroll: true });
+	window.scrollTo({
+		top: target.getBoundingClientRect().top + window.pageYOffset - headerHeight,
+		behavior: prefersReducedMotion ? 'auto' : 'smooth',
+	});
+	if (window.history && window.history.pushState) {
+		window.history.pushState(null, '', hash);
+	}
+}
 
 const useStyles = makeStyles((theme) => {
 	return {
 		menuButton: {
 			marginRight: theme.spacing(2),
 		},
-		title: {
+		identity: {
+			display: 'flex',
 			flexGrow: 1,
+			alignItems: 'center',
+			minWidth: 0,
 		},
-		buttonLink: {
-			color: theme.palette.primary.contrastText,
-			textDecoration: 'none',
-		}
-	}
+		avatar: {
+			marginRight: theme.spacing(1),
+		},
+		name: {
+			fontSize: '1.25rem',
+			fontWeight: 500,
+			whiteSpace: 'nowrap',
+			overflow: 'hidden',
+			textOverflow: 'ellipsis',
+		},
+		navLink: {
+			margin: theme.spacing(0, 1),
+		},
+	};
 });
-
-function ElevationScroll(props) {
-	const { children } = props;
-	const theme = useTheme();
-	const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
-	const introHeight = isDesktop ? 0.8 : 1;
-
-	// Note that you normally won't need to set the window ref as useScrollTrigger
-	// will default to window.
-	// This is only being set here because the demo is in an iframe.
-	const trigger = useScrollTrigger({
-		disableHysteresis: true,
-		threshold: (window.screen.height * introHeight) - 200,
-	});
-
-	return React.cloneElement(children, {
-		elevation: !!trigger ? 4 : 0,
-	});
-}
-
-function AvatarScroll(props) {
-	const { children } = props;
-	const theme = useTheme();
-	const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
-	const introHeight = isDesktop ? 0.8 : 1;
-
-	// Note that you normally won't need to set the window ref as useScrollTrigger
-	// will default to window.
-	// This is only being set here because the demo is in an iframe.
-	const trigger = useScrollTrigger({
-		disableHysteresis: true,
-		threshold: (window.screen.height * introHeight) - 200,
-	});
-
-	return React.cloneElement(children, {
-		in: !!trigger,
-		className: 'd-flex flex-grow-1 align-items-center'
-	});
-}
 
 export default function MyAppBar(props) {
 	const classes = useStyles();
-	const {
-		onOpenSideDrawer
-	} = props;
+	const theme = useTheme();
+	const { onOpenSideDrawer } = props;
+	const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
+	const isScrolled = useScrollTrigger({
+		disableHysteresis: true,
+		threshold: HEADER_SCROLL_THRESHOLD,
+	});
 
 	return (
-		<ElevationScroll {...props}>
-			<AppBar position='fixed' elevation={0}>
-				<Toolbar>
-					<Hidden xlUp>
-						<IconButton
-							edge='start'
-							className={classes.menuButton}
-							color='inherit'
-							aria-label='menu'
-							onClick={onOpenSideDrawer}
-						>
-							<MenuIcon />
-						</IconButton>
-					</Hidden>
+		<AppBar position='fixed' elevation={isScrolled ? 4 : 0}>
+			<Toolbar>
+				{!isDesktop && (
+					<IconButton
+						edge='start'
+						className={classes.menuButton}
+						color='inherit'
+						aria-label='menu'
+						onClick={onOpenSideDrawer}
+					>
+						<MenuIcon />
+					</IconButton>
+				)}
 
-					<AvatarScroll>
-						<Fade>
-							<div>
-								<Avatar className='mr-2' src={ownerImage} />
-								<Typography variant='h6' className={classes.title}>
-									{constants.USER_PROFILE.NAME}
-								</Typography>
-							</div>
-						</Fade>
-					</AvatarScroll>
+				<Box className={classes.identity}>
+					<Fade in={isScrolled}>
+						<Box display='flex' alignItems='center' minWidth={0}>
+							<Avatar className={classes.avatar} src={ownerImage} alt='' />
+							<Typography component='span' className={classes.name}>
+								{constants.USER_PROFILE.NAME}
+							</Typography>
+						</Box>
+					</Fade>
+				</Box>
 
-					<Hidden mdDown>
-						<Box>
-							<AnchorLink offset='25' href='#about-me' className={classes.buttonLink}>
-								<Button color='inherit' className='mx-3'>About Me</Button>
-							</AnchorLink>
-						</Box>
-						<Box>
-							<AnchorLink offset='50' href='#experience' className={classes.buttonLink}>
-								<Button color='inherit' className='mx-3'>Experience</Button>
-							</AnchorLink>
-						</Box>
-						<Box>
-							<AnchorLink offset='75' href='#projects' className={classes.buttonLink}>
-								<Button color='inherit' className='mx-3'>Projects</Button>
-							</AnchorLink>
-						</Box>
-						<Box>
-							<AnchorLink offset='0' href='#contact-me' className={classes.buttonLink}>
-								<Button color='inherit' className='mx-3'>Contact Me</Button>
-							</AnchorLink>
-						</Box>
-						<Box>
+				{isDesktop && (
+					<Box component='nav' aria-label='Sections' display='flex' alignItems='center'>
+						{NAV_LINKS.map(({ label, href }) => (
 							<Button
+								key={href}
 								color='inherit'
-								className='mx-3'
-								href='/Nishant_Desai_Resume.pdf'
-								target='_blank'
+								className={classes.navLink}
+								href={href}
+								onClick={scrollToSection}
 							>
-								Resume
+								{label}
 							</Button>
-						</Box>
-					</Hidden>
-
-					<Box>
+						))}
 						<Button
-							onClick={() => window.showInstallPrompt()}
 							color='inherit'
-							className='install-handle d-none mx-3'
-							startIcon={<GetAppIcon />}
+							className={classes.navLink}
+							href={constants.USER_PROFILE.RESUME}
+							target='_blank'
+							rel='noopener noreferrer'
 						>
-							Install
+							Resume
 						</Button>
 					</Box>
-				</Toolbar>
-			</AppBar>
-		</ElevationScroll>
+				)}
+
+				<Button
+					onClick={() => window.showInstallPrompt && window.showInstallPrompt()}
+					color='inherit'
+					className='install-handle d-none mx-3'
+					startIcon={<GetAppIcon />}
+				>
+					Install
+				</Button>
+			</Toolbar>
+		</AppBar>
 	);
 }

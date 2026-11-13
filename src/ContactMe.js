@@ -1,4 +1,3 @@
-/* eslint-disable import/no-webpack-loader-syntax */
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,10 +15,10 @@ import Email from '@material-ui/icons/Email';
 
 import constants from './constant';
 
-import githubIcon from '!file-loader!./assets/github.svg';
-import linkedinIcon from '!file-loader!./assets/linkedin.svg';
-import upworkIcon from '!file-loader!./assets/upwork.svg';
-import facebookIcon from '!file-loader!./assets/facebook.svg';
+import githubIcon from './assets/github.svg';
+import linkedinIcon from './assets/linkedin.svg';
+import upworkIcon from './assets/upwork.svg';
+import facebookIcon from './assets/facebook.svg';
 
 const useClasses = makeStyles((theme) => {
 	return {
@@ -105,13 +104,20 @@ export default function ContactMe(props) {
 	const classes = useClasses();
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const { GITHUB, UPWORK, LINKEDIN, FACEBOOK } = constants.USER_PROFILE.LINKS;
+	const socialLinks = [
+		{ name: 'GitHub', url: GITHUB, icon: githubIcon },
+		{ name: 'Upwork', url: UPWORK, icon: upworkIcon, iconClassName: 'upwork-icon' },
+		{ name: 'LinkedIn', url: LINKEDIN, icon: linkedinIcon },
+		{ name: 'Facebook', url: FACEBOOK, icon: facebookIcon },
+	];
 	
 	return (
 		<Container className='my-5 px-0'>
 			<Box className='row m-0'>
 				<Box className='col-12 px-0'>
 					<Paper className={classes.paper}>
-						<Typography variant='h4' className={classes.sectionTitle}>
+						<Typography variant='h4' component='h2' className={classes.sectionTitle}>
 							Contact Me
 						</Typography>
 
@@ -127,7 +133,7 @@ export default function ContactMe(props) {
 									size='large'
 									className={`${classes.emailButton} uses-internet`}
 									startIcon={<Email />}
-									onClick={() => window.open(`mailto:${constants.USER_PROFILE.EMAIL}`, '_blank')}
+									href={`mailto:${constants.USER_PROFILE.EMAIL}`}
 									fullWidth={isMobile}
 								>
 									Send an E-mail
@@ -136,59 +142,26 @@ export default function ContactMe(props) {
 
 							<Divider className={classes.divider} />
 
-							<Typography variant='h6' className={classes.platformsTitle}>
+							<Typography variant='h6' component='h3' className={classes.platformsTitle}>
 								Connect with me on these platforms
 							</Typography>
 
 							<Box className={classes.socialIconsContainer}>
 								{
-									constants.USER_PROFILE.LINKS.GITHUB && (
-										<Tooltip title='Github'>
+									socialLinks.filter(({ url }) => !!url).map(({ name, url, icon, iconClassName }) => (
+										<Tooltip key={name} title={name}>
 											<IconButton
 												color='primary'
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.GITHUB)}
+												href={url}
+												target='_blank'
+												rel='noopener noreferrer'
+												aria-label={`${name} profile (opens in a new tab)`}
 												className={`${classes.contactMeButton} uses-internet`}
 											>
-												<img alt='github_profile' src={githubIcon} />
+												<img src={icon} alt='' className={iconClassName} />
 											</IconButton>
 										</Tooltip>
-									)
-								}
-								{
-									constants.USER_PROFILE.LINKS.UPWORK && (
-										<Tooltip title='Upwork'>
-											<IconButton
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.UPWORK)}
-												className={classes.contactMeButton}
-											>
-												<img src={upworkIcon} alt='upwork_profile' className='upwork-icon' />
-											</IconButton>
-										</Tooltip>
-									)
-								}
-								{
-									constants.USER_PROFILE.LINKS.LINKEDIN && (
-										<Tooltip title='LinkedIn'>
-											<IconButton
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.LINKEDIN)}
-												className={classes.contactMeButton}
-											>
-												<img src={linkedinIcon} alt='linkedin_profile' />
-											</IconButton>
-										</Tooltip>
-									)
-								}
-								{
-									constants.USER_PROFILE.LINKS.FACEBOOK && (
-										<Tooltip title='Facebook'>
-											<IconButton
-												onClick={() => window.open(constants.USER_PROFILE.LINKS.FACEBOOK)}
-												className={classes.contactMeButton}
-											>
-												<img src={facebookIcon} alt='facebook_profile' />
-											</IconButton>
-										</Tooltip>
-									)
+									))
 								}
 							</Box>
 						</Box>

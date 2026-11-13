@@ -10,12 +10,13 @@ const links = [
 
 // Easter-egg console replies, derived from the same data as the page.
 const replies = {
-  help: 'Available: email, links, skills, resume, hire(), clear',
+  help: 'Available: email, links, skills, resume, hire(), inspect, clear',
   email: `"${profile.email}"`,
   links: JSON.stringify(Object.fromEntries(links.map(({ key, href }) => [key, href]))),
   skills: JSON.stringify(technologies.map((t) => t.label)),
   resume: `Opening ${profile.resume}…`,
   'hire()': 'Promise { <pending> } → opening your mail client…',
+  inspect: 'Layout overlay toggled. Psst: ↑↑↓↓←→←→BA works too.',
 };
 ---
 
@@ -100,6 +101,7 @@ const replies = {
     color: var(--amber);
   }
   .prompt input {
+    font-size: 16px;
     flex: 1;
     min-width: 0;
     min-height: 40px;
@@ -124,6 +126,8 @@ const replies = {
       actions: {
         resume: () => window.open(resume, '_blank', 'noopener'),
         'hire()': () => (location.href = `mailto:${email}`),
+        // Handled by src/scripts/layout-debug.ts; an event avoids a shared JS chunk.
+        inspect: () => document.dispatchEvent(new Event('layout-debug:toggle')),
       },
     });
     // The prompt only works with JavaScript, so reveal it here.

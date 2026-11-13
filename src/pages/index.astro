@@ -35,6 +35,23 @@ import { profile } from '../data/profile';
   <UpdateToast />
 </Base>
 
+<script>
+  // The page's single client entry for cursor effects, so they bundle (and inline) as one script.
+  import { initEffectsToggle } from '../scripts/effects';
+  import { initCursorField } from '../scripts/cursor-field';
+  import { initHeroTilt } from '../scripts/hero-tilt';
+  import { initInspectOverlay } from '../scripts/inspect-overlay';
+  import { initMagnetic } from '../scripts/magnetic';
+  import { initLayoutDebug } from '../scripts/layout-debug';
+
+  initEffectsToggle();
+  initCursorField();
+  initHeroTilt();
+  initInspectOverlay();
+  initMagnetic();
+  initLayoutDebug();
+</script>
+
 <style>
   main:focus {
     outline: none;

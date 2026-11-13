@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { jobs, type Job } from '../src/data/profile';
 import { careerRange, placement, rulerYears } from '../src/lib/timeline';
 import { enhanceTimeline } from '../src/scripts/timeline';
@@ -50,6 +50,9 @@ function renderTimeline() {
       <article id="job-c" data-job-panel>c</article>
     </div>`;
   const root = document.querySelector<HTMLElement>('[data-timeline]')!;
+  root.querySelectorAll<HTMLElement>('[data-job-panel], [data-job-tab]').forEach((element) => {
+    element.scrollIntoView = vi.fn();
+  });
   enhanceTimeline(root);
   const tabs = [...root.querySelectorAll<HTMLElement>('[data-job-tab]')];
   const panels = [...root.querySelectorAll<HTMLElement>('[data-job-panel]')];
@@ -60,6 +63,34 @@ function renderTimeline() {
 describe('enhanceTimeline', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
+    window.history.replaceState(null, '', '/');
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+      callback(0);
+      return 0;
+    });
+  });
+  afterEach(() => vi.restoreAllMocks());
+
+  it('opens the linked job instead of hiding it during enhancement', () => {
+    window.history.replaceState(null, '', '#job-b');
+    const { visible } = renderTimeline();
+    expect(visible()).toEqual(['job-b']);
+  });
+
+  it('reveals jobs reached through fragment navigation after load', () => {
+    const { visible } = renderTimeline();
+    window.history.replaceState(null, '', '#job-a');
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+    expect(visible()).toEqual(['job-a']);
+  });
+
+  it('activates a focused timeline tab with Space', () => {
+    const { tabs, visible } = renderTimeline();
+    tabs[0].focus();
+    const event = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+    tabs[0].dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true);
+    expect(visible()).toEqual(['job-a']);
   });
 
   it('starts on the current role and hides the others', () => {

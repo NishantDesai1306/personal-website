@@ -45,7 +45,13 @@ const structuredData = {
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#0e0f11" />
     <meta name="color-scheme" content="dark" />
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    {/* Applies a saved "cursor effects off" choice before first paint (see src/scripts/effects.ts). */}
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      try {
+        if (localStorage.getItem('cursor-effects') === 'off') document.documentElement.classList.add('effects-off');
+      } catch {}
+    </script>
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png" />

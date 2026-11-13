@@ -24,7 +24,7 @@ const stack = technologies.slice(0, 4).map((t) => t.label.toLowerCase()).join(',
     <p class="tag mono close" aria-hidden="true">&lt;/<span class="t">developer</span>&gt;</p>
   </div>
 
-  <figure class="inspect panel">
+  <figure class="inspect panel" data-pointer-card>
     <div class="inspect-head mono" aria-hidden="true">
       <span class="on">Styles</span><span>Computed</span><span>Layout</span>
     </div>
@@ -166,6 +166,12 @@ const stack = technologies.slice(0, 4).map((t) => t.label.toLowerCase()).join(',
     color: var(--amber);
     font-style: normal;
   }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .inspect {
+      transform: perspective(900px) rotateX(var(--pointer-x, 0deg)) rotateY(var(--pointer-y, 0deg));
+      transition: transform 180ms ease-out;
+    }
+  }
   @media (max-width: 900px) {
     .hero {
       grid-template-columns: 1fr;
@@ -179,3 +185,5 @@ const stack = technologies.slice(0, 4).map((t) => t.label.toLowerCase()).join(',
     }
   }
 </style>
+
+{/* Tilt behaviour: src/scripts/hero-tilt.ts, started from pages/index.astro. */}

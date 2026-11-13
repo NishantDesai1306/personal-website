@@ -1,0 +1,181 @@
+---
+import { Image } from 'astro:assets';
+import owner from '../assets/owner.webp';
+import { profile, technologies } from '../data/profile';
+
+const stack = technologies.slice(0, 4).map((t) => t.label.toLowerCase()).join(', ');
+---
+
+<section class="hero wrap" id="top" aria-labelledby="hero-title">
+  <div class="copy">
+    <p class="tag mono" aria-hidden="true">
+      &lt;<span class="t">developer</span> <span class="a">role</span>=<span class="v">"senior-frontend"</span>
+      <span class="a">location</span>=<span class="v">"{profile.country}"</span>&gt;
+    </p>
+    <p class="hello">Hello, I'm</p>
+    <h1 id="hero-title">{profile.name}</h1>
+    <p class="title">{profile.tagline}</p>
+    <p class="intro">{profile.intro}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#contact-me">contact()</a>
+      <a class="btn" href="#projects">view projects</a>
+      <a class="btn" href={profile.resume}>resume.pdf</a>
+    </div>
+    <p class="tag mono close" aria-hidden="true">&lt;/<span class="t">developer</span>&gt;</p>
+  </div>
+
+  <figure class="inspect panel">
+    <div class="inspect-head mono" aria-hidden="true">
+      <span class="on">Styles</span><span>Computed</span><span>Layout</span>
+    </div>
+    <div class="photo">
+      <span class="dim mono" aria-hidden="true">img.nishant {profile.photo.width} × {profile.photo.height}</span>
+      <Image
+        src={owner}
+        alt={`Portrait of ${profile.name}`}
+        widths={[280, 420]}
+        sizes="(max-width: 900px) 280px, 420px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <figcaption class="props mono">
+      <div><b>experience</b>: <i>since {profile.since}</i>;</div>
+      <div><b>stack</b>: <i>{stack}</i>;</div>
+      <div><b>mobile</b>: <i>react-native, flutter</i>;</div>
+    </figcaption>
+  </figure>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 96px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero:focus {
+    outline: none;
+  }
+  .tag {
+    font-size: 14px;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+  .tag .t {
+    color: var(--tag);
+  }
+  .tag .a {
+    color: var(--attr);
+  }
+  .tag .v {
+    color: var(--amber);
+  }
+  .close {
+    margin-top: 28px;
+  }
+  .hello {
+    margin-top: 28px;
+    font: 500 15px var(--mono);
+    color: var(--text-2);
+  }
+  h1 {
+    font: 700 clamp(52px, 8vw, 104px)/0.95 var(--sans);
+    letter-spacing: -0.05em;
+    margin: 6px 0 20px;
+  }
+  .title {
+    display: inline;
+    font: 600 clamp(20px, 2.2vw, 26px)/1.35 var(--sans);
+    letter-spacing: -0.01em;
+    background: linear-gradient(transparent 60%, rgb(255 178 36 / 0.3) 60%);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .intro {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--text-2);
+    max-width: 52ch;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .inspect {
+    overflow: hidden;
+    max-width: 440px;
+    justify-self: end;
+    width: 100%;
+  }
+  .inspect-head {
+    display: flex;
+    gap: 6px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .inspect-head span {
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .inspect-head .on {
+    background: var(--panel-2);
+    color: var(--text);
+  }
+  .photo {
+    position: relative;
+    margin: 36px 22px 18px;
+    outline: 1px dashed rgb(124 196 255 / 0.6);
+    outline-offset: 6px;
+  }
+  .photo img {
+    width: 100%;
+    aspect-ratio: 7 / 8;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 6px;
+  }
+  .dim {
+    position: absolute;
+    left: -6px;
+    top: -30px;
+    background: var(--tag);
+    color: #06121d;
+    font-size: 11px;
+    padding: 3px 7px;
+    border-radius: 3px;
+  }
+  .props {
+    padding: 4px 22px 20px;
+    font-size: 12.5px;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+  .props b {
+    color: var(--attr);
+    font-weight: 400;
+  }
+  .props i {
+    color: var(--amber);
+    font-style: normal;
+  }
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-top: 48px;
+      padding-bottom: 64px;
+    }
+    .inspect {
+      justify-self: start;
+      max-width: 340px;
+    }
+  }
+</style>

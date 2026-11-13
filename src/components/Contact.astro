@@ -1,0 +1,132 @@
+---
+import { profile, technologies } from '../data/profile';
+
+const links = [
+  { key: 'github', label: 'GitHub', href: profile.links.github },
+  { key: 'linkedin', label: 'LinkedIn', href: profile.links.linkedin },
+  { key: 'upwork', label: 'Upwork', href: profile.links.upwork },
+  { key: 'facebook', label: 'Facebook', href: profile.links.facebook },
+];
+
+// Easter-egg console replies, derived from the same data as the page.
+const replies = {
+  help: 'Available: email, links, skills, resume, hire(), clear',
+  email: `"${profile.email}"`,
+  links: JSON.stringify(Object.fromEntries(links.map(({ key, href }) => [key, href]))),
+  skills: JSON.stringify(technologies.map((t) => t.label)),
+  resume: `Opening ${profile.resume}…`,
+  'hire()': 'Promise { <pending> } → opening your mail client…',
+};
+---
+
+<section class="section last" id="contact-me" tabindex="-1" aria-labelledby="contact-title">
+  <div class="wrap">
+    <p class="eyebrow">// console · contact me</p>
+    <h2 class="section-title" id="contact-title">Contact me</h2>
+    <p class="lede">{profile.contact}</p>
+
+    <div class="actions">
+      <a class="btn btn-primary" href={`mailto:${profile.email}`}>Send an e-mail</a>
+      {
+        links.map(({ label, href }) => (
+          <a class="btn" href={href} rel="noopener noreferrer me">
+            {label} <span aria-hidden="true">↗</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="console panel mono" data-console data-replies={JSON.stringify(replies)} data-email={profile.email} data-resume={profile.resume}>
+      <div data-console-log>
+        <div class="console-in">nishant.email</div>
+        <div class="console-out">"<a href={`mailto:${profile.email}`}>{profile.email}</a>"</div>
+      </div>
+      <form class="prompt" data-console-form hidden>
+        <label for="console-input"><span aria-hidden="true">›</span><span class="visually-hidden">Console command</span></label>
+        <input id="console-input" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send" placeholder='try "help"' />
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .last {
+    border-bottom: 0;
+  }
+  .lede {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--text-2);
+    max-width: 60ch;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .console {
+    margin-top: 40px;
+    padding: 22px 24px;
+    background: #08090a;
+    font-size: 14.5px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+  }
+  .console :global(.console-in) {
+    color: var(--muted);
+  }
+  .console :global(.console-in)::before {
+    content: '› ';
+    color: var(--amber);
+  }
+  .console :global(.console-out) {
+    padding-left: 16px;
+    color: var(--text);
+  }
+  .console :global(.console-out.is-error) {
+    color: var(--poor);
+  }
+  .console a {
+    color: var(--amber);
+  }
+  .prompt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .prompt label {
+    color: var(--amber);
+  }
+  .prompt input {
+    flex: 1;
+    min-width: 0;
+    min-height: 40px;
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+  .console:focus-within {
+    border-color: var(--amber);
+  }
+</style>
+
+<script>
+  import { createConsole } from '../scripts/console';
+
+  const root = document.querySelector<HTMLElement>('[data-console]');
+  const form = root?.querySelector<HTMLFormElement>('[data-console-form]');
+  if (root && form) {
+    const { email = '', resume = '/' } = root.dataset;
+    createConsole(form, {
+      replies: JSON.parse(root.dataset.replies ?? '{}'),
+      actions: {
+        resume: () => window.open(resume, '_blank', 'noopener'),
+        'hire()': () => (location.href = `mailto:${email}`),
+      },
+    });
+    // The prompt only works with JavaScript, so reveal it here.
+    form.hidden = false;
+  }
+</script>

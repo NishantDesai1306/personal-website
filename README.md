@@ -1,9 +1,9 @@
 # Nishant Desai — portfolio source
 
-This is the editable React / Material UI source for `nishantdesai1306.github.io`.
-The sibling `../nishantdesai1306.github.io` repository contains the published build,
-not the application source. Make application changes here; do not edit minified
-files in the publication repository.
+Source for `nishantdesai1306.github.io`, built with [Astro](https://astro.build) as a
+static, JavaScript-light site in a "browser DevTools" style. The sibling
+`../nishantdesai1306.github.io` repository contains the published build, not the
+source. Make changes here; never edit generated files in the publication repository.
 
 ## Local development
 
@@ -11,7 +11,7 @@ Use Node.js 24 and npm with the committed lockfile:
 
 ```sh
 npm ci
-npm start
+npm run dev        # http://localhost:4321 (no service worker in dev)
 ```
 
 ## Verification and production build
@@ -20,68 +20,74 @@ npm start
 CI=true npm run check
 ```
 
-This runs ESLint, the functional Jest tests, and an optimized build into `build/`.
-The GitHub Actions verification workflow runs the same checks on pushes and pull
-requests. It does **not** publish the website. Source maps remain enabled for
-production debugging; never include private information in client source.
+This runs `astro check` (TypeScript + Astro diagnostics), the production build into
+`build/` (including `build/service-worker.js`), then the Vitest suite. Tests under
+`tests/` cover client behaviour (timeline tabs, console, PWA update/install flow)
+and the built output (no-JS content, structured data, `llms.txt`, offline
+precache). The GitHub Actions workflow runs the same command; it does **not**
+publish the website.
 
-To inspect the production PWA locally:
+To inspect the production build locally:
 
 ```sh
 python3 -m http.server 8766 --bind 127.0.0.1 --directory build
 ```
 
-Open `http://127.0.0.1:8766/`. Service workers are registered only in production
-builds, not by the development server.
-
 ## Content and assets
 
-- `src/constant.js`: profile links and About copy.
-- `src/Experience.js`: employment history and existing engineering results.
-- `src/Projects.js`: personal projects and demos.
+- `src/data/profile.ts`: **all content** — profile, About copy, technologies, Core
+  Web Vitals results, experience and projects. The page, `llms.txt`, JSON-LD and
+  the console easter egg are all generated from it. Keep it faithful to the résumé.
+- `src/components/*.astro`: page sections (`Hero`, `About`, `Vitals`, `Experience`,
+  `Projects`, `Contact`) plus `TopBar` and `UpdateToast`.
+- `src/scripts/*.ts`: the only client JavaScript — timeline tabs, console and PWA
+  helpers. Everything renders without JavaScript; scripts only enhance it.
+- `src/assets/owner.webp`: portrait (Astro generates responsive sizes); the original
+  `owner.png` stays for future edits.
 - `public/Nishant_Desai_Resume.pdf`: résumé download.
-- `src/assets/owner.webp`, `chess.webp`: optimized display assets; originals remain
-  in `src/assets/` for future edits.
-- `public/social-preview.png`: sharing image. Its editable composition is
-  `scripts/social-preview.html`; render at 1200 × 630 pixels to re-export it.
-- `public/index.html`: metadata and a JavaScript-disabled contact/résumé fallback.
-  The full page still uses client-side React rendering; this is not an SSR setup.
+- `public/social-preview.png`: sharing image, composed in `scripts/social-preview.html`
+  (render command in that file).
+- Fonts (Geist, JetBrains Mono) are self-hosted via `@fontsource-variable`.
+
+## Crawlers and AI agents
+
+The full page — every job, project and link — is in the static HTML. The build also
+emits `ProfilePage`/`Person` JSON-LD, `/llms.txt` (plain-text profile), `/sitemap.xml`
+and `/robots.txt`.
 
 ## Offline use and updates
 
-`src/service-worker.js` precaches compiled application assets plus the public
-resources listed in `src/offline-assets.json`, including the résumé and icons.
-`npm run build` hashes those public resources and supplies their revision to
-Workbox. Always use that command rather than calling `react-scripts build`
-directly; it ensures a changed résumé invalidates the offline cache.
+`scripts/generate-sw.mjs` runs after `astro build` and uses Workbox to generate
+`build/service-worker.js`, precaching the page, its assets, Latin font subsets, the
+résumé and the app icons. Always build with `npm run build` so the worker is
+regenerated.
 
-`public/sw.js` is a compatibility entry point for older installations. It imports
-the maintained worker rather than keeping the original cache-first implementation.
-Keep it available until legacy registrations have been intentionally retired.
+The worker **must stay at `/service-worker.js`**: visitors who installed the old React
+version have a worker registered at that URL, and they receive this site as a normal
+update. `public/sw.js` is the compatibility entry point for even older installations;
+it imports the current worker. Keep both.
 
-The update invitation is React state, not a hidden DOM node. It detects both new
-updates and a worker already waiting from a previous visit. Visitors choose when
-to activate a new worker; the page reloads after activation.
+Visitors choose when to update: a waiting worker shows the "Update available" toast,
+also after a reload, and "Update now" activates it and reloads.
 
 ### Manual acceptance checks
 
-1. At 320, 390, 1024, and 1440 px, confirm navigation and project controls remain
-   reachable without horizontal page scrolling.
-2. Use the mobile drawer with Tab and Enter; selecting a section closes the drawer,
-   but tabbing through links must not close it.
-3. Visit the production build online, wait for the worker to activate, then go
-   offline. Reload the homepage and open the résumé without having opened it first.
-   External demo videos and social links still require an internet connection.
-4. Leave a page open while serving a second build from the same origin. Verify
-   “Update available”, dismissal, and “Update now”. Reload with an update already
-   waiting to verify it is offered again.
-5. Verify `/sw.js` installations receive the current app without deleting unrelated
-   site storage. Physical-device installation remains a separate manual check.
+1. At 320, 390, 1024 and 1440 px, confirm there is no horizontal page scrolling and
+   the career trace keeps the selected role visible.
+2. Keyboard: the skip link is the first stop; section tabs move focus; timeline tabs
+   respond to ←/→/Home/End.
+3. Visit the production build online, then go offline. Reload the homepage and open
+   the résumé without having opened it first.
+4. With a page open, serve a second build from the same origin. Verify "Update
+   available", dismissal, reload-while-waiting and "Update now".
+5. Upgrade path: install the currently published site, deploy this build at the same
+   origin and confirm the old page's update prompt loads the new site.
 
 ## Publishing
 
 Publication is a separate, explicitly approved step: verify this source, copy the
-contents of `build/` into the publication repository, and review the generated
-changes there before committing/pushing. Preserve unrelated notes and repository
-metadata. Remove stale generated bundles/legacy precache manifests deliberately,
-not with a blanket directory deletion. Do not remove the compatibility `sw.js`.
+contents of `build/` into the publication repository, and review the changes there
+before committing/pushing. The old React build files (`static/`, `asset-manifest.json`,
+`precache-manifest.*.js`, `service-worker.js.map`, `index.css`, hashed SVGs) can be
+removed deliberately at that point. Preserve unrelated notes and repository metadata,
+and never remove `sw.js`.

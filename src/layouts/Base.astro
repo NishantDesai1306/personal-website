@@ -1,0 +1,76 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import { jobs, profile, technologies } from '../data/profile';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const socialImage = new URL('/social-preview.png', Astro.site).href;
+
+const current = jobs.find((job) => !job.end);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: canonical,
+  mainEntity: {
+    '@type': 'Person',
+    name: profile.name,
+    jobTitle: profile.role,
+    description: profile.intro,
+    url: profile.site,
+    image: new URL('/images/icons/icon-512x512.png', Astro.site).href,
+    email: `mailto:${profile.email}`,
+    address: { '@type': 'PostalAddress', addressCountry: 'CA' },
+    worksFor: current && { '@type': 'Organization', name: current.company, url: current.url },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Uka Tarsadia University' },
+    knowsAbout: [...technologies.map((t) => t.label), 'Core Web Vitals', 'Web performance'],
+    sameAs: [profile.links.github, profile.links.linkedin, profile.links.upwork],
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#0e0f11" />
+    <meta name="color-scheme" content="dark" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Plain-text profile for AI agents" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profile.name} — ${profile.role}`} />
+    <meta property="profile:first_name" content="Nishant" />
+    <meta property="profile:last_name" content="Desai" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <slot />
+  </body>
+</html>

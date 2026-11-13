@@ -1,0 +1,228 @@
+---
+import { jobs } from '../data/profile';
+import { careerRange, placement, rulerYears } from '../lib/timeline';
+
+const now = new Date();
+const range = careerRange(jobs, now);
+const years = rulerYears(range);
+// Oldest first on the trace, matching left-to-right time.
+const trace = [...jobs].reverse();
+const colors: Record<string, string> = {
+  appgambit: 'var(--tag)',
+  moddio: 'var(--attr)',
+  foodx: 'var(--good)',
+  jdpower: 'var(--amber)',
+};
+---
+
+<section class="section" id="experience" tabindex="-1" aria-labelledby="experience-title">
+  <div class="wrap" data-timeline>
+    <p class="eyebrow">// performance · career recording {range.start} → now</p>
+    <h2 class="section-title" id="experience-title">Experience</h2>
+    <p class="hint">Select a task on the trace to inspect it.</p>
+
+    <div class="trace panel" data-trace-scroll>
+      <div class="trace-in" style={`--years:${years.length}`}>
+        <div class="ruler mono" aria-hidden="true">
+          {years.map((year) => <span>{year}</span>)}
+        </div>
+        <div class="lane">
+          {
+            trace.map((job) => {
+              const { left, width } = placement(job, range, now);
+              return (
+                <a
+                  class="seg mono"
+                  id={`tab-${job.id}`}
+                  href={`#job-${job.id}`}
+                  data-job-tab
+                  data-current={String(!job.end)}
+                  style={`left:${left}%;width:calc(${width}% - 4px);--c:${colors[job.id] ?? 'var(--text-2)'}`}
+                >
+                  {job.company}
+                  <small>{job.title}</small>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="jobs">
+      {
+        trace.map((job) => (
+          <article class="job panel" id={`job-${job.id}`} data-job-panel aria-labelledby={`job-title-${job.id}`}>
+            <header>
+              <h3 id={`job-title-${job.id}`}>{job.title}</h3>
+              <p class="meta mono">
+                <a href={job.url} rel="noopener noreferrer">
+                  {job.company} ↗
+                </a>
+                <br />
+                <time>{job.duration}</time>
+              </p>
+            </header>
+            <ul>
+              {job.points.map((point) =>
+                typeof point === 'string' ? (
+                  <li>{point}</li>
+                ) : (
+                  <li>
+                    {point.main}
+                    <ul class="sub">
+                      {point.subPoints.map((sub) => (
+                        <li>{sub}</li>
+                      ))}
+                    </ul>
+                  </li>
+                ),
+              )}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hint {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  /* Without JS the trace is decorative-only; every job is listed below. */
+  [data-timeline]:not(.is-enhanced) .hint {
+    display: none;
+  }
+  .trace {
+    margin-top: 40px;
+    padding: 18px 18px 6px;
+    overflow-x: auto;
+  }
+  .trace-in {
+    min-width: 760px;
+  }
+  .ruler {
+    display: grid;
+    grid-template-columns: repeat(var(--years), 1fr);
+    font-size: 11px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+  }
+  .ruler span {
+    border-left: 1px solid var(--line);
+    padding-left: 6px;
+  }
+  .lane {
+    position: relative;
+    height: 60px;
+    margin: 14px 0;
+  }
+  .seg {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding: 9px 12px;
+    border-radius: 6px;
+    background: var(--c);
+    color: #0d0e10;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+  }
+  .seg small {
+    display: block;
+    font-weight: 400;
+    opacity: 0.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .seg:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+  .seg[aria-selected='true'] {
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--c);
+    transform: translateY(-2px);
+  }
+  .jobs {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .job {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 32px;
+    padding: 28px;
+  }
+  .job:focus-visible {
+    outline-offset: 4px;
+  }
+  .job h3 {
+    font: 600 22px/1.25 var(--sans);
+    letter-spacing: -0.02em;
+  }
+  .meta {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .meta a {
+    color: var(--amber);
+    text-decoration: none;
+  }
+  .meta a:hover {
+    text-decoration: underline;
+  }
+  .job > ul > li {
+    position: relative;
+    padding: 10px 0 10px 22px;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-2);
+  }
+  .job > ul > li:last-child {
+    border-bottom: 0;
+  }
+  .job > ul > li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-family: var(--mono);
+  }
+  .sub {
+    margin-top: 8px;
+  }
+  .sub li {
+    font: 400 13.5px/1.7 var(--mono);
+    color: var(--good);
+  }
+  .sub li::before {
+    content: '↳ ';
+    color: var(--muted);
+  }
+  @media (max-width: 800px) {
+    .job {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 22px;
+    }
+  }
+</style>
+
+<script>
+  import { enhanceTimeline } from '../scripts/timeline';
+
+  const root = document.querySelector<HTMLElement>('[data-timeline]');
+  if (root) enhanceTimeline(root);
+</script>

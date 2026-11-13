@@ -2,18 +2,33 @@
 <html lang="en">
 <meta charset="utf-8">
 <title>Portfolio social preview</title>
+<!-- Render at 1200 × 630 and save as public/social-preview.png (from the project root, after npm ci):
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+       --window-size=1200,630 --screenshot=public/social-preview.png "file://$PWD/scripts/social-preview.html" -->
 <style>
-  * { box-sizing: border-box; }
-  body { margin: 0; width: 1200px; height: 630px; background: #303f9f; color: #fff; font-family: Arial, sans-serif; display: flex; flex-direction: column; justify-content: center; padding: 90px; }
-  p { margin: 0 0 26px; font-size: 24px; letter-spacing: 3px; text-transform: uppercase; }
-  h1 { margin: 0 0 20px; font-size: 84px; line-height: 1.1; }
-  h2 { margin: 0 0 36px; font-size: 38px; font-weight: 400; }
-  footer { font-size: 26px; color: #e8eaf6; }
+  @font-face { font-family: Geist; src: url(../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: Mono; src: url(../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1200px; height: 630px; background: #0e0f11; color: #e7e9ec; font-family: Geist, sans-serif; display: flex; flex-direction: column; overflow: hidden; }
+  .bar { display: flex; gap: 34px; align-items: center; height: 64px; padding: 0 72px; border-bottom: 1px solid #2a2e34; font: 500 20px Mono, monospace; color: #8f96a0; }
+  .bar b { color: #e7e9ec; font-weight: 500; display: flex; align-items: center; gap: 12px; padding-right: 34px; border-right: 1px solid #2a2e34; height: 100%; }
+  .bar b::before { content: ''; width: 11px; height: 11px; border-radius: 50%; background: #3ecf8e; }
+  .bar .on { color: #e7e9ec; border-bottom: 3px solid #ffb224; height: 100%; display: flex; align-items: center; }
+  main { flex: 1; padding: 62px 72px 0; }
+  .tag { font: 400 26px Mono, monospace; color: #8f96a0; }
+  .tag .t { color: #7cc4ff; } .tag .a { color: #c4a7ff; } .tag .v { color: #ffb224; }
+  h1 { font-size: 124px; font-weight: 700; letter-spacing: -6px; line-height: 1; margin: 26px 0; }
+  h2 { display: inline; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; background: linear-gradient(transparent 60%, rgba(255,178,36,.32) 60%); }
+  footer { display: flex; gap: 36px; padding: 0 72px 52px; font: 500 24px Mono, monospace; color: #3ecf8e; }
+  footer span::before { content: '› '; color: #ffb224; }
 </style>
 <body>
-  <p>Software engineering</p>
-  <h1>Nishant Desai</h1>
-  <h2>Frontend &amp; fullstack developer</h2>
-  <footer>React · Next.js · Web performance</footer>
+  <div class="bar"><b>nishant.desai</b><span>Elements</span><span class="on">Lighthouse</span><span>Performance</span><span>Network</span></div>
+  <main>
+    <p class="tag">&lt;<span class="t">developer</span> <span class="a">role</span>=<span class="v">"senior-frontend"</span>&gt;</p>
+    <h1>Nishant Desai</h1>
+    <h2>Senior Frontend Developer building fast React and Next.js apps</h2>
+  </main>
+  <footer><span>React</span><span>Next.js</span><span>Core Web Vitals</span></footer>
 </body>
 </html>

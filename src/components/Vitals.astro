@@ -1,0 +1,138 @@
+---
+import { vitals } from '../data/profile';
+
+// Bars show the size of each change relative to the largest one, so their
+// lengths stay truthful to the reported percentages.
+const largest = Math.max(...vitals.flatMap((v) => [v.good, v.poor]));
+const scale = (n: number) => `${((n / largest) * 100).toFixed(1)}%`;
+---
+
+<section class="section" id="vitals" tabindex="-1" aria-labelledby="vitals-title">
+  <div class="wrap">
+    <p class="eyebrow">// lighthouse · jdpower.com · Core Web Vitals</p>
+    <h2 class="section-title" id="vitals-title">
+      Months of careful optimization at J.D. Power.
+    </h2>
+    <div class="cards">
+      {
+        vitals.map(({ viewport, good, poor }) => (
+          <article class="card panel">
+            <h3 class="mono">
+              <span>{viewport}</span>
+              <span>URLs by status</span>
+            </h3>
+            <dl>
+              <div class="row">
+                <dt>“Good” URLs</dt>
+                <dd class="track" aria-hidden="true">
+                  <i class="bar good" style={`--w:${scale(good)}`} />
+                </dd>
+                <dd class="delta">+{good}%</dd>
+              </div>
+              <div class="row">
+                <dt>“Poor” URLs</dt>
+                <dd class="track" aria-hidden="true">
+                  <i class="bar poor" style={`--w:${scale(poor)}`} />
+                </dd>
+                <dd class="delta">−{poor}%</dd>
+              </div>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+    <p class="note mono">Bar length = size of the change. Both directions are improvements: more “Good” URLs, fewer “Poor” ones.</p>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .card {
+    padding: 24px;
+  }
+  .card h3 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+  .card h3 span:first-child {
+    color: var(--text);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 110px 1fr 72px;
+    gap: 14px;
+    align-items: center;
+    font: 400 13px var(--mono);
+  }
+  .row + .row {
+    margin-top: 16px;
+  }
+  .track {
+    height: 10px;
+    border-radius: 5px;
+    background: var(--panel-2);
+    overflow: hidden;
+  }
+  .bar {
+    display: block;
+    height: 100%;
+    width: var(--w);
+    border-radius: 5px;
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .good {
+    background: var(--good);
+  }
+  .poor {
+    background: var(--poor);
+  }
+  /* Animate in only when JS is available to reveal them again. */
+  :global(.js) .cards:not(.is-visible) .bar {
+    transform: scaleX(0);
+  }
+  .delta {
+    text-align: right;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--good);
+  }
+  .note {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  @media (max-width: 800px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+    .row {
+      grid-template-columns: 96px 1fr 64px;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  const cards = document.querySelector('#vitals .cards');
+  if (cards) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        cards.classList.add('is-visible');
+        observer.disconnect();
+      },
+      { threshold: 0.4 },
+    );
+    observer.observe(cards);
+  }
+</script>

@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import TopBar from '../components/TopBar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Vitals from '../components/Vitals.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import UpdateToast from '../components/UpdateToast.astro';
+import { profile } from '../data/profile';
+---
+
+<Base
+  title={`${profile.name} | Senior Frontend Developer`}
+  description="Nishant Desai is a senior frontend developer in Canada building fast React and Next.js apps, with a focus on web performance and Core Web Vitals. Experience, projects and contact details."
+>
+  <TopBar />
+  <main id="main-content" tabindex="-1">
+    <Hero />
+    <About />
+    <Vitals />
+    <Experience />
+    <Projects />
+    <Contact />
+  </main>
+  <footer class="footer wrap mono">
+    <span>© {new Date().getFullYear()} {profile.name}</span>
+    <span>
+      <a href="https://github.com/NishantDesai1306/personal-website" rel="noopener noreferrer">view source</a>
+      ·
+      <a href="/llms.txt">llms.txt</a>
+    </span>
+  </footer>
+  <UpdateToast />
+</Base>
+
+<style>
+  main:focus {
+    outline: none;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 28px;
+    padding-bottom: 48px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer a {
+    color: var(--text-2);
+  }
+</style>

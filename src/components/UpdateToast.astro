@@ -1,0 +1,66 @@
+<div class="toast mono" role="status" data-update-toast hidden>
+  <span>Update available</span>
+  <button type="button" class="accept" data-update-accept>Update now</button>
+  <button type="button" class="dismiss" data-update-dismiss aria-label="Dismiss update">✕</button>
+</div>
+
+<style>
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 6px 6px 16px;
+    background: var(--panel-2);
+    border: 1px solid var(--amber);
+    border-radius: 10px;
+    font-size: 13px;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 0.5);
+    max-width: calc(100vw - 32px);
+  }
+  button {
+    min-height: 40px;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .accept {
+    padding: 0 14px;
+    background: var(--amber);
+    color: #111;
+    font-weight: 600;
+  }
+  .dismiss {
+    width: 40px;
+    background: transparent;
+    color: var(--muted);
+  }
+  button:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+</style>
+
+<script>
+  import { initInstallPrompt, registerServiceWorker, showUpdateToast } from '../scripts/pwa';
+
+  const installButton = document.querySelector<HTMLButtonElement>('[data-install]');
+  if (installButton) initInstallPrompt(installButton);
+
+  const toast = document.querySelector<HTMLElement>('[data-update-toast]');
+  // Service workers only run in production builds (the dev server has none).
+  if (import.meta.env.PROD && 'serviceWorker' in navigator && toast) {
+    const start = () =>
+      registerServiceWorker({
+        url: '/service-worker.js',
+        onUpdate: (worker) => showUpdateToast(toast, worker),
+      }).catch((error) => console.error('Service worker registration failed:', error));
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+  }
+</script>

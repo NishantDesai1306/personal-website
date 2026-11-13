@@ -11,6 +11,9 @@
 # production
 /build
 
+# astro
+.astro/
+
 # IDEs and editors
 /.idea
 /.vscode

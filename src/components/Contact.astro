@@ -1,5 +1,5 @@
 ---
-import { profile, technologies } from '../data/profile';
+import { profile, skills } from '../data/profile';
 
 const links = [
   { key: 'github', label: 'GitHub', href: profile.links.github },
@@ -13,7 +13,7 @@ const replies = {
   help: 'Available: email, links, skills, resume, hire(), inspect, clear',
   email: `"${profile.email}"`,
   links: JSON.stringify(Object.fromEntries(links.map(({ key, href }) => [key, href]))),
-  skills: JSON.stringify(technologies.map((t) => t.label)),
+  skills: JSON.stringify(skills),
   resume: `Opening ${profile.resume}…`,
   'hire()': 'Promise { <pending> } → opening your mail client…',
   inspect: 'Layout overlay toggled. Psst: ↑↑↓↓←→←→BA works too.',

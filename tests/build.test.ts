@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it } from 'vitest';
-import { jobs, profile, projects } from '../src/data/profile';
+import { caseStudies, jobs, profile, projects } from '../src/data/profile';
 
 const build = resolve(import.meta.dirname, '../build');
 const read = (file: string) => readFileSync(resolve(build, file), 'utf8');
@@ -33,6 +33,14 @@ describe('static HTML (no JavaScript)', () => {
       for (const link of project.links) {
         expect(document.querySelector(`a[href="${link.href}"]`), link.href).not.toBeNull();
       }
+    }
+  });
+
+  it('contains every case study in full', () => {
+    for (const study of caseStudies) {
+      const article = document.getElementById(`case-${study.id}`);
+      expect(article, study.id).not.toBeNull();
+      for (const { body } of study.sections) expect(article?.textContent).toContain(body);
     }
   });
 
@@ -83,6 +91,7 @@ describe('metadata for search engines and agents', () => {
     expect(llms.startsWith(`# ${profile.name}`)).toBe(true);
     for (const job of jobs) expect(llms).toContain(`${job.title} — ${job.company} (${job.duration})`);
     for (const project of projects) expect(llms).toContain(`### ${project.name}`);
+    for (const study of caseStudies) expect(llms).toContain(study.title);
   });
 
   it('allows crawling and lists the sitemap', () => {

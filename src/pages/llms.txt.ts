@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { jobs, profile, projects, technologies, vitals } from '../data/profile';
+import { caseStudies, jobs, profile, projects, skillGroups, vitals } from '../data/profile';
 
 // Plain-text profile for AI agents and LLM crawlers (https://llmstxt.org).
 // Generated from the same data as the page so the two never drift apart.
@@ -23,8 +23,20 @@ export const GET: APIRoute = ({ site }) => {
     '## About',
     '',
     ...profile.about.flatMap((p) => [p, '']),
-    `Technologies: ${technologies.map((t) => t.label).join(', ')}.`,
+    '## Skills',
     '',
+    ...skillGroups.map((g) => `- ${g.name}: ${g.items.join(', ')}`),
+    '',
+    '## Case studies',
+    '',
+    ...caseStudies.flatMap((study) => [
+      `### ${study.title} (${study.company})`,
+      '',
+      study.summary,
+      '',
+      ...study.sections.map((s) => `- ${s.heading}: ${s.body}`),
+      '',
+    ]),
     '## Core Web Vitals results at J.D. Power',
     '',
     ...vitals.map((v) => `- ${v.viewport}: "Good" URLs +${v.good}%, "Poor" URLs -${v.poor}%`),

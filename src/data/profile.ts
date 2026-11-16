@@ -1,10 +1,26 @@
 // Single source of truth for the portfolio's content.
-// Copy is carried over from the previous React site; do not add roles,
-// results or claims here that are not backed by the résumé.
+// Do not add roles, results or claims here that are not backed by the résumé
+// or confirmed by Nishant. No invented metrics.
 
 export interface Link {
   label: string;
   href: string;
+}
+
+export interface SkillGroup {
+  name: string;
+  items: string[];
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  company: string;
+  summary: string;
+  /** Short, technically accurate dependency chain shown as a diagram. */
+  chain: string[];
+  sections: { heading: string; body: string }[];
+  stack: string[];
 }
 
 export interface Job {
@@ -36,14 +52,19 @@ export interface Project {
   parts?: ProjectPart[];
 }
 
+/** Matches the résumé PDF; update both together. */
+const yearsOfExperience = 10;
+
 export const profile = {
   name: 'Nishant Desai',
+  /** Current job title (used in structured data). */
   role: 'Senior Frontend Developer',
-  tagline: 'Senior Frontend Developer building fast React and Next.js apps',
+  tagline: 'Senior Frontend Engineer · Architecture & migrations',
   intro:
-    "I'm a software engineer working in Canada. Since 2016 I have built web apps, scalable backends and React Native mobile apps, with a focus on performance and clean, intuitive UI.",
+    `I build fast, maintainable React and Next.js applications and help teams through larger technical changes: framework migrations, architecture decisions and performance work. I've been doing this for ${yearsOfExperience} years, and I work in Canada.`,
   country: 'Canada',
   since: 2016,
+  yearsOfExperience,
   email: 'nishantdesai1306@gmail.com',
   resume: '/Nishant_Desai_Resume.pdf',
   site: 'https://nishantdesai1306.github.io/',
@@ -55,25 +76,58 @@ export const profile = {
     facebook: 'https://www.facebook.com/nishant.desai.1306',
   },
   about: [
-    "Hello! I'm Nishant Desai, a software engineer who loves creating new and exciting web-based apps. I develop apps with intuitive, pixel-perfect UIs and efficient backends.",
-    'Shortly after graduating from Uka Tarsadia University, I joined JumpByte (now AppGambit) where I worked on a wide variety of projects on a daily basis.',
-    'I specialize in the MEAN and MERN stacks for web apps, and I have built mobile apps with React Native and Flutter.',
-    "I'm always interested in improving myself as a developer, and in meeting interesting people.",
+    `I'm a frontend-focused software engineer with ${yearsOfExperience} years of experience building and maintaining complex web applications. Beyond shipping features, I've helped make architecture decisions, co-led framework migrations, and written the guidelines that help teams deliver consistently.`,
+    'Most of my recent work is in React, Next.js and Material UI. At J.D. Power I improved the Core Web Vitals of jdpower.com over several months, and tracked down a Google Ads issue that had been affecting the site for months.',
+    'I have also worked across the stack: Node.js backends, a horizontally scalable server provisioning system and a two-tier cache that halved S3 costs at modd.io, plus mobile apps in React Native and Flutter.',
+    'I started at JumpByte (now AppGambit) shortly after graduating from Uka Tarsadia University, working on a wide variety of projects.',
   ],
   contact:
     "I welcome opportunities to discuss potential collaborations, whether it's a job opportunity, project proposal, or technical discussion. I'm committed to providing thoughtful responses to all professional inquiries.",
 } as const;
 
-export const technologies: Link[] = [
-  { label: 'NextJS', href: 'https://nextjs.org/' },
-  { label: 'React', href: 'https://react.dev/' },
-  { label: 'NodeJS', href: 'https://nodejs.org/en/' },
-  { label: 'Angular', href: 'https://angular.dev/' },
-  { label: 'Meteor', href: 'https://www.meteor.com' },
-  { label: 'React Native', href: 'https://reactnative.dev/' },
-  { label: 'Flutter', href: 'https://flutter.dev' },
-  { label: 'MySQL', href: 'https://www.mysql.com' },
-  { label: 'MongoDB', href: 'https://www.mongodb.com' },
+/** Grouped by competency; only skills backed by the résumé or the jobs below. */
+export const skillGroups: SkillGroup[] = [
+  { name: 'Frontend engineering', items: ['React', 'Next.js', 'Material UI', 'JavaScript', 'HTML', 'CSS'] },
+  {
+    name: 'Technical leadership',
+    items: ['Framework migrations', 'Architecture decisions', 'Technical documentation', 'Developer guidelines'],
+  },
+  { name: 'Performance', items: ['Core Web Vitals', 'Web performance', 'Production debugging'] },
+  { name: 'Backend & infrastructure', items: ['Node.js', 'Express', 'MongoDB', 'MySQL', 'AWS S3', 'Auto-scaling game servers'] },
+  { name: 'Mobile & earlier work', items: ['React Native', 'Flutter', 'Angular', 'Meteor'] },
+];
+
+export const skills = skillGroups.flatMap((group) => group.items);
+
+export const caseStudies: CaseStudy[] = [
+  {
+    id: 'frontend-migration',
+    title: 'Leading a multi-framework frontend migration',
+    company: 'J.D. Power',
+    summary:
+      'What started as a Next.js upgrade on jdpower.com turned into a coordinated migration across Next.js, React and Material UI. I co-led the effort with the team.',
+    chain: ['Next.js upgrade', 'newer React', 'Material UI v4 → v5'],
+    sections: [
+      { heading: 'Problem', body: 'The jdpower.com frontend needed a Next.js upgrade to keep the stack current.' },
+      {
+        heading: 'Discovery',
+        body: 'Upgrading Next.js meant upgrading React, and that in turn required moving Material UI from v4 to v5. The Material UI migration proved to be a much larger undertaking than the original upgrade.',
+      },
+      {
+        heading: 'Decision',
+        body: 'As a team, we decided to tackle the Material UI migration first. I took part in that architectural decision and helped set the implementation approach and timeline.',
+      },
+      {
+        heading: 'My contribution',
+        body: 'I documented the easiest migration paths and the technical issues developers were likely to hit, wrote guidelines for current and future development, and guided other developers through the migration.',
+      },
+      {
+        heading: 'Outcome',
+        body: 'Material UI and Next.js were upgraded, and the guidelines remained in place for later frontend work.',
+      },
+    ],
+    stack: ['Next.js', 'React', 'Material UI'],
+  },
 ];
 
 /** Core Web Vitals results at J.D. Power (Search Console URL counts). */
@@ -91,11 +145,12 @@ export const jobs: Job[] = [
     start: { year: 2022, month: 11 },
     duration: 'November 2022 - Present',
     points: [
-      'Worked on a NextJS-based web application that connects users with car dealers or with other users who want to sell their cars.',
-      'Debugged and resolved a Google Ads issue that had been plaguing the app for months.',
-      'Streamlined the Google Ads implementation, eliminating cases where Google would serve empty ads.',
-      'Led the migration of Material UI from v4 to v5.',
-      'Helped migrate from the Pages Router to the App Router in NextJS.',
+      'Maintained jdpower.com, a Next.js web application that connects users with car dealers or with other users who want to sell their cars.',
+      'Co-led the Material UI v4 → v5 and Next.js upgrades: helped decide to tackle the larger Material UI migration first, set the approach and timeline, documented migration paths and likely issues, and guided other developers through the work.',
+      'Wrote frontend guidelines for future development as part of the migration.',
+      'Helped migrate from the Pages Router to the App Router in Next.js.',
+      'Debugged a Google Ads issue that had affected the site for months, and streamlined the implementation so Google no longer served empty ads.',
+      'Helped choose and integrate the analytics tools used in production.',
       {
         main: 'Improved the overall performance and Core Web Vitals of the application by carefully optimizing the codebase over several months.',
         subPoints: [

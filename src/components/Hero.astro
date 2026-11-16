@@ -1,9 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import owner from '../assets/owner.webp';
-import { profile, technologies } from '../data/profile';
-
-const stack = technologies.slice(0, 4).map((t) => t.label.toLowerCase()).join(', ');
+import { profile } from '../data/profile';
 ---
 
 <section class="hero wrap" id="top" aria-labelledby="hero-title">
@@ -18,6 +16,7 @@ const stack = technologies.slice(0, 4).map((t) => t.label.toLowerCase()).join(',
     <p class="intro">{profile.intro}</p>
     <div class="actions">
       <a class="btn btn-primary" href="#contact-me">contact()</a>
+      <a class="btn" href="#case-studies">case study</a>
       <a class="btn" href="#projects">view projects</a>
       <a class="btn" href={profile.resume}>resume.pdf</a>
     </div>
@@ -40,9 +39,9 @@ const stack = technologies.slice(0, 4).map((t) => t.label.toLowerCase()).join(',
       />
     </div>
     <figcaption class="props mono">
-      <div><b>experience</b>: <i>since {profile.since}</i>;</div>
-      <div><b>stack</b>: <i>{stack}</i>;</div>
-      <div><b>mobile</b>: <i>react-native, flutter</i>;</div>
+      <div><b>experience</b>: <i>{profile.yearsOfExperience} years</i>;</div>
+      <div><b>stack</b>: <i>next.js, react, material-ui</i>;</div>
+      <div><b>focus</b>: <i>architecture, migrations, performance</i>;</div>
     </figcaption>
   </figure>
 </section>

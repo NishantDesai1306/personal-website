@@ -20,6 +20,10 @@ const sections = [
       {sections.map(({ href, label }) => <a href={href} data-nav-link>{label}</a>)}
     </nav>
     <div class="bar-actions">
+      <button class="quick-trigger" type="button" data-quick-open-trigger aria-label="Quick Open — search portfolio" aria-haspopup="dialog" aria-controls="quick-open" aria-keyshortcuts="Meta+K Control+K" hidden>
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="6.5" /><path d="m15 15 5 5" /></svg>
+        <kbd data-quick-shortcut aria-hidden="true">Ctrl K</kbd>
+      </button>
       <button class="fx" type="button" data-effects-toggle aria-pressed="true" aria-label="Cursor effects" title="Turn cursor effects off">
         <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
           <path d="M3 2l9 5-4 1-1 4z" fill="currentColor" />
@@ -110,6 +114,25 @@ const sections = [
   .resume:hover,
   .install:hover {
     text-decoration: underline;
+  }
+  .quick-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: var(--text-2);
+    cursor: pointer;
+  }
+  .quick-trigger:hover { color: var(--amber); }
+  .quick-trigger kbd { font: 400 10px var(--mono); color: var(--muted); white-space: nowrap; }
+  @media (max-width: 1100px) {
+    .quick-trigger kbd { display: none; }
   }
   /* Only offered where the effects can actually run (mouse, motion allowed, JS). */
   .fx {

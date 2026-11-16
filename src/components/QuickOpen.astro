@@ -1,0 +1,189 @@
+---
+import { caseStudies, jobs, profile, projects } from '../data/profile';
+
+// Results only carry a label here. quick-open.ts indexes the text of the section each one links to,
+// so `keywords` is just for terms that section doesn't contain.
+const entries: { label: string; detail: string; type: string; href: string; keywords?: string }[] = [
+  ...caseStudies.map((study) => ({
+    label: study.title,
+    detail: `Case study · ${study.company}`,
+    type: 'MD',
+    href: `#case-${study.id}`,
+  })),
+  { label: 'Core Web Vitals', detail: 'Performance · J.D. Power', type: 'WEB', href: '#vitals' },
+  { label: 'About & skills', detail: profile.tagline, type: 'ME', href: '#about-me' },
+  ...jobs.map((job) => ({
+    label: job.company,
+    detail: job.title,
+    type: 'EXP',
+    href: `#job-${job.id}`,
+  })),
+  ...projects.map((project) => ({
+    label: project.name,
+    detail: project.stack.join(' · '),
+    type: 'APP',
+    href: `#project-${project.id}`,
+  })),
+  { label: 'Open résumé', detail: 'PDF · Download or read', type: 'PDF', href: profile.resume, keywords: 'resume cv experience' },
+  { label: 'Get in touch', detail: profile.email, type: '@', href: '#contact-me', keywords: 'contact email hire collaboration console' },
+];
+---
+
+<dialog class="quick-open" id="quick-open" aria-labelledby="quick-title" aria-describedby="quick-description">
+  <div class="quick-head mono">
+    <h2 id="quick-title">Quick Open</h2>
+    <button type="button" data-quick-close aria-label="Close Quick Open">esc <span aria-hidden="true">×</span></button>
+  </div>
+  <p class="intro" id="quick-description">Find the work behind the skills.</p>
+  <div class="search-row">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="6.5" /><path d="m15 15 5 5" /></svg>
+    <label class="visually-hidden" for="quick-search">Search the portfolio</label>
+    <input id="quick-search" data-quick-search type="search" placeholder="Try React, migration, S3…" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="quick-results" aria-expanded="false" aria-describedby="quick-status" />
+  </div>
+  <div class="results-scroll" data-quick-scroll>
+    <ul id="quick-results" role="listbox" aria-label="Portfolio results">
+      {entries.map((entry, index) => (
+        <li role="presentation" data-quick-item data-search={entry.keywords}>
+          <a id={`quick-result-${index}`} href={entry.href} role="option" aria-selected="false" tabindex="-1">
+            <span class="file-type mono" aria-hidden="true">{entry.type}</span>
+            <span class="result-copy"><span class="result-label">{entry.label}</span><span class="result-detail">{entry.detail}</span></span>
+            <span class="return mono" aria-hidden="true">↵</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="empty" data-quick-empty hidden>No matches. Try a technology, company or project.</p>
+  </div>
+  <footer class="quick-footer mono">
+    <span role="status" id="quick-status" data-quick-status></span>
+    <span class="keys" aria-hidden="true"><kbd>↑</kbd><kbd>↓</kbd> navigate <kbd>↵</kbd> open</span>
+  </footer>
+</dialog>
+
+<style>
+  .quick-open {
+    position: fixed;
+    inset: 0;
+    top: min(12vh, 96px);
+    bottom: auto;
+    margin: 0 auto;
+    width: min(620px, calc(100% - 32px));
+    max-width: none;
+    max-height: min(660px, calc(100dvh - min(12vh, 96px) - 24px));
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+    color: var(--text);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.06);
+    overflow: hidden;
+  }
+  .quick-open[open] {
+    display: grid;
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  }
+  .quick-open::backdrop { background: rgb(0 0 0 / 0.7); }
+  .quick-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px 0 24px;
+  }
+  h2 { font-size: 12px; font-weight: 500; color: var(--amber); }
+  .quick-head button {
+    min-height: 44px;
+    min-width: 64px;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .quick-head button:hover { color: var(--text); }
+  .quick-head button span { margin-left: 8px; font-size: 20px; }
+  .intro { padding: 0 24px 16px; font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+  .search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 16px 12px;
+    padding: 0 14px;
+    min-height: 52px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+  }
+  .search-row:focus-within { border-color: var(--amber); }
+  .search-row svg { flex-shrink: 0; }
+  input {
+    min-width: 0;
+    width: 100%;
+    height: 50px;
+    background: none;
+    border: 0;
+    outline: none;
+    font-size: 16px;
+  }
+  input::placeholder { color: var(--muted); }
+  .results-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 8px 8px; }
+  li a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 64px;
+    padding: 12px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 8px;
+  }
+  li a[aria-selected='true'] { background: var(--panel-2); border-color: var(--line); }
+  .file-type {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--tag);
+    font-size: 10px;
+  }
+  .result-copy { display: grid; gap: 3px; min-width: 0; }
+  .result-label { font-size: 14px; font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; }
+  .result-detail { color: var(--muted); font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
+  .return { margin-left: auto; color: var(--amber); opacity: 0; }
+  [aria-selected='true'] .return { opacity: 1; }
+  .empty { padding: 24px 16px; color: var(--text-2); font-size: 14px; }
+  .quick-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+  }
+  .keys { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+  kbd { font: inherit; color: var(--text-2); }
+  @media (max-width: 520px) {
+    .quick-open { top: 16px; max-height: calc(100dvh - 32px); }
+    .quick-head { padding-left: 20px; }
+    .intro { padding-left: 20px; font-size: 18px; }
+    .quick-footer { padding: 12px 16px; }
+    .keys { display: none; }
+  }
+  @media (max-height: 450px) {
+    .quick-open { top: 8px; max-height: calc(100dvh - 16px); }
+    .intro { display: none; }
+    .quick-open[open] { grid-template-rows: auto auto minmax(0, 1fr) auto; }
+  }
+</style>
+
+<script>
+  import { initQuickOpen } from '../scripts/quick-open';
+
+  const dialog = document.querySelector<HTMLDialogElement>('#quick-open');
+  const trigger = document.querySelector<HTMLButtonElement>('[data-quick-open-trigger]');
+  if (dialog && trigger) initQuickOpen(dialog, trigger);
+</script>

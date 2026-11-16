@@ -22,7 +22,7 @@ CI=true npm run check
 
 This runs `astro check` (TypeScript + Astro diagnostics), the production build into
 `build/` (including `build/service-worker.js`), then the Vitest suite. Tests under
-`tests/` cover client behaviour (timeline tabs, console, PWA update/install flow)
+`tests/` cover client behaviour (timeline tabs, console, Quick Open, PWA update/install flow)
 and the built output (no-JS content, structured data, `llms.txt`, offline
 precache). The GitHub Actions workflow runs the same command; it does **not**
 publish the website.
@@ -39,8 +39,8 @@ python3 -m http.server 8766 --bind 127.0.0.1 --directory build
   Web Vitals results, experience and projects. The page, `llms.txt`, JSON-LD and
   the console easter egg are all generated from it. Keep it faithful to the résumé.
 - `src/components/*.astro`: page sections (`Hero`, `About`, `CaseStudies`, `Vitals`,
-  `Experience`, `Projects`, `Contact`) plus `TopBar` and `UpdateToast`.
-- `src/scripts/*.ts`: client behavior modules — timeline tabs, console, PWA helpers
+  `Experience`, `Projects`, `Contact`) plus `TopBar`, `QuickOpen` and `UpdateToast`.
+- `src/scripts/*.ts`: client behavior modules — timeline tabs, console, Quick Open, PWA helpers
   and cursor effects (field, hero tilt, inspect overlay and magnetic buttons), plus
   the layout-debug easter egg. Core content renders without JavaScript; scripts
   only enhance it. Cursor effects share a fine-pointer/reduced-motion/preference
@@ -51,6 +51,17 @@ python3 -m http.server 8766 --bind 127.0.0.1 --directory build
 - `public/social-preview.png`: sharing image, composed in `scripts/social-preview.html`
   (render command in that file).
 - Fonts (Geist, JetBrains Mono) are self-hosted via `@fontsource-variable`.
+
+## Quick Open
+
+Use the header search button or **⌘K / Ctrl+K** to find projects, experience, case
+studies and the résumé. Search is local, case/accent-insensitive and matches all
+query words. Arrow keys select a result, Enter opens it, and Escape closes the
+dialog and returns focus. Selecting a job also reveals its collapsed timeline
+panel. The index is built in the browser on first open from the sections each
+result links to; there is no search service, client dependency, duplicated content
+in the HTML or additional index request. Without JavaScript the
+search button stays hidden and all core content remains available normally.
 
 ## Crawlers and AI agents
 

@@ -38,6 +38,18 @@ describe('console easter egg', () => {
     expect(lines().at(-1)).toContain('sudo is not defined');
   });
 
+  it.each(['toString', 'constructor', '__proto__', 'hasOwnProperty'])(
+    'rejects inherited command %s without running an inherited action', (command) => {
+      const inheritedAction = vi.fn();
+      const { run, lines } = setup(Object.create({ [command]: inheritedAction }));
+
+      run(command);
+
+      expect(lines().at(-1)).toBe(`Uncaught ReferenceError: ${command} is not defined. Try "help".`);
+      expect(inheritedAction).not.toHaveBeenCalled();
+    },
+  );
+
   it('ignores empty input and clears history on "clear"', () => {
     const { run, lines } = setup();
     run('   ');

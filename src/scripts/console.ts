@@ -32,10 +32,12 @@ export function createConsole(form: HTMLFormElement, { replies, actions = {} }: 
 
     const reply = document.createElement('div');
     reply.className = 'console-out';
-    reply.textContent = replies[command] ?? `Uncaught ReferenceError: ${command} is not defined. Try "help".`;
-    if (!(command in replies)) reply.classList.add('is-error');
+    const known = Object.hasOwn(replies, command);
+    reply.textContent = known ? replies[command] : `Uncaught ReferenceError: ${command} is not defined. Try "help".`;
+    if (!known) reply.classList.add('is-error');
 
     log.append(line, reply);
-    actions[command]?.();
+    const action = Object.hasOwn(actions, command) ? actions[command] : undefined;
+    if (typeof action === 'function') action();
   });
 }

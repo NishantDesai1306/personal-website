@@ -38,10 +38,13 @@ python3 -m http.server 8766 --bind 127.0.0.1 --directory build
 - `src/data/profile.ts`: **all content** — profile, About copy, technologies, Core
   Web Vitals results, experience and projects. The page, `llms.txt`, JSON-LD and
   the console easter egg are all generated from it. Keep it faithful to the résumé.
-- `src/components/*.astro`: page sections (`Hero`, `About`, `Vitals`, `Experience`,
-  `Projects`, `Contact`) plus `TopBar` and `UpdateToast`.
-- `src/scripts/*.ts`: the only client JavaScript — timeline tabs, console and PWA
-  helpers. Everything renders without JavaScript; scripts only enhance it.
+- `src/components/*.astro`: page sections (`Hero`, `About`, `CaseStudies`, `Vitals`,
+  `Experience`, `Projects`, `Contact`) plus `TopBar` and `UpdateToast`.
+- `src/scripts/*.ts`: client behavior modules — timeline tabs, console, PWA helpers
+  and cursor effects (field, hero tilt, inspect overlay and magnetic buttons), plus
+  the layout-debug easter egg. Core content renders without JavaScript; scripts
+  only enhance it. Cursor effects share a fine-pointer/reduced-motion/preference
+  gate in `effects.ts` and a single entry in `src/pages/index.astro`.
 - `src/assets/owner.webp`: portrait (Astro generates responsive sizes); the original
   `owner.png` stays for future edits.
 - `public/Nishant_Desai_Resume.pdf`: résumé download.

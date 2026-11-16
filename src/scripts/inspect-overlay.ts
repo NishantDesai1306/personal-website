@@ -1,6 +1,6 @@
 /**
  * DevTools-style "inspect element" hover: a highlight box and a
- * `tag.class  W × H` label over the card, button or heading under the cursor.
+ * `tag.class  W × H` label over the card, chip or heading under the cursor.
  *
  * One overlay element is reused for everything. It is created on the first
  * hover and only repositioned when the hovered element changes (pointerover),
@@ -9,7 +9,8 @@
 
 import { whileEffectsEnabled } from './effects';
 
-export const INSPECT_TARGETS = '.panel, .btn, .chip, .section-title, .photo';
+// Not `.btn`: magnetic buttons move under the cursor, and a static box around them looks detached.
+export const INSPECT_TARGETS = '.panel, .chip, .section-title, .photo';
 const LABEL_HEIGHT = 26;
 
 /** `article.job.panel` style name, as DevTools prints it (max two classes). */

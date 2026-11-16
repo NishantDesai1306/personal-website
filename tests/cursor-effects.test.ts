@@ -90,6 +90,16 @@ describe('inspect hover', () => {
     expect(document.querySelector('.inspect-overlay')).toBeNull();
   });
 
+  it('does not box magnetic buttons, but keeps the box of a card they sit in', () => {
+    document.body.innerHTML = '<a class="btn" id="loose">x</a><article class="card panel"><a class="btn" id="nested">y</a></article>';
+    const stop = startInspectOverlay();
+    pointer('pointerover', document.querySelector('#loose')!);
+    expect(document.querySelector('.inspect-overlay')).toBeNull();
+    pointer('pointerover', document.querySelector('#nested')!);
+    expect(document.querySelector('.inspect-overlay')!.textContent).toContain('article.card.panel');
+    stop();
+  });
+
   it('ignores touch input', () => {
     document.body.innerHTML = '<div class="panel"></div>';
     const stop = startInspectOverlay();
